@@ -2,11 +2,11 @@
 class postcurl {
  
 	private $ch;    //cURL Handler
-	private $tableRows;
-	private $tableNum;
-	private $postParams;
+	private $tableRows; //calculate the total rows in the result table
+	private $tableNum; //assign the tables number under consideration
+	private $postParams; //post params to be sent
 	private $responseRows;
-	private $postUrl;
+	private $postUrl; //post url to be used
 	private $userAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
 	
 	function __construct($postUrl,$tableNum,$postparams) {
@@ -31,8 +31,8 @@ class postcurl {
 	
 	private function setResponseRows(){
 		$responseHTML = $this->curlOpt();
-		$responseDOM = new DOMDocument();        //Create new DOM Object
 		$responseDOM->strictErrorChecking=false;
+		$responseDOM = new DOMDocument();        //Create new DOM Object
 		$responseDOM->recover=true;
 		@$responseDOM->loadHTML($responseHTML); //Load the HTML into the DOM Object
 		$responseTable = $responseDOM->getElementsByTagName("table")->item($this->tableNum); //Parse the DOM Object and get the required Table
