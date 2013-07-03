@@ -8,4 +8,6 @@ $obj = new postcurl($url,$tablenum,$postparams);
 
 echo $obj->getInfoFromRow(2,2);
 
+echo "bah";
+
 ?>
