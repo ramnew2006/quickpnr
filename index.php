@@ -95,7 +95,6 @@ $_POST = array();
 ?>
 		</div>
 	</div>
-	<footer class="navbar navbar-fixed-bottom">Dedicated to all the people who spent a great deal of their lives on IRCTC!</footer>
 	<script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>

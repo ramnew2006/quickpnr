@@ -28,6 +28,7 @@ function urlResult(){
 
 $result = urlResult();
 $numRowsResult = $result->length;
+$badquery = "INSERT INTO stationlist (station_name, station_code) VALUES ('','')";
 
 for($i=1;$i<$numRowsResult;$i++){
 	for($j=0;$j<=7;$j++){
@@ -36,7 +37,10 @@ for($i=1;$i<$numRowsResult;$i++){
 			$query = "INSERT INTO stationlist (station_name, station_code) VALUES ('" . $result->item($i)->getElementsByTagName('td')->item($j)->textContent . "',";
 		}else{
 			$query .= "'" . $result->item($i)->getElementsByTagName('td')->item($j)->textContent . "')";
-			mysql_query($query);
+			if($query!=$badquery){
+				mysql_query($query);
+			}
+			//echo $query . "<br/>";
 		}
 	}
 }

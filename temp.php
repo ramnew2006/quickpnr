@@ -1,13 +1,11 @@
 <?php
-require_once 'postcurl.php';
+require_once 'getcurl.php';
 
-$url = "http://www.indianrail.gov.in/cgi_bin/inet_trnnum_cgi.cgi";
-$tablenum = 24;
-$postparams = "lccp_trnname=12077";
-$obj = new postcurl($url,$tablenum,$postparams);
+$url = "http://www.indianrail.gov.in/mail_express_trn_list.html";
+$tablenum = 5;
+
+$obj = new getcurl($url,$tablenum);
 
 echo $obj->getInfoFromRow(2,2);
-
-echo "bah";
 
 ?>
