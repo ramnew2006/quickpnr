@@ -24,7 +24,7 @@ for($i=0;$i<$numRows;$i++){
 	curl_setopt($ch, CURLOPT_URL,"http://localhost/quickpnr/storetrainschedule.php");   //To set the page to be fetched
 	curl_exec($ch);
 	curl_close($ch);
-	sleep(1);
+	sleep(3);
 }
 
 $db->dbdisconnect();

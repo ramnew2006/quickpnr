@@ -59,8 +59,8 @@ class postcurl {
 		return $this->tableRows;
 	}
 	
-	public function tableColumns(){
-		$this->tableColumns = $this->responseRows->item(1)->getElementsByTagName('td')->length;
+	public function tableColumns($i){
+		$this->tableColumns = $this->responseRows->item($i)->getElementsByTagName('td')->length;
 		return $this->tableColumns;
 	}
 
