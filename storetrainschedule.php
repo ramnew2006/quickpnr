@@ -8,7 +8,7 @@ $db->dbconnect();
 
 $url = "http://www.indianrail.gov.in/cgi_bin/inet_trnnum_cgi.cgi";
 $tablenum = 24;
-$trn_num = $_POST['train_num'];
+$trn_num = 12077;//$_POST['train_num'];
 $postparams = "lccp_trnname=" . $trn_num . "&getIt=Please Wait...";
 
 $postobj = new postcurl($url,$tablenum,$postparams);
@@ -17,6 +17,7 @@ $lengthCol = 9;
 
 $fields = "(train_num,stn_code,stn_name,route_num,arr_time,dep_time,halt_time,distance,day,slip)";
 $values = "";
+$values2 = "";
 $k=1; //route number
 $normalroute = 1; //normal route is switched on by default
 $sliproute = 0; //slip route is switched off initially
@@ -94,11 +95,11 @@ $insert = "INSERT INTO trainschedule " . $fields . " VALUES ". $values;
 $insert2 = "INSERT INTO trainschedule " . $fields . " VALUES ". $values2;
 $insert = trim($insert,",");
 $insert2 = trim($insert2,",");
-mysql_query($insert);
-mysql_query($insert2);
-//echo $insert . "<br/>";
-//echo "slip route<br/>"; 
-//echo $insert2 . "<br/>";
+//mysql_query($insert);
+//mysql_query($insert2);
+echo $insert . "<br/>";
+echo "slip route<br/>"; 
+echo $insert2 . "<br/>";
 //print_r($test);
 $db->dbdisconnect();
 

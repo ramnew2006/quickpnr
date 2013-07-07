@@ -223,12 +223,13 @@ textarea {
 
 body {
   margin: 0;
-  font-family: "Imprima", Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-  /*background-color: #ffffff;*/
-  background-color: #e5e5e5;
+  background-color: #ffffff;
+  height: 100%;
+  /*background-color: #e5e5e5;*/
 }
 
 a {
@@ -740,8 +741,8 @@ h4,
 h5,
 h6 {
   margin: 10px 0;
-  font-family: "Glametrix Light";
-  /*font-family: inherit; */
+  /*font-family: "Glametrix Light";*/
+  font-family: inherit;
   font-weight: bold;
   line-height: 20px;
   color: inherit;
@@ -6166,63 +6167,4 @@ a.badge:focus {
 
 .affix {
   position: fixed;
-}
-
-/* Custom CSS Code - Add here*/
-
-.container-fluid-header {
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-bottom: 1em;
-  color:#fff;
-  background-color:#1C3145;
-  *zoom: 1;
-}
-
-.container-fluid-header:before,
-.container-fluid-header:after {
-  display: table;
-  line-height: 0;
-  content: "";
-}
-
-.container-fluid-header:after {
-  clear: both;
-}
-
-.container-fluid-content {
-  padding-right: 20px;
-  padding-left: 20px;
-  *zoom: 1;
-}
-
-.container-fluid-content:before,
-.container-fluid-content:after {
-  display: table;
-  line-height: 0;
-  content: "";
-}
-
-.container-fluid-content:after {
-  clear: both;
-}
-
-@font-face {
-    font-family: "Glametrix";
-    src: url(/quickpnr/fonts/Glametrix.otf) format("opentype");
-}
-
-@font-face {
-    font-family: "Glametrix Bold";
-    src: url(/quickpnr/fonts/GlametrixBold.otf) format("opentype");
-}
-
-@font-face {
-    font-family: "Glametrix Light";
-    src: url(/quickpnr/fonts/GlametrixLight.otf) format("opentype");
-}
-
-@font-face {
-    font-family: "Imprima";
-    src: url(/quickpnr/fonts/Imprima-Regular.ttf) format("truetype");
 }
