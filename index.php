@@ -32,7 +32,7 @@
   	<div id="containercustom">
 		<header class="container-fluid-header">
 		  <h1 style="padding-top:0.5em;">
-			<span style="font-size: 1.05em;line-height:0.75em;font-style:italic;">quickPNR</span>
+			<span style="font-size: 1.05em;line-height:0.75em;">qwikTravel</span>
 			<div style="font-size:0.8em;font-weight:normal;float:right;padding-top:5px;">
 				<a href="" class="btn btn-primary">PNR Status</a>
 				<a href="" class="btn btn-primary">Trains</a>

@@ -6,6 +6,7 @@ class database{
 	private $dbpass;
 	private $dbname;
 	private $dblink;
+	private $dbsalt;
 		
 	public function database(){
 		$this->dbhost="localhost";
@@ -23,6 +24,11 @@ class database{
 	
 	public function dbdisconnect(){
 		mysql_close($this->dblink);
+	}
+	
+	public function returnSalt(){
+		$this->dbsalt = "qWikTrAVel";
+		return $this->dbsalt;
 	}
 }
 ?>

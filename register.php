@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'database.php';
 
 if(isset($_SESSION['user'])){
@@ -31,9 +30,6 @@ if(isset($_SESSION['user'])){
         	return false;
         }
     }
-    function resetForm(){
-    	$('#pnrResult').hide();
-    }
     </script>
   </head>
   <body>
@@ -53,10 +49,10 @@ if(isset($_SESSION['user'])){
 			<div class="row-fluid" id="pnrForm">
 				<div class="span4"></div>
 				<div class="span4">
-					<form action="loginaction.php" method="post" onsubmit="return(validateForm());">
+					<form action="doregister.php" method="post" onsubmit="return(validateForm());">
 					<input id="mobileNum" name="mobileNum" type="text" size="10" maxlength="10" placeholder="Your 10 digit Mobile number"><br/>
 					<input name="userPassword" type="password" placeholder="Your Password"><br/>
-					<input type="submit" name="userLogin" value="Login" class="btn">
+					<input type="submit" name="userRegister" value="Register" class="btn">
 					</form>
 				</div>
 				<div class="span4"></div>
@@ -75,7 +71,6 @@ if(isset($_SESSION['user'])){
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
-
 <?php
 }
 ?>
