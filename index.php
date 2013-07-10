@@ -92,7 +92,7 @@
 						// }
 					// }
 					$url = "http://www.indianrail.gov.in/cgi_bin/inet_pnrstat_cgi.cgi";
-					$tablenum = 25;
+					$tablenum = 26;
 					$postparams = "lccp_pnrno1=" . $_POST['pnrNum'] . "&submit=Wait+For+PNR+Enquiry%21";
 					
 					$postobj = new postcurl($url,$tablenum,$postparams);

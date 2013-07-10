@@ -22,6 +22,8 @@ if(isset($_POST['userRegister'])){
 		}
 		
 	}
+}else{
+	header("Location:register.php");
 }
 
 $dbobj->dbdisconnect();

@@ -24,6 +24,8 @@ if(isset($_POST['userLogin'])){
 		}
 		
 	}
+}else{
+	header("Location:userlogin.php");
 }
 
 $dbobj->dbdisconnect();
