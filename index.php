@@ -49,6 +49,7 @@
 					<input id="pnrNum" name="pnrNum" type="text" size="10" maxlength="10" placeholder="Enter your PNR number">
 					<input type="submit" name="checkStatus" value="Get Status" class="btn">
 					<input type="submit" name="savePnr" value="Save PNR" class="btn">
+					<input type="submit" name="sendSMS" value="Send SMS" class="btn">
 					</form>
 					<form>
 					</form>

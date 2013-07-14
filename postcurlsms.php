@@ -32,7 +32,6 @@ class postcurl {
 		curl_setopt($this->ch, CURLOPT_USERAGENT, $this->userAgent);    //To mask the robot as a browser
 		curl_setopt($this->ch, CURLOPT_POSTFIELDS,$this->postParams); //Post fields
 		curl_setopt($this->ch, CURLOPT_POST,true); //To send the POST parameters
-		//curl_setopt($this->ch, CURLOPT_REFERER, 'http://www.indianrail.gov.in/train_Schedule.html');
 		curl_setopt($this->ch, CURLOPT_HTTPHEADER, $header);
 		curl_setopt($this->ch, CURLOPT_URL,$this->postUrl);   //To set the page to be fetched
 		return curl_exec($this->ch);    //Execute and return the response

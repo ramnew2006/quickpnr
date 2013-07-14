@@ -1,7 +1,6 @@
 <?php
 require_once 'database.php';
 require_once 'postcurl.php';
-require_once 'sendmail.php';
 
 $dbobj = new database();
 $dbobj->dbconnect();
@@ -31,24 +30,22 @@ for($k=0;$k<$numRows;$k++){
 		$html .= "</tr>";
 	}
 	$html .= "</table>";
-	$headers = 'From: ramnew2006@gmail.com' . "\r\n" .
-    'Reply-To: ramnew2006@gmail.com' . "\r\n" .
+
+	// Always set content-type when sending HTML email
+	$headers = "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+	$headers .= 'From: noreply@qwiktravel.com' . "\r\n" .
+    'Reply-To: noreply@qwiktravel.com' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
-	$from = "ramnew2006@gmail.com";
-	$to = "ramnew2006@gmail.com";
+	
+	$to = "ram_new2006@yahoo.co.in";
 	$subj = "hi";
-	$msg = "hello there";
-	$mailobj = new sendMail($to, $from, $subj, $msg);
-	if($mailobj){
-		echo "success";
+	
+	if(mail($to, $subj, $html, $headers)){
+		echo "mail successfully sent";
 	}else{
-		echo "bad";
+		echo "something is wrong";
 	}
-	// if(mail("ramnew2006@gmail.com", "Hi", "Hello", $headers)){
-		// echo "mail successfully sent";
-	// }else{
-		// echo "something is wrong";
-	// }
 }
 
 echo $html;
