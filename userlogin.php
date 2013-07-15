@@ -54,8 +54,8 @@ if(isset($_SESSION['user'])){
 				<div class="span4"></div>
 				<div class="span4">
 					<form action="loginaction.php" method="post" onsubmit="return(validateForm());">
-					<input id="mobileNum" name="mobileNum" type="text" size="10" maxlength="10" placeholder="Your 10 digit Mobile number"><br/>
-					<input name="userPassword" type="password" placeholder="Your Password"><br/>
+					<input id="mobileNum" name="mobileNum" type="text" size="10" maxlength="10" placeholder="Mobile number"><br/>
+					<input name="userPassword" type="password" placeholder="Password"><br/>
 					<input type="submit" name="userLogin" value="Login" class="btn">
 					</form>
 				</div>
