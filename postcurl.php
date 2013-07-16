@@ -9,13 +9,17 @@ class postcurl {
 	private $responseRows;
 	private $postUrl; //post url to be used
 	private $userAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
+	private $header_info;
+	private $curloutput;
+	private $referrer;
 	
-	function __construct($postUrl,$tableNum,$postparams) {
+	function __construct($postUrl,$tableNum,$postparams,$referrer="http://www.indianrail.gov.in/seat_Avail.html") {
 		$this->postUrl = $postUrl;
 		$this->tableNum = $tableNum;
 		$this->postParams = $postparams;
 		//Fetching Started
 		$this->setResponseRows();
+		$this->referrer = $referrer;
 	}
 	
 	private function curlOpt(){
@@ -23,7 +27,7 @@ class postcurl {
 					"Host:www.indianrail.gov.in",
 					"Origin:http://www.indianrail.gov.in",
 					"Proxy-Connection:keep-alive",
-					"Referer:http://www.indianrail.gov.in/seat_Avail.html",
+					"Referer:".$this->referrer,
 					"User-Agent:Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1");
 		$this->ch = curl_init();        //Initialize the cURL handler
 		curl_setopt($this->ch, CURLOPT_RETURNTRANSFER,true);    //To give the file fetched back to the handler
@@ -34,8 +38,11 @@ class postcurl {
 		curl_setopt($this->ch, CURLOPT_POST,true); //To send the POST parameters
 		//curl_setopt($this->ch, CURLOPT_REFERER, 'http://www.indianrail.gov.in/train_Schedule.html');
 		curl_setopt($this->ch, CURLOPT_HTTPHEADER, $header);
+		curl_setopt($this->ch, CURLINFO_HEADER_OUT, true);
 		curl_setopt($this->ch, CURLOPT_URL,$this->postUrl);   //To set the page to be fetched
-		return curl_exec($this->ch);    //Execute and return the response
+		$this->curloutput = curl_exec($this->ch);    //Execute and return the response
+		$this->header_info = curl_getinfo($this->ch);
+		return $this->curloutput;
     }
 	
 	private function setResponseRows(){
@@ -62,6 +69,14 @@ class postcurl {
 	public function tableColumns($i){
 		$this->tableColumns = $this->responseRows->item($i)->getElementsByTagName('td')->length;
 		return $this->tableColumns;
+	}
+	
+	public function curloutput(){
+		return $this->curloutput;
+	}
+	
+	public function curlheaders(){
+		return $this->header_info;
 	}
 
 }
