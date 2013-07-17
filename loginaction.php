@@ -19,6 +19,7 @@ if(isset($_POST['userLogin'])){
 		if(mysql_num_rows($query)==1){
 			echo "User Identified";
 			$_SESSION['user']="loggedin";
+			$_SESSION['userName']=$mobileNum;
 		}else{
 			echo "wrong mobile num or password";
 		}

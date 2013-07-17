@@ -12,15 +12,16 @@ class postcurl {
 	private $header_info;
 	private $curloutput;
 	private $referrer;
+	private $errorCheck;
 	
 	//Constructor
 	function __construct($postUrl,$tableNum,$postparams,$referrer="http://www.indianrail.gov.in/seat_Avail.html") {
 		$this->postUrl = $postUrl;
 		$this->tableNum = $tableNum;
 		$this->postParams = $postparams;
+		$this->referrer = $referrer;
 		//Fetching Started
 		$this->setResponseRows();
-		$this->referrer = $referrer;
 	}
 	
 	//Main curl operation
@@ -45,6 +46,11 @@ class postcurl {
 		$this->curloutput = curl_exec($this->ch);    //Execute and return the response
 		$this->header_info = curl_getinfo($this->ch);
 		return $this->curloutput;
+		if($this->header_info['http_code']==200){
+			$this->errorCheck=true;
+		}else{
+			$this->errorCheck=false;
+		}
     }
 	
 	//calculating elements of the given table
@@ -83,6 +89,10 @@ class postcurl {
 	//returns the headers of the curl operation
 	public function curlheaders(){
 		return $this->header_info;
+	}
+	
+	public function errorcheck(){
+		return $this->errorCheck;
 	}
 
 }
