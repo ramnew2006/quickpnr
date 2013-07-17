@@ -1,8 +1,10 @@
 <?php
 set_time_limit(0);
+session_start();
+require_once 'database.php';
 require_once 'postcurl.php';
-require_once 'getcurl.php';
 
+//Login Parameters
 $url = "https://www.irctc.co.in/cgi-bin/bv60.dll/irctc/services/login.do";
 $username = "ramnew2009";
 $password = "man0har";

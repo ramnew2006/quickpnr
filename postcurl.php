@@ -13,6 +13,7 @@ class postcurl {
 	private $curloutput;
 	private $referrer;
 	
+	//Constructor
 	function __construct($postUrl,$tableNum,$postparams,$referrer="http://www.indianrail.gov.in/seat_Avail.html") {
 		$this->postUrl = $postUrl;
 		$this->tableNum = $tableNum;
@@ -22,6 +23,7 @@ class postcurl {
 		$this->referrer = $referrer;
 	}
 	
+	//Main curl operation
 	private function curlOpt(){
 		$header = array("Content-Type:application/x-www-form-urlencoded",
 					"Host:www.indianrail.gov.in",
@@ -45,6 +47,7 @@ class postcurl {
 		return $this->curloutput;
     }
 	
+	//calculating elements of the given table
 	private function setResponseRows(){
 		$responseHTML = $this->curlOpt();
 		$responseDOM = new DOMDocument();        //Create new DOM Object
@@ -66,15 +69,18 @@ class postcurl {
 		return $this->tableRows;
 	}
 	
+	//return the number of columns in a give row
 	public function tableColumns($i){
 		$this->tableColumns = $this->responseRows->item($i)->getElementsByTagName('td')->length;
 		return $this->tableColumns;
 	}
 	
+	//return the output of the curl operation
 	public function curloutput(){
 		return $this->curloutput;
 	}
 	
+	//returns the headers of the curl operation
 	public function curlheaders(){
 		return $this->header_info;
 	}
