@@ -12,7 +12,6 @@ class postcurl {
 	private $header_info;
 	private $curloutput;
 	private $referrer;
-	private $errorCheck;
 	
 	//Constructor
 	function __construct($postUrl,$tableNum,$postparams,$referrer="http://www.indianrail.gov.in/seat_Avail.html") {
@@ -46,22 +45,19 @@ class postcurl {
 		$this->curloutput = curl_exec($this->ch);    //Execute and return the response
 		$this->header_info = curl_getinfo($this->ch);
 		return $this->curloutput;
-		if($this->header_info['http_code']==200){
-			$this->errorCheck=true;
-		}else{
-			$this->errorCheck=false;
-		}
-    }
+	}
 	
 	//calculating elements of the given table
 	private function setResponseRows(){
 		$responseHTML = $this->curlOpt();
-		$responseDOM = new DOMDocument();        //Create new DOM Object
-		$responseDOM->strictErrorChecking=false;
-		$responseDOM->recover=true;
-		@$responseDOM->loadHTML($responseHTML); //Load the HTML into the DOM Object
-		$responseTable = $responseDOM->getElementsByTagName("table")->item($this->tableNum); //Parse the DOM Object and get the required Table
-		$this->responseRows = @$responseTable->childNodes;
+		if($this->header_info['http_code']==200){
+			$responseDOM = new DOMDocument();        //Create new DOM Object
+			$responseDOM->strictErrorChecking=false;
+			$responseDOM->recover=true;
+			@$responseDOM->loadHTML($responseHTML); //Load the HTML into the DOM Object
+			$responseTable = $responseDOM->getElementsByTagName("table")->item($this->tableNum); //Parse the DOM Object and get the required Table
+			$this->responseRows = @$responseTable->childNodes;
+		}
 	}
 	
 	//return the text of the element in the table using row and column number
@@ -91,9 +87,5 @@ class postcurl {
 		return $this->header_info;
 	}
 	
-	public function errorcheck(){
-		return $this->errorCheck;
-	}
-
 }
 ?>

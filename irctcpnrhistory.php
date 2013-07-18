@@ -5,6 +5,9 @@ require_once 'database.php';
 require_once 'postcurl.php';
 
 if(isset($_POST['savePnrHistory'])){
+	$dbobj = new database();
+	$dbobj->dbconnect();
+
 	if(isset($_SESSION['user'])){
 		
 		//IRCTC Login Parameters
@@ -15,10 +18,9 @@ if(isset($_POST['savePnrHistory'])){
 
 		//Initial Login
 		$postobj = new postcurl($url,1,$postparams);
-		$error = $postobj->errorcheck();
-		echo $error;
+		$code = $postobj->curlheaders()['http_code'];
 		
-		if($error){
+		if($code==302){
 			$url = $postobj->curlheaders()['redirect_url'];
 			$query = parse_url($url)['query'];
 			$query = explode('&',$query);
@@ -34,9 +36,9 @@ if(isset($_POST['savePnrHistory'])){
 			
 			$postobj = new postcurl($url,15,$postparams,$ref);
 			$error = $postobj->errorcheck();
-			echo $error;
+			$code = $postobj->curlheaders()['http_code'];
 
-			if($error){
+			if($code==200){
 				//print_r($postobj->curlheaders());
 				$numRows = $postobj->tableRows();
 				$mobnum = $_SESSION['userName'];
@@ -45,9 +47,10 @@ if(isset($_POST['savePnrHistory'])){
 					if($i%2==1){
 						$pnrnum = $postobj->getInfoFromRow($i,3);
 						if(!empty($pnrnum)){
-							$values = "('" . $pnrnum . "','" . $mobnum . "'),";
-							$query = "INSERT INTO `quickpnr`.`pnrdetails` (`pnrnum`, `mobnum`) VALUES " . $values;
-							$query = mysql_query($query);
+							$values = "('" . $pnrnum . "','" . $mobnum . "')";
+							$query = "INSERT INTO `pnrdetails` (`pnrnum`, `mobnum`) VALUES " . $values;
+							//echo $query;
+							mysql_query($query);
 						}
 					}
 				}
@@ -59,6 +62,8 @@ if(isset($_POST['savePnrHistory'])){
 	}else{
 		header("Location:userlogin.php");
 	}
+	
+	$dbobj->dbdisconnect();
 }else{
 	header("Location: temp.php");
 }
