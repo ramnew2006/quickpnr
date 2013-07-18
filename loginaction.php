@@ -20,6 +20,7 @@ if(isset($_POST['userLogin'])){
 			echo "User Identified";
 			$_SESSION['user']="loggedin";
 			$_SESSION['userName']=$mobileNum;
+			header("Location: {$_SESSION['redirect_url']}");
 		}else{
 			echo "wrong mobile num or password";
 		}

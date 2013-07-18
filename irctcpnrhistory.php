@@ -35,7 +35,7 @@ if(isset($_POST['savePnrHistory'])){
 			$postparams = $bvs . "&" . $bve . "&page=history&password=" . $password . "&Submit=GO";
 			
 			$postobj = new postcurl($url,15,$postparams,$ref);
-			$error = $postobj->errorcheck();
+			//$error = $postobj->errorcheck();
 			$code = $postobj->curlheaders()['http_code'];
 
 			if($code==200){
@@ -43,24 +43,47 @@ if(isset($_POST['savePnrHistory'])){
 				$numRows = $postobj->tableRows();
 				$mobnum = $_SESSION['userName'];
 				
+				$confirm = 0;
+				
 				for($i=1;$i<$numRows;$i++){
 					if($i%2==1){
 						$pnrnum = $postobj->getInfoFromRow($i,3);
+						
 						if(!empty($pnrnum)){
-							$values = "('" . $pnrnum . "','" . $mobnum . "')";
-							$query = "INSERT INTO `pnrdetails` (`pnrnum`, `mobnum`) VALUES " . $values;
-							//echo $query;
-							mysql_query($query);
+							$src_stn = $postobj->getInfoFromRow($i,4);
+							$dest_stn = $postobj->getInfoFromRow($i,5);
+							$doj_temp = $postobj->getInfoFromRow($i,6);
+							$doj_temp = explode('-',$doj_temp);
+							$doj = $doj_temp[2] . "-" . $doj_temp[1] . "-" . $doj_temp[0];
+							$time_diff = strtotime(date("Y-m-d"))-strtotime($doj);
+							if($time_diff<0){
+								$archive = "N";
+							}else{
+								$archive = "Y";
+							}
+							$values = "('" . $pnrnum . "','" . $mobnum . "','" . $archive . "','" . $src_stn . "','" . $dest_stn . "','" . $doj . "')";
+							$query = "INSERT INTO `pnrdetails` (`pnrnum`, `mobnum`, `archive`, `src_stn`, `dest_stn`, `doj`) VALUES " . $values;
+							echo $query;
+							if(mysql_query($query)){
+								$confirm=1;
+							}else{
+								$confirm =0;
+							}
 						}
 					}
 				}
-				echo "Successfully imported PNR numbers";
+				if($confirm==1){
+					echo "Successfully imported PNR numbers";
+				}else{
+					echo "There is some problem while importing PNR numbers";
+				}
 			}
 		}else{
 			echo "There is some problem while connecting to IRCTC Servers!";
 		}
 	}else{
 		header("Location:userlogin.php");
+		$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
 	}
 	
 	$dbobj->dbdisconnect();
