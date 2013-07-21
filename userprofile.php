@@ -213,15 +213,17 @@ $dbobj->dbdisconnect();
 ?>
   <script type="text/javascript">
   $(".sendsms").on("click",function() {
+	var current = $(this);
 	var pnrnum = $(this).attr('name');
 	pnrnum = pnrnum.match(/[0-9]+/);
 	  alert("You are going to send the SMS for "+ pnrnum);
+	  //$(this).val("Sent");
 	  $.ajax({
 			type: "POST",
 			url: "messagesend.php",
 			data: "pnrNum="+pnrnum ,
 			success: function(html){
-			$("#displayresult").html(html).show();
+				current.val(html);
 			}
 		});
 	});

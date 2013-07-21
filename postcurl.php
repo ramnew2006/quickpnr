@@ -67,8 +67,12 @@ class postcurl {
 	
 	//return the number of rows in the table under consideration
 	public function tableRows(){
-		$this->tableRows = $this->responseRows->length;
-		return $this->tableRows;
+		try{
+			$this->tableRows = $this->responseRows->length;
+			return $this->tableRows;
+		}catch(Exception $e){
+			return false;
+		}
 	}
 	
 	//return the number of columns in a give row
