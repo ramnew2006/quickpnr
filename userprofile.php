@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <?php
 session_start();
 require_once 'database.php';
@@ -57,7 +59,7 @@ $dbobj->dbconnect();
 		</tr></thead>";
 	echo "<tbody>";
 	while ($row = mysql_fetch_array($result)) {
-		echo "<form method=\"post\" action=\"userprofile.php#pnrstatus\">";
+		//echo "<form method=\"post\" action=\"userprofile.php#pnrstatus\">";
 		echo "<tr>";
 		for($i=0;$i<(sizeof($row)/2);$i++){
 			echo "<td>";
@@ -67,11 +69,11 @@ $dbobj->dbconnect();
 		echo "<td>";
 		echo "<input type=\"hidden\" name=\"pnrNum\" value=\"" . $row[1] . "\">";
 		if($row['archive']=="N"){
-			echo "<input class=\"btn btn-primary\" type=\"submit\" name=\"getStatus\" value=\"Get Status\">&nbsp;&nbsp;<input class=\"btn btn-primary\" type=\"submit\" name=\"sendSMS\" value=\"Send SMS\">";
+			echo "<input class=\"btn btn-primary\" type=\"submit\" name=\"getStatus\" id=\"getStatus\" value=\"Get Status\">&nbsp;&nbsp;<input id=\"sendSMS\" class=\"sendsms btn btn-primary\" type=\"submit\" name=\"sendSMS" . $row['pnrnum'] ."\" value=\"Send SMS\">";
 		}
 		echo "</td>";
 		echo "</tr>";
-		echo "</form>";
+		//echo "</form>";
 	}
 	echo "</tbody>";
 	echo "</table>";
@@ -200,7 +202,7 @@ if(isset($_POST['sendSMS'])){
 
 
 </section>
-
+<div id="displayresult"></div>
 
 <br><br><br><br>
 
@@ -209,3 +211,20 @@ if(isset($_POST['sendSMS'])){
 include('footer.php');
 $dbobj->dbdisconnect();
 ?>
+  <script type="text/javascript">
+  $(".sendsms").on("click",function() {
+	var pnrnum = $(this).attr('name');
+	pnrnum = pnrnum.match(/[0-9]+/);
+	  alert("You are going to send the SMS for "+ pnrnum);
+	  $.ajax({
+			type: "POST",
+			url: "messagesend.php",
+			data: "pnrNum="+pnrnum ,
+			success: function(html){
+			$("#displayresult").html(html).show();
+			}
+		});
+	});
+  </script>
+  </body>
+</html>
