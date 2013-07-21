@@ -80,6 +80,12 @@
 					
 					$postobj = new postcurl($url,$tablenum,$postparams);
 					$lengthRow = $postobj->tableRows();
+					
+					if($lengthRow==1){
+						$tablenum = 26;
+						$postobj = new postcurl($url,$tablenum,$postparams);
+						$lengthRow = $postobj->tableRows();
+					}
 
 					echo "<table>";
 					for($i=0;$i<$lengthRow;$i++){

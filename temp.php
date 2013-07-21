@@ -1,10 +1,10 @@
 <?php
-// set_time_limit(0);
-// require_once 'getcurl.php';
-// require_once 'database.php';
+set_time_limit(0);
+require_once 'getcurl.php';
+require_once 'database.php';
 
-// $db = new database();
-// $db->dbconnect();
+$db = new database();
+$db->dbconnect();
 
 // //$url = "http://www.indianrail.gov.in/mail_express_trn_list.html";
 // //$tablenum = 5;
@@ -36,7 +36,11 @@
 
 // //echo $obj->getInfoFromRow(2,2);
 
-// $db->dbdisconnect();
+$query = mysql_query("SELECT act_code FROM userlogin WHERE mobilenum=8939686018");
+echo mysql_result($query,0);
+
+
+$db->dbdisconnect();
 
 ?>
 

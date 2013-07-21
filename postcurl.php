@@ -14,7 +14,7 @@ class postcurl {
 	private $referrer;
 	
 	//Constructor
-	function __construct($postUrl,$tableNum,$postparams,$referrer="http://www.indianrail.gov.in/seat_Avail.html") {
+	function __construct($postUrl,$tableNum,$postparams,$referrer="http://www.indianrail.gov.in/") {
 		$this->postUrl = $postUrl;
 		$this->tableNum = $tableNum;
 		$this->postParams = $postparams;

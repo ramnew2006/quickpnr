@@ -17,10 +17,16 @@ if(isset($_POST['userLogin'])){
 		$password = hash('sha512',$password);
 		$query = mysql_query("SELECT * FROM `userlogin` WHERE `mobilenum` = " . $mobileNum . " AND `password` = '" . $password . "'");
 		if(mysql_num_rows($query)==1){
-			echo "User Identified";
-			$_SESSION['user']="loggedin";
-			$_SESSION['userName']=$mobileNum;
-			header("Location: {$_SESSION['redirect_url']}");
+			$act_status = mysql_fetch_array($query)['act_status'];
+			if($act_status=="Y"){
+				echo "User Identified";
+				$_SESSION['user']="loggedin";
+				$_SESSION['userName']=$mobileNum;
+				if(isset($_SESSION['redirect_url'])){
+					header("Location: {$_SESSION['redirect_url']}");
+				}
+			}else{
+			}
 		}else{
 			echo "wrong mobile num or password";
 		}
