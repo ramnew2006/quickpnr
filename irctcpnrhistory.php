@@ -63,7 +63,7 @@ if(isset($_POST['savePnrHistory'])){
 							}
 							$values = "('" . $pnrnum . "','" . $mobnum . "','" . $archive . "','" . $src_stn . "','" . $dest_stn . "','" . $doj . "')";
 							$query = "INSERT INTO `pnrdetails` (`pnrnum`, `mobnum`, `archive`, `src_stn`, `dest_stn`, `doj`) VALUES " . $values;
-							echo $query;
+							//echo $query;
 							if(mysql_query($query)){
 								$confirm=1;
 							}else{

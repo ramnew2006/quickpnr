@@ -48,7 +48,8 @@ if(isset($_POST['pnrNum'])){
 				//return false;
 				echo "Error";
 			}
-		}else{
+		}
+		if(!isset($lengthRow)){
 			echo "Try Later!";
 		}
 }

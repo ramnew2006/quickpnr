@@ -20,28 +20,36 @@ $dbobj->dbconnect();
   
   <div class="subnav">
     <ul class="nav nav-pills">
-      <li><a href="#pnrhistory">PNR History</a></li>
+      <li><a href="#profiledetails">Profile</a></li>
+	  <li><a href="#pnrhistory">PNR History</a></li>
+	  <?php if(isset($_POST['getStatus'])){ ?>
       <li><a href="#pnrstatus">PNR Status</a></li>
-      <li><a href="#buttons">Buttons</a></li>
+	  <?php }?>
       <li><a href="#forms">Forms</a></li>
       <li><a href="#tables">Tables</a></li>
       <li><a href="#miscellaneous">Miscellaneous</a></li>
     </ul>
   </div>
 
-  
+<section id="profiledetails">
+  <div class="page-header">
+    <h3>Profile</h3>
+  </div>
+  <div class="row" style="margin-left:auto;">
+	<p>Welcome Ram!!</p>
+  </div>
+</section>  
 
 <!-- PNR History
 ================================================== -->
 <section id="pnrhistory">
-  <div class="page-header">
-    <h1>PNR History</h1>
-  </div>
-
   <!-- Headings & Paragraph Copy -->
-  <div class="row">
-
 <?php
+	echo "<div class=\"page-header\">
+    <h3>PNR History</h3>
+	</div>
+	<div class=\"row\">";
+	
 	$query = "SELECT * FROM pnrdetails WHERE mobnum=" . $_SESSION['userName'];
 	$result = mysql_query($query);
 	$numRows = mysql_num_rows($result);
@@ -55,11 +63,11 @@ $dbobj->dbconnect();
 		<th>Source</th>
 		<th>Destination</th>
 		<th>Date of Journey</th>
-		<th></th>
+		<th>Status</th>
 		</tr></thead>";
 	echo "<tbody>";
 	while ($row = mysql_fetch_array($result)) {
-		//echo "<form method=\"post\" action=\"userprofile.php#pnrstatus\">";
+		echo "<form method=\"post\" action=\"userprofile.php#pnrstatus\">";
 		echo "<tr>";
 		for($i=0;$i<(sizeof($row)/2);$i++){
 			echo "<td>";
@@ -69,14 +77,16 @@ $dbobj->dbconnect();
 		echo "<td>";
 		echo "<input type=\"hidden\" name=\"pnrNum\" value=\"" . $row[1] . "\">";
 		if($row['archive']=="N"){
-			echo "<input class=\"btn btn-primary\" type=\"submit\" name=\"getStatus\" id=\"getStatus\" value=\"Get Status\">&nbsp;&nbsp;<input id=\"sendSMS\" class=\"sendsms btn btn-primary\" type=\"submit\" name=\"sendSMS" . $row['pnrnum'] ."\" value=\"Send SMS\">";
+			echo "<input class=\"btn btn-warning\" type=\"submit\" name=\"getStatus\" id=\"getStatus\" value=\"Get Status\">&nbsp;<i rel=\"tooltip\" style=\"color:#EE8505;\" title=\"Get PNR Status\" class=\"icon-question-sign\"></i>&nbsp;&nbsp;<a id=\"sendSMS\" class=\"sendsms btn btn-inverse\" name=\"sendSMS" . $row['pnrnum'] ."\">Send SMS</a>&nbsp;<i rel=\"tooltip\" title=\"Send Message to your registered Mobile\" class=\"icon-question-sign\"></i>";
+		}else{
 		}
 		echo "</td>";
 		echo "</tr>";
-		//echo "</form>";
+		echo "</form>";
 	}
 	echo "</tbody>";
 	echo "</table>";
+	echo "</div>";
 }else{
 	header("Location:userlogin.php");
 	$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
@@ -84,7 +94,7 @@ $dbobj->dbconnect();
 
 ?>
 
-  </div>
+  
 
 </section>
 
@@ -102,7 +112,7 @@ $dbobj->dbconnect();
 if(isset($_POST['getStatus'])){
 
 	echo "<div class=\"page-header\">
-    <h1>PNR Status</h1>
+    <h3>PNR Status</h3>
 	</div>
 	<div class=\"row\">";
 	
@@ -146,7 +156,7 @@ if(isset($_POST['getStatus'])){
 if(isset($_POST['sendSMS'])){
 
 	echo "<div class=\"page-header\">
-    <h1>PNR Status</h1>
+    <h3>PNR Status</h3>
 	</div>
 	<div class=\"row\">";
 	
@@ -211,22 +221,30 @@ if(isset($_POST['sendSMS'])){
 include('footer.php');
 $dbobj->dbdisconnect();
 ?>
-  <script type="text/javascript">
-  $(".sendsms").on("click",function() {
-	var current = $(this);
-	var pnrnum = $(this).attr('name');
-	pnrnum = pnrnum.match(/[0-9]+/);
-	  alert("You are going to send the SMS for "+ pnrnum);
-	  //$(this).val("Sent");
-	  $.ajax({
-			type: "POST",
-			url: "messagesend.php",
-			data: "pnrNum="+pnrnum ,
-			success: function(html){
-				current.val(html);
-			}
-		});
+
+<script type="text/javascript">
+$(".sendsms").on("click",function() {
+var current = $(this);
+var pnrnum = $(this).attr('name');
+pnrnum = pnrnum.match(/[0-9]+/);
+current.html("<i class=\"icon-refresh icon-spin\"></i> Sending...");
+alert("You are going to send the SMS for "+ pnrnum);
+  
+  //$(this).val("Sent");
+  $.ajax({
+		type: "POST",
+		url: "messagesend.php",
+		data: "pnrNum="+pnrnum ,
+		success: function(html){
+			current.html("<i class=\"icon-check\"></i> "+html);
+		}
 	});
-  </script>
+});
+$("#getStatus").on("click",function() {
+var current = $(this);
+current.val("Retrieving...");
+});
+</script>
+
   </body>
 </html>

@@ -12,6 +12,7 @@
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/bootswatch.css" rel="stylesheet">
+	<link href="css/custom.css" rel="stylesheet">
 
   </head>
 
@@ -32,7 +33,7 @@
        <a class="brand" href="../">qwikTravel</a>
        <div class="nav-collapse collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
-          <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">News</a></li>
+          <!--<li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">News</a></li>
           <li><a id="swatch-link" href="../#gallery">Gallery</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Preview <b class="caret"></b></a>
@@ -63,7 +64,7 @@
               <li><a target="_blank" href="variables.less">variables.less</a></li>
               <li><a target="_blank" href="bootswatch.less">bootswatch.less</a></li>
             </ul>
-          </li>
+          </li>-->
         </ul>
         <ul class="nav pull-right" id="main-menu-right">
           <li><a rel="tooltip" href="userprofile.php" title="My Profile">My Account <i class="icon-share-alt"></i></a></li>

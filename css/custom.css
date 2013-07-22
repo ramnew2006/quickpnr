@@ -1,0 +1,25 @@
+.navbar .brand {
+	font-size: 2.1em;
+}
+.table {
+	width: 90%;
+}
+div.subnav .nav > li > a {
+	color: white;
+}
+div.subnav .nav > li > a:hover {
+	color: white;
+}
+.subnav {
+	background-image: none;
+	background-color: #0AAAF1;
+	margin-bottom:0px;
+}
+section {
+	padding-top: 55px;
+	margin-top: 0px;
+}
+.table-bordered th, .table-bordered td {
+	text-align: center;
+	font-size: 14px;
+}
