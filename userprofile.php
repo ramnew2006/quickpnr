@@ -37,6 +37,13 @@ $dbobj->dbconnect();
   </div>
   <div class="row" style="margin-left:auto;">
 	<p>Welcome Ram!!</p>
+	<table>
+	<tr>
+		<td><h4>Mobile Number</h4></td>
+		<td style="padding-left:2em;"><h5><div id="profilemob"><?php echo $_SESSION['userName']; ?>&nbsp;&nbsp;<a id="changeprofilemob">[Change]</a></div><div id="formprofilemob" style="display: none;"><form><input type="text" value="<?php echo $_SESSION['userName']; ?>">&nbsp;&nbsp;<input type="submit" class="btn btn-primary" value="Save">&nbsp;&nbsp;<a id="cancelprofilemob" class="btn btn-primary">Cancel</a></form></div></h5></td>
+		<!--<td>&nbsp;&nbsp;<a id="changeprofilemob" class="btn btn-warning">Change</a></td>-->
+	</tr>
+	</table>
   </div>
 </section>  
 
@@ -67,7 +74,7 @@ $dbobj->dbconnect();
 		</tr></thead>";
 	echo "<tbody>";
 	while ($row = mysql_fetch_array($result)) {
-		echo "<form method=\"post\" action=\"userprofile.php#pnrstatus\">";
+		echo "<form method=\"post\" action=\"userprofile.php#pnrstatus\" onsubmit=\"return(pnrtimevalidate());\">";
 		echo "<tr>";
 		for($i=0;$i<(sizeof($row)/2);$i++){
 			echo "<td>";
@@ -222,29 +229,5 @@ include('footer.php');
 $dbobj->dbdisconnect();
 ?>
 
-<script type="text/javascript">
-$(".sendsms").on("click",function() {
-var current = $(this);
-var pnrnum = $(this).attr('name');
-pnrnum = pnrnum.match(/[0-9]+/);
-current.html("<i class=\"icon-refresh icon-spin\"></i> Sending...");
-alert("You are going to send the SMS for "+ pnrnum);
-  
-  //$(this).val("Sent");
-  $.ajax({
-		type: "POST",
-		url: "messagesend.php",
-		data: "pnrNum="+pnrnum ,
-		success: function(html){
-			current.html("<i class=\"icon-check\"></i> "+html);
-		}
-	});
-});
-$("#getStatus").on("click",function() {
-var current = $(this);
-current.val("Retrieving...");
-});
-</script>
-
-  </body>
+</body>
 </html>

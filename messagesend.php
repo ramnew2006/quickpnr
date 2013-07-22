@@ -43,14 +43,11 @@ if(isset($_POST['pnrNum'])){
 			$smsobj = new sendSMS($_SESSION['userName'],$message);
 			if($smsobj){
 				//return true;
-				echo "Sent";
+				echo "Success";
 			}else{
 				//return false;
-				echo "Error";
+				echo "Failure";
 			}
-		}
-		if(!isset($lengthRow)){
-			echo "Try Later!";
 		}
 }
 ?>

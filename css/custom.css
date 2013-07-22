@@ -23,3 +23,9 @@ section {
 	text-align: center;
 	font-size: 14px;
 }
+input[type="text"] {
+	margin-bottom: 0px;
+}
+form {
+	margin: 0px;
+}
