@@ -1,10 +1,10 @@
 //User Profile - Sending SMS
-$(".sendsms").one("click",function() {
+$(".getsms").one("click",function() {
 var current = $(this);
 var pnrnum = $(this).attr('name');
 pnrnum = pnrnum.match(/[0-9]+/);
 current.html("<i class=\"icon-refresh icon-spin\"></i> Sending...");
-alert("You are going to send the SMS for "+ pnrnum);
+//alert("You are going to send the SMS for "+ pnrnum);
   
   $.ajax({
 		type: "POST",

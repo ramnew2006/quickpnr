@@ -84,7 +84,11 @@ $dbobj->dbconnect();
 		echo "<td>";
 		echo "<input type=\"hidden\" name=\"pnrNum\" value=\"" . $row[1] . "\">";
 		if($row['archive']=="N"){
-			echo "<input class=\"btn btn-warning\" type=\"submit\" name=\"getStatus\" id=\"getStatus\" value=\"Get Status\">&nbsp;<i rel=\"tooltip\" style=\"color:#EE8505;\" title=\"Get PNR Status\" class=\"icon-question-sign\"></i>&nbsp;&nbsp;<a id=\"sendSMS\" class=\"sendsms btn btn-inverse\" name=\"sendSMS" . $row['pnrnum'] ."\">Send SMS</a>&nbsp;<i rel=\"tooltip\" title=\"Send Message to your registered Mobile\" class=\"icon-question-sign\"></i>";
+			echo "
+			<a rel=\"tooltip\" title=\"Get PNR Status\"><input class=\"btn btn-warning\" type=\"submit\" name=\"getStatus\" id=\"getStatus\" value=\"Get Status\"></a>
+			&nbsp;&nbsp;<a id=\"getSMS\" class=\"getsms btn btn-inverse\" name=\"getSMS" . $row['pnrnum'] ."\" rel=\"tooltip\" title=\"Get Message to your registered Mobile\">Get SMS</a>
+			&nbsp;&nbsp;<a rel=\"tooltip\" title=\"Send Message to any Mobile\" id=\"sendSMS\" class=\"sendsms btn btn-primary\" name=\"sendSMS" . $row['pnrnum'] ."\">Send SMS</a>
+			";
 		}else{
 		}
 		echo "</td>";
@@ -104,7 +108,23 @@ $dbobj->dbconnect();
   
 
 </section>
-
+<!-- Button to trigger modal -->
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+</div>
 
 <!-- PNR Status
 ================================================== -->
