@@ -43,6 +43,10 @@ $dbobj->dbconnect();
 		<td style="padding-left:2em;"><h5><div id="profilemob"><?php echo $_SESSION['userName']; ?>&nbsp;&nbsp;<a id="changeprofilemob">[Change]</a></div><div id="formprofilemob" style="display: none;"><form><input type="text" value="<?php echo $_SESSION['userName']; ?>">&nbsp;&nbsp;<input type="submit" class="btn btn-primary" value="Save">&nbsp;&nbsp;<a id="cancelprofilemob" class="btn btn-primary">Cancel</a></form></div></h5></td>
 		<!--<td>&nbsp;&nbsp;<a id="changeprofilemob" class="btn btn-warning">Change</a></td>-->
 	</tr>
+	<tr>
+		<td><h4>Password</h4></td>
+		<td style="padding-left:2em;"><h5><div id="profilepwd">XXXXXXX&nbsp;&nbsp;<a id="changeprofilepwd">[Change]</a></div><div id="formprofilepwd" style="display: none;"><form><input type="text">&nbsp;&nbsp;<input type="submit" class="btn btn-primary" value="Save">&nbsp;&nbsp;<a id="cancelprofilepwd" class="btn btn-primary">Cancel</a></form></div></h5></td>
+	</tr>
 	</table>
   </div>
 </section>  
@@ -87,7 +91,7 @@ $dbobj->dbconnect();
 			echo "
 			<a rel=\"tooltip\" title=\"Get PNR Status\"><input class=\"btn btn-warning\" type=\"submit\" name=\"getStatus\" id=\"getStatus\" value=\"Get Status\"></a>
 			&nbsp;&nbsp;<a id=\"getSMS\" class=\"getsms btn btn-inverse\" name=\"getSMS" . $row['pnrnum'] ."\" rel=\"tooltip\" title=\"Get Message to your registered Mobile\">Get SMS</a>
-			&nbsp;&nbsp;<a rel=\"tooltip\" title=\"Send Message to any Mobile\" id=\"sendSMS\" class=\"sendsms btn btn-primary\" name=\"sendSMS" . $row['pnrnum'] ."\">Send SMS</a>
+			&nbsp;&nbsp;<a data-toggle=\"modal\" href=\"#myModal\" rel=\"tooltip\" title=\"Send Message to any Mobile\" id=\"sendSMS\" class=\"sendsms btn btn-primary\" name=\"sendSMS" . $row['pnrnum'] ."\" value=\"" . $row['pnrnum'] . "\">Send SMS</a>
 			";
 		}else{
 		}
@@ -108,18 +112,21 @@ $dbobj->dbconnect();
   
 
 </section>
-<!-- Button to trigger modal -->
-<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+<!-- Button to trigger modal 
+<a id="idmyModal" href="#myModal" role="button" class="btn" data-toggle="modal" value="1234">Launch demo modal</a>-->
  
-<!-- Modal -->
+<!-- Send SMS Modal -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Modal header</h3>
   </div>
   <div class="modal-body">
-    <p>One fine body…</p>
+    <form>
+	<input type="hidden" name="currentpnr" id="currentpnr" value="">
+	</form>
   </div>
+  
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     <button class="btn btn-primary">Save changes</button>

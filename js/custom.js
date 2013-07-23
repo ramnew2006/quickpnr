@@ -42,3 +42,18 @@ $("#cancelprofilemob").on("click",function() {
 	$('#formprofilemob').hide();
 	$('#profilemob').show();
 });
+
+//User Profile - Password Toggle
+$("#changeprofilepwd").on("click",function() {
+	$('#formprofilepwd').show();
+	$('#profilepwd').hide();
+});
+$("#cancelprofilepwd").on("click",function() {
+	$('#formprofilepwd').hide();
+	$('#profilepwd').show();
+});
+
+$(".sendsms").one("click",function() {
+	var current = $(this);
+	$('#currentpnr').val(current.attr('value'));
+});

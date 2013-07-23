@@ -1,5 +1,6 @@
 .navbar .brand {
 	font-size: 2.1em;
+	color: #000;
 }
 .table {
 	width: 90%;
@@ -22,4 +23,10 @@ section {
 .table-bordered th, .table-bordered td {
 	text-align: center;
 	font-size: 14px;
+}
+input[type="text"] {
+	margin-bottom:0px;
+}
+form {
+	margin-bottom:0px;
 }
