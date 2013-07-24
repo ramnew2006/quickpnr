@@ -17,8 +17,7 @@
   </head>
 
   <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
-    <script src="js/bsa.js"></script>
-
+    
 
   <!-- Navbar
     ================================================== -->

@@ -1,5 +1,5 @@
 <?php
-set_time_limit(0);
+set_time_limit(60);
 session_start();
 require_once 'database.php';
 require_once 'postcurl.php';
@@ -44,6 +44,8 @@ if(isset($_POST['savePnrHistory'])){
 				$mobnum = $_SESSION['userName'];
 				
 				$confirm = 0;
+				$irctcimportprogress=0;
+				$progressbit = (100/($numRows-1));
 				
 				for($i=1;$i<$numRows;$i++){
 					if($i%2==1){
@@ -71,6 +73,9 @@ if(isset($_POST['savePnrHistory'])){
 							}
 						}
 					}
+					$irctcimportprogress=$irctcimportprogress+$progressbit;
+					//file_put_contents("irctcpnrimportprogress.php",round($irctcimportprogress));
+					$_SESSION['irctcimportprogress']=round($irctcimportprogress);
 				}
 				if($confirm==1){
 					echo "Successfully imported PNR numbers";

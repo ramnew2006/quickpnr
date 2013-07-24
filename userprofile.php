@@ -118,18 +118,16 @@ $dbobj->dbconnect();
 <!-- Send SMS Modal -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+    <h3 id="myModalLabel">Send PNR Status to Any Mobile</h3>
   </div>
   <div class="modal-body">
-    <form>
-	<input type="hidden" name="currentpnr" id="currentpnr" value="">
-	</form>
+    <input type="hidden" name="currentpnr" id="currentpnr" value="">
+	Mobile Number:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+91&nbsp;&nbsp;<input type="text" name="currentmobileNum" id="currentmobileNum">
   </div>
-  
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
+    <a class="btn btn-primary" name="sendSMSanyMobile" id="sendSMSanyMobile">Send SMS</a>
   </div>
 </div>
 
@@ -244,6 +242,49 @@ if(isset($_POST['sendSMS'])){
 ?>
 
 
+
+</section>
+
+<!-- PNR History
+================================================== -->
+<section id="pnrhistory">
+  <!-- Headings & Paragraph Copy -->
+<div class="page-header">
+    <h3>Import Booking History From IRCTC</h3>
+  </div>
+  <div class="row" style="margin-left:auto;">
+	<p>Enter your IRCTC user name and password and start importing your booking history at a go.</p>
+	<table>
+	<tr>
+		<td>IRCTC User Name</td>
+		<td style="padding-left:2em;"><input type="text" name="irctcusername" id="irctcusername"></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>IRCTC Password</td>
+		<td style="padding-left:2em;"><input type="text" name="irctcpassword" id="irctcpassword"></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td style="padding-left:2em;"><a class="btn btn-primary" id="importirctchistory">Start Importing</a></td>
+	</tr>
+	</table>
+	
+  </div>
+  <br><br>
+  
+  <div id="irctcimportprogress">
+	<div class="progress progress-info progress-striped active">
+        <div id="progressbar" class="bar" style="width: 20%;"></div>
+     </div>
+	</div>
 
 </section>
 <div id="displayresult"></div>

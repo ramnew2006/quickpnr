@@ -1,4 +1,4 @@
-//User Profile - Sending SMS
+//User Profile - Sending SMS to Registered Mobile
 $(".getsms").one("click",function() {
 var current = $(this);
 var pnrnum = $(this).attr('name');
@@ -9,13 +9,40 @@ current.html("<i class=\"icon-refresh icon-spin\"></i> Sending...");
   $.ajax({
 		type: "POST",
 		url: "messagesend.php",
-		data: "pnrNum="+pnrnum ,
+		data: "pnrNum="+pnrnum+"&regMobile=Y" ,
 		success: function(html){
 			if(html=="Success"){
-				current.html("<i class=\"icon-check\"></i> "+html);
+				current.html("<i class=\"icon-ok\"></i> "+html);
 				current.attr('class','sendsms btn btn-inverse disabled');
 			}else if(html=="Failure"){
-				current.html("<i class=\"icon-check\"></i> "+html);
+				current.html("<i class=\"icon-warning-sign\"></i> "+html);
+				current.attr('class','sendsms btn btn-inverse disabled');
+			}else{
+				current.html("Try later");
+			}
+		}
+	});
+
+});
+
+//User Profile - Sending SMS to Any Mobile
+$("#sendSMSanyMobile").on("click",function() {
+var current = $(this);
+var anymobilenum = $('#currentmobileNum').val();
+var pnrnum = $('#currentpnr').val();
+current.html("<i class=\"icon-refresh icon-spin\"></i> Sending...");
+alert("You are going to send the SMS for "+ pnrnum);
+  
+  $.ajax({
+		type: "POST",
+		url: "messagesend.php",
+		data: "pnrNum="+pnrnum+"&mobileNum="+anymobilenum+"&anyMobile=Y" ,
+		success: function(html){
+			if(html=="Success"){
+				current.html("<i class=\"icon-ok\"></i> "+html);
+				current.attr('class','sendsms btn btn-inverse disabled');
+			}else if(html=="Failure"){
+				current.html("<i class=\"icon-warning-sign\"></i> "+html);
 				current.attr('class','sendsms btn btn-inverse disabled');
 			}else{
 				current.html("Try later");
@@ -56,4 +83,39 @@ $("#cancelprofilepwd").on("click",function() {
 $(".sendsms").one("click",function() {
 	var current = $(this);
 	$('#currentpnr').val(current.attr('value'));
+});
+
+//Import IRCTC PNR History
+$("#importirctchistory").one("click",function() {
+	var progress = 0;
+	var irctcusername = $('#irctcusername').val();
+	var irctcpassword = $('#irctcpassword').val();
+	
+	$.ajax({
+		type: "POST",
+		url: "irctcpnrhistory.php",
+		data: "irctcUsername="+irctcusername+"&irctcPassword="+irctcpassword+"&savePnrHistory=Y" ,
+		success: function(html){
+			return false;
+		}
+	});
+	
+	while(progress<=100){
+		$.getJSON('http://example.com/json.php',function(data){
+			progress = data['result'];
+			$('#progressbar').attr('style','width:'+progress+'%;');
+		}
+		// $.ajax({
+			// type: "GET",
+			// url: "irctcpnrimportprogress.php",
+			// success: function(html){
+				// progress = html;
+				// $('#progressbar').attr('style','width:'+progress+'%;');
+			// }
+		// });
+	}
+	
+	if(progress==100){
+		$('#irctcimportprogress').html("Successfully imported your PNR History");
+	}
 });
