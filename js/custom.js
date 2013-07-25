@@ -86,36 +86,35 @@ $(".sendsms").one("click",function() {
 });
 
 //Import IRCTC PNR History
-$("#importirctchistory").one("click",function() {
+$("#importirctchistory").click(function() {
+	$('#irctcimportprogress').show();
 	var progress = 0;
 	var irctcusername = $('#irctcusername').val();
 	var irctcpassword = $('#irctcpassword').val();
+	var importresult = "Initial";
 	
 	$.ajax({
 		type: "POST",
 		url: "irctcpnrhistory.php",
 		data: "irctcUsername="+irctcusername+"&irctcPassword="+irctcpassword+"&savePnrHistory=Y" ,
 		success: function(html){
-			return false;
+			importresult = html;
 		}
+		
 	});
 	
-	while(progress<=100){
-		$.getJSON('http://example.com/json.php',function(data){
+	$.ajax({
+		dataType: "json",
+		type: "GET",
+		async: false,
+		url: "irctcpnrimportprogress.php",
+		success: function(data){
+			$('#progressbar').attr('style','width:'+progress+'%;');
 			progress = data['result'];
 			$('#progressbar').attr('style','width:'+progress+'%;');
 		}
-		// $.ajax({
-			// type: "GET",
-			// url: "irctcpnrimportprogress.php",
-			// success: function(html){
-				// progress = html;
-				// $('#progressbar').attr('style','width:'+progress+'%;');
-			// }
-		// });
-	}
+	});
 	
-	if(progress==100){
-		$('#irctcimportprogress').html("Successfully imported your PNR History");
-	}
+	$('#irctcimportprogress').html(importresult).delay(4000);
+	
 });

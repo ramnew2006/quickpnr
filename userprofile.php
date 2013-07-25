@@ -265,7 +265,7 @@ if(isset($_POST['sendSMS'])){
 	</tr>
 	<tr>
 		<td>IRCTC Password</td>
-		<td style="padding-left:2em;"><input type="text" name="irctcpassword" id="irctcpassword"></td>
+		<td style="padding-left:2em;"><input type="password" name="irctcpassword" id="irctcpassword"></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
@@ -280,9 +280,9 @@ if(isset($_POST['sendSMS'])){
   </div>
   <br><br>
   
-  <div id="irctcimportprogress">
+  <div id="irctcimportprogress" style="display:none;">
 	<div class="progress progress-info progress-striped active">
-        <div id="progressbar" class="bar" style="width: 20%;"></div>
+        <div id="progressbar" class="bar" style="width: 0%;"></div>
      </div>
 	</div>
 
