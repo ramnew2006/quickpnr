@@ -29,7 +29,7 @@
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
        </a>
-       <a class="brand" href="../">qwikTravel</a>
+       <a class="brand" href="/quickpnr/">qwikTravel</a>
        <div class="nav-collapse collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
           <!--<li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">News</a></li>
@@ -66,10 +66,117 @@
           </li>-->
         </ul>
         <ul class="nav pull-right" id="main-menu-right">
-          <li><a rel="tooltip" href="userprofile.php" title="My Profile">My Account <i class="icon-share-alt"></i></a></li>
-          <li><a rel="tooltip" href="logout.php" title="Logout">Logout <i class="icon-share-alt"></i></a></li>
+		<?php if(isset($_SESSION['user'])){ ?>
+          <li><a href="userprofile.php" title="My Profile"><i class="icon-user"></i> My Account</a></li>
+          <li><a href="logout.php" title="Logout"><i class="icon-unlock"></i> Logout</a></li>
+		<?php }else{ ?>
+		  <li><a data-toggle="modal" href="#myRegisterModal" title="Register Now!">Sign Up</a></li>
+          <li><a data-toggle="modal" href="#myLoginModal" title="Login">Login</a></li>
+		<?php } ?>
         </ul>
        </div>
      </div>
    </div>
  </div>
+
+ <div class="container">
+
+
+<!-- Masthead
+================================================== -->
+  
+  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/index.php" || $_SERVER["REQUEST_URI"]=="/quickpnr/") {?>
+  <?php }else{ ?>
+  <div class="subnav">
+    <ul class="nav nav-pills">
+	<?php if(isset($_SESSION['user'])){ ?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userprofile.php") {?>
+	  <li class="active"><a href="#userprofile">My Account</a></li>
+      <?php }else{ ?>
+	  <li><a href="userprofile.php">My Account</a></li>
+	  <?php } ?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrstatus.php") {?>
+      <li class="active"><a href="#pnrstatus">PNR Status</a></li>
+	  <?php }else{ ?>
+	  <li><a href="userpnrstatus.php">PNR Status</a></li>
+	  <?php } ?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrhistory.php") {?>
+      <li class="active"><a href="#pnrhistory">PNR History</a></li>
+	  <?php }else{ ?>
+	  <li><a href="userpnrhistory.php">PNR History</a></li>
+	  <?php } ?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/irctcimportview.php") {?>
+	  <li class="active"><a href="#irctcimport">Import From IRCTC</a></li>
+	  <?php }else{ ?>
+	  <li><a href="irctcimportview.php">Import From IRCTC</a></li>
+	  <?php } ?>	  
+	<?php }else{ ?>
+	<?php } ?>
+    </ul>
+  </div>
+  <?php } ?>
+  
+<?php if(isset($_SESSION['user'])) { ?>
+<?php }else{ ?>
+  <!-- Login Modal -->
+<div id="myLoginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+    <h3 id="myModalLabel">Login to your Account</h3>
+  </div>
+  <div class="modal-body">
+  <?php $_SESSION['redirect_url']=$_SERVER["REQUEST_URI"]; ?>
+    <form action="loginaction.php" method="post">
+		<table>
+		<tr>
+			<td>Mobile Number</td>
+			<td style="padding-left:1em;"><input id="mobileNum" name="mobileNum" type="text" size="10" maxlength="10" placeholder="Mobile number"></td>
+		</tr>
+		<tr>
+			<td><br/></td>
+			<td style="padding-left:1em;"><br/></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td style="padding-left:1em;"><input name="userPassword" type="password" placeholder="Password"><br/>
+		</tr>
+		</table>
+	</div>
+  <div class="modal-footer">
+    <input class="btn btn-primary" value="Login" name="userLogin" type="submit">
+	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </form>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div id="myRegisterModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+    <h3 id="myModalLabel">Register Now!</h3>
+  </div>
+  <div class="modal-body">
+  <?php $_SESSION['redirect_url']=$_SERVER["REQUEST_URI"]; ?>
+    <form action="doregister.php" method="post" onsubmit="return(validateForm());">
+		<table>
+		<tr>
+			<td>Mobile Number</td>
+			<td style="padding-left:1em;"><input id="mobileNum" name="mobileNum" type="text" size="10" maxlength="10" placeholder="Mobile number"></td>
+		</tr>
+		<tr>
+			<td><br/></td>
+			<td style="padding-left:1em;"><br/></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td style="padding-left:1em;"><input name="userPassword" type="password" placeholder="Password"><br/>
+		</tr>
+		</table>
+	</div>
+  <div class="modal-footer">
+	<input class="btn btn-primary" name="userRegister" value="Register" type="submit">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </form>
+  </div>
+</div>
+<?php } ?>

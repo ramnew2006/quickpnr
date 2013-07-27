@@ -7,44 +7,29 @@ require_once 'database.php';
 $dbobj = new database();
 $dbobj->dbconnect();
 
-include('header.php');
+if(isset($_SESSION['user'])){  
+	include('header.php');
 ?>
   
 <!-- PNR Status
 ================================================== -->
 <section id="pnrstatus">
 	 <!-- Headings & Paragraph Copy -->
-<div class="row">
- <div class="span7">
-	<div class="well">
-        <h1>h1. Heading 1</h1>
-        <h2>h2. Heading 2</h2>
-        <h3>h3. Heading 3</h3>
-		<h1>h1. Heading 1</h1>
-        <h2>h2. Heading 2</h2>
-		<h2>h2. Heading 2</h2>
-        <h3>h3. Heading 3</h3>
-        <h4>h4. Heading 4</h4>
-        <h5>h5. Heading 5</h5>
-        <h6>h6. Heading 6</h6>
-    </div>
- </div>
- <div class="span5">
-	<div class="page-header">
+<div class="page-header">
     <h3>PNR Status</h3>
 	</div>
 	<div class="row" style="margin-left:auto;">
-		<div class="span2">
-		<input id="displaypnrstatusinput" name="displaypnrstatusinput" type="text" placeholder="Enter PNR Number">
-		</div>
-		<div class="span2">
-		<a id="displaypnrstatusinputgetstatus" class="btn btn-primary">Get Status</a>
-		</div>
-		<br><br>
+		<table>
+			<tr>
+				<td><input id="displaypnrstatusinput" name="displaypnrstatusinput" type="text" placeholder="Enter PNR Number"></td>
+				<td style="padding-left:2em;">
+					<a id="displaypnrstatusinputgetstatus" class="btn btn-primary">Get Status</a>
+				</td>
+			</tr>
+		</table><br><br>
 		<div id="displaypnrstatus"></div>
 	</div>
- </div>
-</div>
+
 </section>
 
 <!-- Send SMS Modal -->
@@ -67,6 +52,10 @@ include('header.php');
 
 
 <?php
+}else{
+	header("Location:userlogin.php");
+	$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
+}
 include('footer.php');
 $dbobj->dbdisconnect();
 ?>
