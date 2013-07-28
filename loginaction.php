@@ -17,7 +17,8 @@ if(isset($_POST['userLogin'])){
 		$password = hash('sha512',$password);
 		$query = mysql_query("SELECT * FROM `userlogin` WHERE `mobilenum` = " . $mobileNum . " AND `password` = '" . $password . "'");
 		if(mysql_num_rows($query)==1){
-			$act_status = mysql_fetch_array($query)['act_status'];
+			$result = mysql_fetch_array($query);
+			$act_status = $result['act_status'];
 			if($act_status=="Y"){
 				echo "User Identified";
 				$_SESSION['user']="loggedin";

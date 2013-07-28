@@ -37,6 +37,12 @@ if(isset($_POST['userRegister'])){
 		}
 	}
 }else{
+	if(isset($_SESSION['registerNum'])){
+		echo "<form action=\"activation.php\" method=\"post\" onsubmit=\"return(validateForm());\">
+		Enter your activation code: <input type=\"text\" name=\"act_code\" maxsize=\"6\" id=\"actcode\"><br>
+		<input type=\"submit\" name=\"mobActivation\" value=\"Validate\">
+		</form>";
+	}
 	header("Location:register.php");
 }
 
