@@ -47,7 +47,10 @@ $dbobj->dbconnect();
 				for($i=0;$i<(sizeof($row)/2);$i++){
 					if($i!=1){
 						echo "<td>";
-						if($i==4){
+						if($i==2 || $i==3){ //Getting Real Station Names
+							$tempresult = mysql_query("SELECT station_name FROM stationlist WHERE station_code='" . $row[$i] . "'");
+							echo ucwords(strtolower(mysql_result($tempresult,0)));
+						}elseif($i==4){ //Getting Date in Readable form
 							$date = date_create($row[$i]);
 							echo date_format($date, 'jS F Y') . "<br/>";
 							echo "(" . date_format($date, 'l') . ")";

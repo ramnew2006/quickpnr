@@ -21,6 +21,16 @@ $(document).ready(function() {
 	$("#displaypnrstatusinputgetstatus").click(function() {
 		var current = $(this);
 		var pnrnum = $('#displaypnrstatusinput').val();
+		if($.isNumeric(pnrnum)){
+		}else{
+			alert("Enter a Numberic Value");
+			return false;
+		}
+		if(pnrnum==pnrnum.match(/[0-9]{10}/)){
+		}else{
+			alert("Enter 10 Digit PNR Number");
+			return false;
+		}
 		$('#displaypnrstatus').html("<h3><i class=\"icon-refresh icon-spin\"></i> Retrieving PNR Status...</h3>");
 		
 		$.ajax({
@@ -153,6 +163,60 @@ $(document).ready(function() {
 		});
 	});
 	
+	//Focus on inputs in Login and Register Modals
+	$('#myLoginModal').on('shown', function () {
+		$('#loginmobileNum').focus();
+	});
+	$('#myRegisterModal').on('shown', function () {
+		$('#registermobileNum').focus();
+	});
 	
+	//Automated PNR Status Update toggle
+	$('input[name="automatedpnrupdatestatus"]').click(function(){
+		var current = $(this);
+		if(current.attr('value')=="Y"){
+			$('#automatedpnrupdatefreq').show();
+		}
+		if(current.attr('value')=="N"){
+			$('#automatedpnrupdatefreq').hide();
+		}
+	});
+	
+	//Trains between two stations
+	$('#sourcestationsearchtrain').keyup(function(){
+		var stationname = $('#sourcestationsearchtrain').val();
+		if(stationname==""){
+			$('#sourcestationsearchtraindisplay').html("");
+		}else{
+			$.ajax({
+				type: "POST",
+				url: "userscripts/searchstation.php",
+				data: "stationname="+stationname+"&boxname=sourcestationsearchtrain" ,
+				success: function(html){
+					$('#sourcestationsearchtraindisplay').html(html).show();			
+				}
+			});
+		}
+	});
+	
+	$('#deststationsearchtrain').keyup(function(){
+		var stationname = $('#deststationsearchtrain').val();
+		if(stationname==""){
+			$('#deststationsearchtraindisplay').html("");
+		}else{
+			$.ajax({
+				type: "POST",
+				url: "userscripts/searchstation.php",
+				data: "stationname="+stationname+"&boxname=deststationsearchtrain" ,
+				success: function(html){
+					$('#deststationsearchtraindisplay').html(html).show();			
+				}
+			});
+		}
+	});
+	
+	//Focus on text box on page landing
+	$('input[name="irctcusername"]').focus(); //IRCTC Import Page
+	$('#sourcestationsearchtrain').focus(); //Trains Page
 	
 });

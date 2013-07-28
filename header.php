@@ -1,7 +1,18 @@
-
+<?php 
+$titlequery=mysql_query("SELECT title FROM pagetitles WHERE url='" . $_SERVER["REQUEST_URI"] . "'");
+$numRows=mysql_num_rows($titlequery);
+?>
   <head>
     <meta charset="utf-8">
-    <title>Profile - qwik Travel</title>
+    <title>
+	<?php 
+		if($numRows==1){
+			echo mysql_result($titlequery,0);
+		}else{
+			echo "qwikTravel";
+		}
+	?>
+	</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!--[if lt IE 9]>
@@ -13,7 +24,13 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/bootswatch.css" rel="stylesheet">
 	<link href="css/custom.css" rel="stylesheet">
-
+	<!-- Start WOWSlider.com HEAD section -->
+	<link rel="stylesheet" type="text/css" href="sliderengine/style.css" />
+	<!-- End WOWSlider.com HEAD section -->
+	
+	<!--Loading jQuery in the head for good experience-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	
   </head>
 
   <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -70,8 +87,8 @@
           <li><a href="userprofile.php" title="My Profile"><i class="icon-user"></i> My Account</a></li>
           <li><a href="logout.php" title="Logout"><i class="icon-unlock"></i> Logout</a></li>
 		<?php }else{ ?>
-		  <li><a data-toggle="modal" href="#myRegisterModal" title="Register Now!">Sign Up</a></li>
-          <li><a data-toggle="modal" href="#myLoginModal" title="Login">Login</a></li>
+		  <li><a data-toggle="modal" href="#myRegisterModal" title="Register Now!" id="mainRegisterModal">Sign Up</a></li>
+          <li><a data-toggle="modal" href="#myLoginModal" title="Login" id="mainLoginModal">Login</a></li>
 		<?php } ?>
         </ul>
        </div>
@@ -85,8 +102,7 @@
 <!-- Masthead
 ================================================== -->
   
-  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/index.php" || $_SERVER["REQUEST_URI"]=="/quickpnr/") {?>
-  <?php }else{ ?>
+  <?php if(isset($_SESSION['user'])){ ?>
   <div class="subnav">
     <ul class="nav nav-pills">
 	<?php if(isset($_SESSION['user'])){ ?>
@@ -109,11 +125,17 @@
 	  <li class="active"><a href="#irctcimport">Import From IRCTC</a></li>
 	  <?php }else{ ?>
 	  <li><a href="irctcimportview.php">Import From IRCTC</a></li>
+	  <?php } ?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/searchtrain.php") {?>
+	  <li class="active"><a href="#searchtrain">Trains</a></li>
+	  <?php }else{ ?>
+	  <li><a href="searchtrain.php">Trains</a></li>
 	  <?php } ?>	  
 	<?php }else{ ?>
 	<?php } ?>
     </ul>
   </div>
+  <?php }else{ ?>
   <?php } ?>
   
 <?php if(isset($_SESSION['user'])) { ?>
@@ -130,11 +152,7 @@
 		<table>
 		<tr>
 			<td>Mobile Number</td>
-			<td style="padding-left:1em;"><input id="mobileNum" name="mobileNum" type="text" size="10" maxlength="10" placeholder="Mobile number"></td>
-		</tr>
-		<tr>
-			<td><br/></td>
-			<td style="padding-left:1em;"><br/></td>
+			<td style="padding-left:1em;"><input id="loginmobileNum" name="mobileNum" type="text" size="10" maxlength="10" placeholder="Mobile number"></td>
 		</tr>
 		<tr>
 			<td>Password</td>
@@ -161,11 +179,7 @@
 		<table>
 		<tr>
 			<td>Mobile Number</td>
-			<td style="padding-left:1em;"><input id="mobileNum" name="mobileNum" type="text" size="10" maxlength="10" placeholder="Mobile number"></td>
-		</tr>
-		<tr>
-			<td><br/></td>
-			<td style="padding-left:1em;"><br/></td>
+			<td style="padding-left:1em;"><input id="registermobileNum" name="mobileNum" type="text" size="10" maxlength="10" placeholder="Mobile number"></td>
 		</tr>
 		<tr>
 			<td>Password</td>

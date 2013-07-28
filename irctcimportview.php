@@ -9,7 +9,6 @@ $dbobj->dbconnect();
   if(isset($_SESSION['user'])){
 	include('header.php');
 ?>
-  
 
 <!-- Import From IRCTC
 ================================================== -->
@@ -19,27 +18,27 @@ $dbobj->dbconnect();
     <h3>Import Booking History From IRCTC</h3>
   </div>
   <div class="row" style="margin-left:auto;">
-	<p>Enter your IRCTC user name and password and start importing your booking history at a go.</p>
+	<p style="text-align:center;">Promise!! We won't store your IRCTC username and password!</p><br/>
 	<table>
 	<tr>
-		<td>IRCTC User Name</td>
-		<td style="padding-left:2em;"><input type="text" name="irctcusername" id="irctcusername"></td>
+		<!--<td>IRCTC User Name</td>-->
+		<td><input type="text" name="irctcusername" id="irctcusername" placeholder="IRCTC User Name"></td>
 	</tr>
 	<tr>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-	</tr>
-	<tr>
-		<td>IRCTC Password</td>
-		<td style="padding-left:2em;"><input type="password" name="irctcpassword" id="irctcpassword"></td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
+		<!--<td>&nbsp;</td>-->
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<td></td>
-		<td style="padding-left:2em;"><a class="btn btn-primary" id="importirctchistory">Start Importing</a></td>
+		<!--<td>IRCTC Password</td>-->
+		<td><input type="password" name="irctcpassword" id="irctcpassword" placeholder="IRCTC Password"></td>
+	</tr>
+	<tr>
+		<!--<td>&nbsp;</td>-->
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<!--<td></td>-->
+		<td><a class="btn btn-primary" id="importirctchistory">Start Importing</a></td>
 	</tr>
 	</table>
 	

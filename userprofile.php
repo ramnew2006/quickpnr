@@ -20,12 +20,12 @@ $dbobj->dbconnect();
 	<p>Welcome Ram!!</p>
 	<table>
 	<tr>
-		<td><h4>Mobile Number</h4></td>
+		<td><h5>Mobile Number</h5></td>
 		<td style="padding-left:2em;"><h5><div id="profilemob"><?php echo $_SESSION['userName']; ?>&nbsp;&nbsp;<!--<a id="changeprofilemob">[Change]</a></div><div id="formprofilemob" style="display: none;"><input id="inputprofilemob" type="text" value="<?php //echo $_SESSION['userName']; ?>">&nbsp;&nbsp;<input id="saveprofilemob" type="submit" class="btn btn-primary" value="Save">&nbsp;&nbsp;<a id="cancelprofilemob" class="btn btn-primary">Cancel</a></div>--></h5></td>
 		<!--<td>&nbsp;&nbsp;<a id="changeprofilemob" class="btn btn-warning">Change</a></td>-->
 	</tr>
 	<tr>
-		<td><h4>Password</h4></td>
+		<td><h5>Password</h5></td>
 		<td style="padding-left:2em;"><h5>
 			<div id="profilepwd">XXXXXXX&nbsp;&nbsp;<a id="changeprofilepwd">[Change]</a>
 			<?php 
@@ -46,6 +46,41 @@ $dbobj->dbconnect();
 		</h5></td>
 	</tr>
 	</table>
+	<br>
+	<h5>Do you want to turn on Automated PNR Status update to your Registered Mobile?</h5>
+	<form>
+	<input type="radio" name="automatedpnrupdatestatus" value="Y">&nbsp;Yes&nbsp;&nbsp;
+	<input type="radio" name="automatedpnrupdatestatus" value="N">&nbsp;No
+	</form>
+	<br/>
+	
+	<div id="automatedpnrupdatefreq" style="display:none;">
+		<h5>Frequency of Messages</h5>
+		<form>
+		<table class="table table-bordered table-striped table-hover" style="margin-left:0px;width:auto;">
+		<thead>
+			<th>Daily - Messages/Day</th>
+			<th>Weekly - Messages/Week</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				<input type="radio" name="automatedpnrupdatefreq" value="1"> 1&nbsp;
+				<input type="radio" name="automatedpnrupdatefreq" value="2"> 2&nbsp;
+				<input type="radio" name="automatedpnrupdatefreq" value="3"> 3&nbsp;
+				<input type="radio" name="automatedpnrupdatefreq" value="4"> 4
+				</td>
+				<td>
+				<input type="radio" name="automatedpnrupdatefreq" value="1"> 1&nbsp;
+				<input type="radio" name="automatedpnrupdatefreq" value="2"> 2&nbsp;
+				<input type="radio" name="automatedpnrupdatefreq" value="3"> 3&nbsp;
+				<input type="radio" name="automatedpnrupdatefreq" value="4"> 4
+				</td>
+			</tr>
+		</tbody>
+		</table>
+		</form>
+	</div>
   </div>
 </section>  
 

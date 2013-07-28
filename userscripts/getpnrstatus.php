@@ -20,8 +20,13 @@ if(isset($_POST['pnrNum'])){
 	if($lengthRow){
 		echo "PNR Number: " . $_POST['pnrNum'] . "<br/><br/>";
 		echo "<table class=\"table table-bordered table-striped table-hover\">";
-		echo "<tbody>";
 		for($i=0;$i<$lengthRow-1;$i++){
+			if($i==0){
+				echo "<thead>";
+			}else{
+				echo "</thead>";
+				echo "<tbody>";
+			}
 			$lengthCol = 3;//$postobj->tableColumns($i);
 			echo "<tr>";
 			for($j=0;$j<$lengthCol;$j++){

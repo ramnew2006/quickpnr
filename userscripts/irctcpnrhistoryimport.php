@@ -1,5 +1,5 @@
 <?php
-set_time_limit(60);
+//set_time_limit(60);
 session_start();
 require_once 'database.php';
 require_once 'postcurl.php';

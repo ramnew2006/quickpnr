@@ -23,7 +23,11 @@ if(isset($_POST['userLogin'])){
 				$_SESSION['user']="loggedin";
 				$_SESSION['userName']=$mobileNum;
 				if(isset($_SESSION['redirect_url'])){
-					header("Location: {$_SESSION['redirect_url']}");
+					if($_SESSION['redirect_url']=="/quickpnr/index.php" || $_SESSION['redirect_url']=="/quickpnr/"){
+						header("Location:userprofile.php");
+					}else{
+						header("Location: {$_SESSION['redirect_url']}");
+					}
 				}
 			}else{
 			}
