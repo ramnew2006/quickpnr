@@ -24,6 +24,9 @@ $numRows=mysql_num_rows($titlequery);
     <link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/bootswatch.css" rel="stylesheet">
 	<link href="css/custom.css" rel="stylesheet">
+	<?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrhistory.php") {?>
+	<link href="css/pnrhistory.css" rel="stylesheet">
+	<?php } ?>
 	<!-- Start WOWSlider.com HEAD section -->
 	<link rel="stylesheet" type="text/css" href="sliderengine/style.css" />
 	<!-- End WOWSlider.com HEAD section -->
