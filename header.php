@@ -105,20 +105,16 @@ $numRows=mysql_num_rows($titlequery);
 <!-- Masthead
 ================================================== -->
   
-  <?php if(isset($_SESSION['user'])){ ?>
   <div class="subnav">
     <ul class="nav nav-pills">
+	<!-- Extra Navigation Menu when the user is logged in-->
 	<?php if(isset($_SESSION['user'])){ ?>
 	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userprofile.php") {?>
 	  <li class="active"><a href="#userprofile">My Account</a></li>
       <?php }else{ ?>
 	  <li><a href="userprofile.php">My Account</a></li>
 	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrstatus.php") {?>
-      <li class="active"><a href="#pnrstatus">PNR Status</a></li>
-	  <?php }else{ ?>
-	  <li><a href="userpnrstatus.php">PNR Status</a></li>
-	  <?php } ?>
+	  
 	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrhistory.php") {?>
       <li class="active"><a href="#pnrhistory">PNR History</a></li>
 	  <?php }else{ ?>
@@ -129,17 +125,20 @@ $numRows=mysql_num_rows($titlequery);
 	  <?php }else{ ?>
 	  <li><a href="irctcimportview.php">Import From IRCTC</a></li>
 	  <?php } ?>
+	<?php } ?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrstatus.php") {?>
+      <li class="active"><a href="#pnrstatus">PNR Status</a></li>
+	  <?php }else{ ?>
+	  <li><a href="userpnrstatus.php">PNR Status</a></li>
+	  <?php } ?>
 	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/searchtrain.php") {?>
 	  <li class="active"><a href="#searchtrain">Trains</a></li>
 	  <?php }else{ ?>
 	  <li><a href="searchtrain.php">Trains</a></li>
 	  <?php } ?>	  
-	<?php }else{ ?>
-	<?php } ?>
-    </ul>
+	</ul>
   </div>
-  <?php }else{ ?>
-  <?php } ?>
+  
   
 <?php if(isset($_SESSION['user'])) { ?>
 <?php }else{ ?>

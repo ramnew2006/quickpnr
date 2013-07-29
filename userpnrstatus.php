@@ -7,8 +7,7 @@ require_once 'database.php';
 $dbobj = new database();
 $dbobj->dbconnect();
 
-if(isset($_SESSION['user'])){  
-	include('header.php');
+include('header.php');
 ?>
   
 <!-- PNR Status
@@ -52,10 +51,6 @@ if(isset($_SESSION['user'])){
 
 
 <?php
-}else{
-	header("Location:userlogin.php");
-	$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
-}
 include('footer.php');
 $dbobj->dbdisconnect();
 ?>

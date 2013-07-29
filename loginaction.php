@@ -20,7 +20,7 @@ if(isset($_POST['userLogin'])){
 			$result = mysql_fetch_array($query);
 			$act_status = $result['act_status'];
 			if($act_status=="Y"){
-				echo "User Identified";
+				//echo "User Identified";
 				$_SESSION['user']="loggedin";
 				$_SESSION['userName']=$mobileNum;
 				if(isset($_SESSION['redirect_url'])){

@@ -18,11 +18,13 @@ if(isset($_POST['savePnrHistory'])){
 
 		//Initial Login
 		$postobj = new postcurl($url,1,$postparams);
-		$code = $postobj->curlheaders()['http_code'];
+		$code = $postobj->curlheaders();
+		$code = $code['http_code'];
 		
 		if($code==302){
 			$url = $postobj->curlheaders()['redirect_url'];
-			$query = parse_url($url)['query'];
+			$query = parse_url($url);
+			$query = $query['query'];
 			$query = explode('&',$query);
 			
 			//Extracting Session variables
@@ -36,7 +38,8 @@ if(isset($_POST['savePnrHistory'])){
 			
 			$postobj = new postcurl($url,15,$postparams,$ref);
 			//$error = $postobj->errorcheck();
-			$code = $postobj->curlheaders()['http_code'];
+			$code = $postobj->curlheaders();
+			$code = $code['http_code'];
 
 			if($code==200){
 				//print_r($postobj->curlheaders());
