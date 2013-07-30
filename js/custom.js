@@ -1,5 +1,18 @@
 $(document).ready(function() {
 	
+	//jQuery event for Enter key press - plugin
+	$.fn.pressEnter = function(fn) {  
+		return this.each(function() {  
+			$(this).bind('enterPress', fn);
+			$(this).keyup(function(e){
+				if(e.keyCode == 13)
+				{
+				  $(this).trigger("enterPress");
+				}
+			})
+		});  
+	 }; 
+	
 	//User Profile - PNR History- GET PNR Status
 	$(".getpnrstatus").click(function() {
 		var current = $(this);
@@ -12,7 +25,36 @@ $(document).ready(function() {
 			url: "userscripts/getpnrstatus.php",
 			data: "pnrNum="+pnrnum,
 			success: function(html){
-				$('#displaypnrstatus').html(html);
+				var newhtml = html+'<br><a id="getSMS" class="getsms btn btn-warning" name="getSMS" rel="tooltip" title="Get Message to your registered Mobile">Get SMS</a>&nbsp;&nbsp;<a data-toggle="modal" href="#mySMSModal" rel="tooltip" title="Send Message to any Mobile" id="sendSMS" class="sendsms btn btn-info" name="sendSMS" value="">Send SMS</a>';
+				$('#displaypnrstatus').html(newhtml);
+			}
+		});
+	});
+	
+	
+	//Get PNR Status by pressing Enter key - on PNR Status page
+	$('input[name="displaypnrstatusinput"]').pressEnter(function(){
+		var current = $(this);
+		var pnrnum = $('#displaypnrstatusinput').val();
+		if($.isNumeric(pnrnum)){
+		}else{
+			alert("Enter a Numberic Value");
+			return false;
+		}
+		if(pnrnum==pnrnum.match(/[0-9]{10}/)){
+		}else{
+			alert("Enter 10 Digit PNR Number");
+			return false;
+		}
+		$('#displaypnrstatus').html("<h3><i class=\"icon-refresh icon-spin\"></i> Retrieving PNR Status...</h3>");
+		
+		$.ajax({
+			type: "POST",
+			url: "userscripts/getpnrstatus.php",
+			data: "pnrNum="+pnrnum,
+			success: function(html){
+				var newhtml = html+'<br><a id="getSMS" class="getsms btn btn-warning" name="getSMS" rel="tooltip" title="Get Message to your registered Mobile">Get SMS</a>&nbsp;&nbsp;&nbsp;<a data-toggle="modal" href="#mySMSModal" rel="tooltip" title="Send Message to any Mobile" id="sendSMS" class="sendsms btn btn-info" name="sendSMS" value="">Send SMS</a>';
+				$('#displaypnrstatus').html(newhtml);
 			}
 		});
 	});
@@ -38,7 +80,8 @@ $(document).ready(function() {
 			url: "userscripts/getpnrstatus.php",
 			data: "pnrNum="+pnrnum,
 			success: function(html){
-				$('#displaypnrstatus').html(html);
+				var newhtml = html+'<br><a id="getSMS" class="getsms btn btn-warning" name="getSMS" rel="tooltip" title="Get Message to your registered Mobile">Get SMS</a>&nbsp;&nbsp;&nbsp;<a data-toggle="modal" href="#mySMSModal" rel="tooltip" title="Send Message to any Mobile" id="sendSMS" class="sendsms btn btn-info" name="sendSMS" value="">Send SMS</a>';
+				$('#displaypnrstatus').html(newhtml);
 			}
 		});
 	});
@@ -182,7 +225,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	//Trains between two stations
+	//Trains between two stations - selecting source station
 	$('#sourcestationsearchtrain').keyup(function(){
 		var stationname = $('#sourcestationsearchtrain').val();
 		if(stationname==""){
@@ -199,6 +242,7 @@ $(document).ready(function() {
 		}
 	});
 	
+	//Trains between two stations - selecting destination station
 	$('#deststationsearchtrain').keyup(function(){
 		var stationname = $('#deststationsearchtrain').val();
 		if(stationname==""){
@@ -215,8 +259,23 @@ $(document).ready(function() {
 		}
 	});
 	
+	//Trains between two stations - Finding results
+	$('#getsearchtrains').click(function(){
+		var src_stn = $('#sourcestationsearchtrain').val();
+		var dest_stn = $('#deststationsearchtrain').val();
+		$.ajax({
+			type: "POST",
+			url: "userscripts/searchtrainschedule.php",
+			data: "src_stn="+src_stn+"&dest_stn="+dest_stn ,
+			success: function(html){
+				$('#displaytrainbetweenstations').html(html).show();			
+			}
+		});
+	});
+	
 	//Focus on text box on page landing
 	$('input[name="irctcusername"]').focus(); //IRCTC Import Page
 	$('#sourcestationsearchtrain').focus(); //Trains Page
+	
 	
 });

@@ -20,7 +20,7 @@ include('header.php');
 	<div class="row" style="margin-left:auto;">
 		<table>
 			<tr>
-				<td><input id="displaypnrstatusinput" name="displaypnrstatusinput" type="text" placeholder="Enter PNR Number"></td>
+				<td><input id="displaypnrstatusinput" name="displaypnrstatusinput" type="text" placeholder="Enter PNR Number" maxlength="10"></td>
 				<td style="padding-left:2em;">
 					<a id="displaypnrstatusinputgetstatus" class="btn btn-primary">Get Status</a>
 				</td>

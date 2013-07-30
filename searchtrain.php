@@ -25,6 +25,7 @@ function fill(Value,boxname){
     <h3>Trains between two stations</h3>
 	</div>
 	<div class="row" style="margin-left:auto;">
+	<div class="span4">
 		<table>
 		<tr>
 			<td><input id="sourcestationsearchtrain" name="sourcestationsearchtrain" type="text" placeholder="From">
@@ -47,7 +48,11 @@ function fill(Value,boxname){
 		</tr>
 		</table>
 		<br><br>
-		<div id="displaypnrstatus"></div>
+		
+	</div>
+	<div class="span7">
+		<div id="displaytrainbetweenstations"></div>
+	</div>
 	</div>
 
 </section>
