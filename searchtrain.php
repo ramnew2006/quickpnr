@@ -51,7 +51,7 @@ function fill(Value,boxname){
 		
 	</div>
 	<div class="span7">
-		<div id="displaytrainbetweenstations"></div>
+		<div id="displaytrainbetweenstations" style="display: none;"></div>
 	</div>
 	</div>
 

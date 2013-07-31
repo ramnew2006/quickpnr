@@ -21,10 +21,15 @@ $dbobj->dbconnect();
 	</div>
 	<div class=\"row\">";
 	
-	$query = "SELECT pnrnum, archive, src_stn, dest_stn, doj FROM pnrdetails WHERE mobnum=" . $_SESSION['userName'];
-	$result = mysql_query($query);
-	$numRows = mysql_num_rows($result);
-	
+	$query = mysql_query("SELECT pn.pnrnum, sl.station_name as source, sl2.station_name as dest, pn.doj 
+			FROM pnrdetails AS pn, stationlist AS sl, stationlist AS sl2 
+			WHERE 
+			pn.src_stn=sl.station_code 
+			AND pn.dest_stn=sl2.station_code 
+			AND pn.archive='N' 
+			AND pn.mobnum=" . $_SESSION['userName']
+			);
+			
 	echo "<table class=\"table table-bordered table-striped table-hover\">";
 	echo "<thead><tr>
 		<th>#</th>
@@ -36,44 +41,41 @@ $dbobj->dbconnect();
 		</tr></thead>";
 	echo "<tbody>";
 	$j=1;
-	while ($row = mysql_fetch_array($result)) {
-		if($row['archive']=="N"){
-			echo "<form method=\"post\" action=\"userprofile.php#pnrstatus\" onsubmit=\"return(pnrtimevalidate());\">";
-			echo "<tr>";
-				echo "<td>";
-				echo $j;
-				echo "</td>";
-				$j++;
-				for($i=0;$i<(sizeof($row)/2);$i++){
-					if($i!=1){
-						echo "<td>";
-						if($i==2 || $i==3){ //Getting Real Station Names
-							$tempresult = mysql_query("SELECT station_name FROM stationlist WHERE station_code='" . $row[$i] . "'");
-							echo ucwords(strtolower(mysql_result($tempresult,0)));
-						}elseif($i==4){ //Getting Date in Readable form
-							$date = date_create($row[$i]);
-							echo date_format($date, 'jS F Y') . "<br/>";
-							echo "(" . date_format($date, 'l') . ")";
-						}else{
-							echo $row[$i];
-						}
-						echo "</td>";
+	while ($row = mysql_fetch_array($query)) {
+		echo "<form method=\"post\" action=\"userprofile.php#pnrstatus\" onsubmit=\"return(pnrtimevalidate());\">";
+		echo "<tr>";
+			echo "<td>";
+			echo $j;
+			echo "</td>";
+			$j++;
+			for($i=0;$i<(sizeof($row)/2);$i++){
+				if($i!=1){
+					echo "<td>";
+					if($i==2 || $i==3){ //Getting Real Station Names
+						$tempresult = mysql_query("SELECT station_name FROM stationlist WHERE station_code='" . $row[$i] . "'");
+						echo ucwords(strtolower(mysql_result($tempresult,0)));
+					}elseif($i==4){ //Getting Date in Readable form
+						$date = date_create($row[$i]);
+						echo date_format($date, 'jS F Y') . "<br/>";
+						echo "(" . date_format($date, 'l') . ")";
+					}else{
+						echo $row[$i];
 					}
+					echo "</td>";
 				}
-				echo "<td>";
-				echo "<input type=\"hidden\" name=\"pnrNum\" value=\"" . $row[1] . "\">";
-				
-				echo "
-				<a href=\"#displaypnrstatus\" rel=\"tooltip\" title=\"Get PNR Status\" name=\"getPNRStatus" . $row['pnrnum'] ."\" class=\"getpnrstatus btn btn-primary\" id=\"getPNRStatus\">Get PNR Status</a>
-				&nbsp;&nbsp;<a id=\"getSMS\" class=\"getsms btn btn-warning\" name=\"getSMS" . $row['pnrnum'] ."\" rel=\"tooltip\" title=\"Get Message to your registered Mobile\">Get SMS</a>
-				&nbsp;&nbsp;<a data-toggle=\"modal\" href=\"#mySMSModal\" rel=\"tooltip\" title=\"Send Message to any Mobile\" id=\"sendSMS\" class=\"sendsms btn btn-info\" name=\"sendSMS" . $row['pnrnum'] ."\" value=\"" . $row['pnrnum'] . "\">Send SMS</a>
-				";
-				
-				echo "</td>";
-			echo "</tr>";
-			echo "</form>";
-		}else{
-		}
+			}
+			echo "<td>";
+			echo "<input type=\"hidden\" name=\"pnrNum\" value=\"" . $row[1] . "\">";
+			
+			echo "
+			<a href=\"#displaypnrstatus\" rel=\"tooltip\" title=\"Get PNR Status\" name=\"getPNRStatus" . $row['pnrnum'] ."\" class=\"getpnrstatus btn btn-primary\" id=\"getPNRStatus\">Get PNR Status</a>
+			&nbsp;&nbsp;<a id=\"getSMS\" class=\"getsms btn btn-warning\" name=\"getSMS" . $row['pnrnum'] ."\" rel=\"tooltip\" title=\"Get Message to your registered Mobile\">Get SMS</a>
+			&nbsp;&nbsp;<a data-toggle=\"modal\" href=\"#mySMSModal\" rel=\"tooltip\" title=\"Send Message to any Mobile\" id=\"sendSMS\" class=\"sendsms btn btn-info\" name=\"sendSMS" . $row['pnrnum'] ."\" value=\"" . $row['pnrnum'] . "\">Send SMS</a>
+			";
+			
+			echo "</td>";
+		echo "</tr>";
+		echo "</form>";
 	}
 	echo "</tbody>";
 	echo "</table>";

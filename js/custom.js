@@ -262,13 +262,16 @@ $(document).ready(function() {
 	//Trains between two stations - Finding results
 	$('#getsearchtrains').click(function(){
 		var src_stn = $('#sourcestationsearchtrain').val();
+		src_stn = src_stn.match(/\((.+)\)/)[1];
 		var dest_stn = $('#deststationsearchtrain').val();
+		dest_stn = dest_stn.match(/\((.+)\)/)[1];
+		$('#displaytrainbetweenstations').html("<h5><i class=\"icon-refresh icon-spin\"></i> Retrieving the trains between two stations...</h5>").show();
 		$.ajax({
 			type: "POST",
 			url: "userscripts/searchtrainschedule.php",
 			data: "src_stn="+src_stn+"&dest_stn="+dest_stn ,
 			success: function(html){
-				$('#displaytrainbetweenstations').html(html).show();			
+				$('#displaytrainbetweenstations').html(html);			
 			}
 		});
 	});

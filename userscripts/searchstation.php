@@ -15,7 +15,7 @@ if(isset($_POST['stationname'])){
 	{
 	?>
 
-	<li onclick='fill("<?php echo $row['station_name']; ?>","<?php echo $_POST['boxname'] ?>")' class="ajaxdropdownsearch"><?php echo $row['station_name']; ?></li>
+	<li onclick='fill("<?php echo strtoupper($row['station_name']) . "(" .$row['station_code'] . ")"; ?>","<?php echo $_POST['boxname'] ?>")' class="ajaxdropdownsearch"><?php echo $row['station_name']; ?></li>
 	<?php
 	}
 }
