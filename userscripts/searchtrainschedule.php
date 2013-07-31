@@ -6,7 +6,7 @@ $dbobj->dbconnect();
 if(isset($_POST['src_stn']) && isset($_POST['dest_stn'])){
 	$src_stn = $_POST['src_stn'];
 	$dest_stn = $_POST['dest_stn'];
-	$date = date_create('29-07-2013');
+	$date = date_create('31-07-2013');
 	$day = strtolower(date_format($date, 'D'));
 	$query = mysql_query("SELECT distinct(tr1.train_num), tr1.dep_time, tr4.train_name 
 			FROM trainschedule AS tr1, trainschedule AS tr2, trainrunning AS tr3, trainlist AS tr4 
