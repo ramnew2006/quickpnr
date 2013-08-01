@@ -32,13 +32,9 @@ $numRows=mysql_num_rows($titlequery);
 	<!-- End WOWSlider.com HEAD section -->
 	
 	<!--Loading jQuery in the head for good experience-->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<!--[if lt IE 9]>  
-	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>  
-	<![endif]--> 
-	<!--[if lt IE 8]>
-<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
-<![endif]-->
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>	
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   </head>
 
   <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -110,7 +106,7 @@ $numRows=mysql_num_rows($titlequery);
 <!-- Masthead
 ================================================== -->
   
-  <div class="subnav" id="spyOnThis" data-spy="scroll">
+  <div class="subnav">
     <ul class="nav nav-pills">
 	<!-- Extra Navigation Menu when the user is logged in-->
 	<?php if(isset($_SESSION['user'])){ ?>

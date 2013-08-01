@@ -46,10 +46,12 @@ ul.ajaxdropdownsearch {
 	margin-left: 1px;
 	margin-top: -10px;
 	position: absolute;
+	max-height:200px;
 	list-style-position: outside;
 	list-style-image: none;
 	z-index: 0;
 	color: #fff;
+	overflow: auto;
 }
 
 li.ajaxdropdownsearch{
@@ -58,6 +60,7 @@ li.ajaxdropdownsearch{
 	padding-bottom: 0.25em;
 	padding-top: 0.25em;
 	padding-left: 0.65em;
+	overflow: auto;
 }
 
 li.ajaxdropdownsearch:hover {

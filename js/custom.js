@@ -256,7 +256,35 @@ $(document).ready(function() {
 				}
 			});
 		}
+		// $('#sourcestationsearchtrain').focus(function(){
+			// $('#sourcestationsearchtraindisplay').show();
+		// });
+		
+		// $('#sourcestationsearchtrain').focusout(function(){
+			// $('#sourcestationsearchtraindisplay').hide();
+		// });
 	});
+	
+	
+	// $('#sourcestationsearchtrain').autocomplete({
+	  // var stationname = $('#sourcestationsearchtrain').val();
+	  // source: function( request, response ) {
+        // $.ajax({
+		  // type: "POST",
+          // url: "userscripts/searchstation.php",
+          // dataType: "json",
+          // data: "stationname="+stationname,
+          // success: function( data ) {
+            // response( $.map( data.myData, function( item ) {
+              // return {
+                // label: item.name,
+                // value: item.name
+              // }
+            // }));
+          // }
+        // });
+      // }
+	// });
 	
 	//Trains between two stations - selecting destination station
 	$('#deststationsearchtrain').keyup(function(){
@@ -278,9 +306,9 @@ $(document).ready(function() {
 	//Trains between two stations - Finding results
 	$('#getsearchtrains').click(function(){
 		var src_stn = $('#sourcestationsearchtrain').val();
-		src_stn = src_stn.match(/\((.+)\)/)[1];
+		src_stn = src_stn.match(/\(([^()]+)\)$/)[1];
 		var dest_stn = $('#deststationsearchtrain').val();
-		dest_stn = dest_stn.match(/\((.+)\)/)[1];
+		dest_stn = dest_stn.match(/\(([^()]+)\)$/)[1];
 		$('#displaytrainbetweenstations').html("<h5><i class=\"icon-refresh icon-spin\"></i> Retrieving the trains between two stations...</h5>").show();
 		$.ajax({
 			type: "POST",
