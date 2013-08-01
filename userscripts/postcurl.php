@@ -65,6 +65,11 @@ class postcurl {
 		return @$this->responseRows->item($rowNumber)->getElementsByTagName('td')->item($colNumber)->textContent;
 	}
 	
+	//return the text of the element in the table using only row number
+	public function getInfoFromRowOnly($rowNumber) {
+		return @$this->responseRows->item($rowNumber)->textContent;
+	}
+	
 	//return the number of rows in the table under consideration
 	public function tableRows(){
 		if($this->responseRows){

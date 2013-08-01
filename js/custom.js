@@ -87,8 +87,18 @@ $(document).ready(function() {
 	});
 
 	//User Profile - Sending SMS to Registered Mobile
-	$(".getsms").one("click",function() {
+	$(".getsms").click(function() {
 		var current = $(this);
+		//check whether the button is enabled or not
+		if(current.attr('class')=="sendsms btn btn-inverse disabled"){
+			return false;
+		}
+		//window for confirmation
+		var conf = confirm("Do you want to get SMS to your registered Mobile?");
+		if(conf==true){
+		}else{
+			return false;
+		}
 		var pnrnum = $(this).attr('name');
 		pnrnum = pnrnum.match(/[0-9]+/);
 		current.html("<i class=\"icon-refresh icon-spin\"></i> Sending...");
@@ -120,36 +130,42 @@ $(document).ready(function() {
 	
 	$(".sendsmsanymobile").click(function() {
 		var current = $(this);
+		//If the Send SMS button is disabled stop the action
+		if(current.attr('class')=="sendsmsanymobile btn btn-info disabled"){
+			return false;
+		}
+		//if mobile number is empty stop the action
 		var anymobilenum = $('#currentmobileNum').val();
-		if(anymobilenum){ //if mobile number is empty stop the action
+		if(anymobilenum){ 
 		}else{
 			return false;
 		}	
-		if(current.attr('class')=="sendsmsanymobile btn btn-info"){ //If the Sens SMS button is active then continue the action
-			var pnrnum = $('#currentpnr').val();
-			current.html("<i class=\"icon-refresh icon-spin\"></i> Sending...");
-			alert("You are going to send the SMS for "+ pnrnum);
-			  
-				$.ajax({
-					type: "POST",
-					url: "userscripts/sendtextmessage.php",
-					data: "pnrNum="+pnrnum+"&mobileNum="+anymobilenum+"&anyMobile=Y" ,
-					success: function(html){
-						if(html=="Success"){
-							current.html("<i class=\"icon-ok\"></i> "+html);
-							current.attr('class','sendsmsanymobile btn btn-info disabled');
-							//current.attr('disabled','disabled');
-						}else if(html=="Failure"){
-							current.html("<i class=\"icon-warning-sign\"></i> "+html);
-							current.attr('class','sendsmsanymobile btn btn-info disabled');
-						}else{
-							current.html("Try Again!");
-						}
-					}
-				});
+		var pnrnum = $('#currentpnr').val();
+		current.html("<i class=\"icon-refresh icon-spin\"></i> Sending...");
+		//window for confirmation
+		var conf = confirm("Do you want to send the SMS?");
+		if(conf==true){
 		}else{
 			return false;
 		}
+		
+		$.ajax({
+			type: "POST",
+			url: "userscripts/sendtextmessage.php",
+			data: "pnrNum="+pnrnum+"&mobileNum="+anymobilenum+"&anyMobile=Y" ,
+			success: function(html){
+				if(html=="Success"){
+					current.html("<i class=\"icon-ok\"></i> "+html);
+					current.attr('class','sendsmsanymobile btn btn-info disabled');
+					//current.attr('disabled','disabled');
+				}else if(html=="Failure"){
+					current.html("<i class=\"icon-warning-sign\"></i> "+html);
+					current.attr('class','sendsmsanymobile btn btn-info disabled');
+				}else{
+					current.html("Try Again!");
+				}
+			}
+		});
 	});
 
 	//User Profile - Change mobile number - Toggle
