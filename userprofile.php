@@ -17,7 +17,7 @@ $dbobj->dbconnect();
     <h3>Profile</h3>
   </div>
   <div class="row" style="margin-left:auto;">
-	<p>Welcome Ram!!</p>
+	<h5>Welcome Ram Manohar!</h5>
 	<table>
 	<tr>
 		<td><h5>Mobile Number</h5></td>
@@ -47,42 +47,9 @@ $dbobj->dbconnect();
 	</tr>
 	</table>
 	<br>
-	<h5>Do you want to turn on Automated PNR Status update to your Registered Mobile?</h5>
-	<form>
-	<input type="radio" name="automatedpnrupdatestatus" value="Y">&nbsp;Yes&nbsp;&nbsp;
-	<input type="radio" name="automatedpnrupdatestatus" value="N">&nbsp;No
-	</form>
-	<br/>
 	
-	<div id="automatedpnrupdatefreq" style="display:none;">
-		<h5>Frequency of Messages</h5>
-		<form>
-		<table class="table table-bordered table-striped table-hover" style="margin-left:0px;width:auto;">
-		<thead>
-			<th>Daily - Messages/Day</th>
-			<th>Weekly - Messages/Week</th>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-				<input type="radio" name="automatedpnrupdatefreq" value="1"> 1&nbsp;
-				<input type="radio" name="automatedpnrupdatefreq" value="2"> 2&nbsp;
-				<input type="radio" name="automatedpnrupdatefreq" value="3"> 3&nbsp;
-				<input type="radio" name="automatedpnrupdatefreq" value="4"> 4
-				</td>
-				<td>
-				<input type="radio" name="automatedpnrupdatefreq" value="1"> 1&nbsp;
-				<input type="radio" name="automatedpnrupdatefreq" value="2"> 2&nbsp;
-				<input type="radio" name="automatedpnrupdatefreq" value="3"> 3&nbsp;
-				<input type="radio" name="automatedpnrupdatefreq" value="4"> 4
-				</td>
-			</tr>
-		</tbody>
-		</table>
-		</form>
-	</div>
   </div>
-</section>  
+</section> 
 
 <br><br><br><br>
 

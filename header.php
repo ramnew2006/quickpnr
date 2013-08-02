@@ -24,7 +24,7 @@ $numRows=mysql_num_rows($titlequery);
     <link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/bootswatch.css" rel="stylesheet">
 	<link href="css/custom.css" rel="stylesheet">
-	<?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrhistory.php") {?>
+	<?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrhistory.php" || $_SERVER["REQUEST_URI"]=="/quickpnr/smsreminder.php") {?>
 	<link href="css/pnrhistory.css" rel="stylesheet">
 	<?php } ?>
 	<!-- Start WOWSlider.com HEAD section -->
@@ -115,7 +115,11 @@ $numRows=mysql_num_rows($titlequery);
       <?php }else{ ?>
 	  <li><a href="userprofile.php">My Account</a></li>
 	  <?php } ?>
-	  
+	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/smsreminder.php") {?>
+	  <li class="active"><a href="#smsreminder">SMS Reminder</a></li>
+      <?php }else{ ?>
+	  <li><a href="smsreminder.php">SMS Reminder</a></li>
+	  <?php } ?>
 	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrhistory.php") {?>
       <li class="active"><a href="#pnrhistory">PNR History</a></li>
 	  <?php }else{ ?>
