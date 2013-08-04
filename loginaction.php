@@ -7,6 +7,7 @@ $dbobj->dbconnect();
 
 if(isset($_SESSION['user'])){
 	header("Location:index.php");
+	
 }
 
 if(isset($_POST['userLogin'])){
@@ -24,8 +25,10 @@ if(isset($_POST['userLogin'])){
 				$_SESSION['userName']=$mobileNum;
 				//$_SESSION['userEmail']=$email;
 				//$_SESSION['userFrequency']=$frequency;
-				setcookie('userlogin',$_SESSION['user'],time()+(86400*7));
+				$rand_cookie = hash('sha512', $mobileNum . $dbobj->returnSalt() . time() . rand());
+				setcookie('usercookie',$rand_cookie,time()+(86400*7));
 				setcookie('userName',$_SESSION['userName'],time()+(86400*7));
+				$query = mysql_query("UPDATE userlogin SET cookie='" . $rand_cookie . "' WHERE mobilenum=" . $mobileNum);
 				if(isset($_SESSION['redirect_url'])){
 					if($_SESSION['redirect_url']=="/quickpnr/index.php" || $_SESSION['redirect_url']=="/quickpnr/"){
 						header("Location:userprofile.php");
