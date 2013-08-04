@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
-session_start();
+include('checkcookie.php');
+
 require_once 'database.php';
 
 $dbobj = new database();
@@ -9,13 +8,21 @@ $dbobj->dbconnect();
 
 include('header.php');
 ?>
+
 <script type="text/javascript">
 function fill(Value,boxname){
 	var id = "#"+boxname;
 	$(id).val(Value);
 	$('#'+boxname+'display').hide();
 }
+$(function() {
+	$( "#searchtrainsdatepicker" ).datepicker({
+	  numberOfMonths: 1,
+	  showButtonPanel: true
+	});
+});
 </script>	
+
 <!-- PNR Status
 ================================================== -->
 <section id="searchtrain">
@@ -39,6 +46,9 @@ function fill(Value,boxname){
 			<td><input id="deststationsearchtrain" name="deststationsearchtrain" type="text" placeholder="To">
 			<div id="deststationsearchtraindisplay"></div>
 			</td>
+		</tr>
+		<tr>
+			<td><input type="text" id="searchtrainsdatepicker" placeholder="Select Date"></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>

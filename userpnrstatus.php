@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
-session_start();
+include('checkcookie.php');
+
 require_once 'database.php';
 
 $dbobj = new database();
@@ -9,7 +8,7 @@ $dbobj->dbconnect();
 
 include('header.php');
 ?>
-  
+
 <!-- PNR Status
 ================================================== -->
 <section id="pnrstatus">

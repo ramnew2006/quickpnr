@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
-session_start();
+include('checkcookie.php');
+
 require_once 'database.php';
 
 $dbobj = new database();
 $dbobj->dbconnect();
 
-if(isset($_SESSION['user'])){
-	header("Location:userprofile.php");
-}
 include('header.php');
 ?>
   

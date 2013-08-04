@@ -1,7 +1,12 @@
 <?php 
 $titlequery=mysql_query("SELECT title FROM pagetitles WHERE url='" . $_SERVER["REQUEST_URI"] . "'");
 $numRows=mysql_num_rows($titlequery);
+if(isset($_SESSION['user']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php"){
+	header("Location:userprofile.php");
+}
 ?>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>

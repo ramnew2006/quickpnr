@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
-session_start();
+include('checkcookie.php');
+
+if(!isset($_SESSION['user'])){
+	$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
+	header("Location:userlogin.php");
+	exit();
+}
+
 require_once 'database.php';
 
 $dbobj = new database();
 $dbobj->dbconnect();
-  if(isset($_SESSION['user'])){
-	include('header.php');
+
+include('header.php');
 ?>
 
 <!-- Profile Details
@@ -17,7 +22,7 @@ $dbobj->dbconnect();
     <h3>Profile</h3>
   </div>
   <div class="row" style="margin-left:auto;">
-	<h5>Welcome Ram Manohar!</h5>
+	<h5>Welcome <?php echo $_COOKIE['userlogin']; ?></h5>
 	<table>
 	<tr>
 		<td><h5>Mobile Number</h5></td>
@@ -55,10 +60,6 @@ $dbobj->dbconnect();
 
 
 <?php
-}else{
-	header("Location:userlogin.php");
-	$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
-}
 include('footer.php');
 $dbobj->dbdisconnect();
 ?>
