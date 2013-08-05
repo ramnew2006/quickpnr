@@ -15,9 +15,9 @@ include('header.php');
 <section id="pnrstatus">
 	 <!-- Headings & Paragraph Copy -->
 <div class="row">
- <div class="span7">
+ <!--<div class="span7">-->
 	<!-- Start WOWSlider.com BODY section -->
-	<div id="wowslider-container1">
+	<!--<div id="wowslider-container1">
 	<div class="ws_images"><ul>
 <li><img src="sliderdata/images/adobesearchpromote.jpg" alt="adobe-search-promote" title="adobe-search-promote" id="wows1_0"/></li>
 <li><img src="sliderdata/images/sctraining_sp_test1.jpg" alt="sctraining_sp_test1" title="sctraining_sp_test1" id="wows1_1"/></li>
@@ -32,7 +32,7 @@ include('header.php');
 	<div class="ws_shadow"></div>
 	</div>
 	<script type="text/javascript" src="sliderengine/wowslider.js"></script>
-	<script type="text/javascript" src="sliderengine/script.js"></script>
+	<script type="text/javascript" src="sliderengine/script.js"></script>-->
 	<!-- End WOWSlider.com BODY section -->
 	
 	<!--<div class="well">
@@ -47,20 +47,35 @@ include('header.php');
         <h5>h5. Heading 5</h5>
         <h6>h6. Heading 6</h6>
     </div>-->
- </div>
- <div class="span5">
-	<div class="page-header">
+ <!--</div>-->
+ <div class="span6">
+ 	<div class="page-header">
     <h3>PNR Status</h3>
 	</div>
 	<div class="row" style="margin-left:auto;">
-		<div class="span2">
-		<input id="displaypnrstatusinput" name="displaypnrstatusinput" type="text" placeholder="Enter PNR Number" size="10" maxlength="10">
-		</div>
-		<div class="span2">
-		<a id="displaypnrstatusinputgetstatus" class="btn btn-primary">Get Status</a>
-		</div>
-		<br><br>
+		<table>
+			<tr>
+				<td><input id="displaypnrstatusinput" name="displaypnrstatusinput" type="text" placeholder="Enter PNR Number" maxlength="10" autocomplete="on"></td>
+				<td style="padding-left:2em;">
+					<a id="displaypnrstatusinputgetstatus" class="btn btn-primary">Get Status</a>
+				</td>
+			</tr>
+		</table><br><br>
 		<div id="displaypnrstatus"></div>
+	</div>
+ </div>
+ <div class="span6">
+	<div class="row" style="margin-left:auto;">
+		<div class="alert alert-block" style="line-height:30px;width:80%;margin-left:auto;margin-right:auto;">
+		<h4 style="font-weight:normal;">SMS Reminder</h4><br>
+		<p>Frustrated to check your PNR Status again and again? Don't worry we will keep you updated daily about your PNR Status through SMS! For FREE!</p>
+		<p><a href="/quickpnr/smsreminder.php" style="color:blanchedAlmond;text-decoration:underline;">Click Here to Turn on SMS Reminder Service</a></p>
+		</div>
+		<div class="alert alert-info" style="line-height:30px;width:80%;margin-left:auto;margin-right:auto;">
+		<h4 style="font-weight:normal;">Sync with IRCTC</h4><br>
+		<p>Now sync your IRCTC account and keep getting PNR Status of all your tickets to your registered mobile through SMS! For FREE!</p>
+		<p><a href="" style="color:white;text-decoration:underline;">Click Here to Sync your IRCTC Account</a></p>
+		</div>
 	</div>
  </div>
 </div>
