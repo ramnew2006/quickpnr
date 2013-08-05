@@ -324,5 +324,6 @@ $(document).ready(function() {
 	$('input[name="irctcusername"]').focus(); //IRCTC Import Page
 	$('#sourcestationsearchtrain').focus(); //Trains Page
 	
+	//Register form confirm password
 	
 });

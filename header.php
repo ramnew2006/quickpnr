@@ -43,7 +43,7 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php
   </head>
 
   <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
-    
+
 
   <!-- Navbar
     ================================================== -->
@@ -193,7 +193,11 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php
 		</tr>
 		<tr>
 			<td>Password</td>
-			<td style="padding-left:1em;"><input name="userPassword" type="password" placeholder="Password"><br/>
+			<td style="padding-left:1em;"><input id="registeruserPassword" name="userPassword" type="password" placeholder="Password"><br/>
+		</tr>
+		<tr>
+			<td>Confirm Password</td>
+			<td style="padding-left:1em;"><input id="registeruserConfirmPassword" name="userConfirmPassword" type="password" placeholder="Password"><br/>
 		</tr>
 		</table>
 	</div>
@@ -203,4 +207,23 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php
     </form>
   </div>
 </div>
+<script type="text/javascript">
+function validateForm(){
+	var mobilenum = $('#registermobileNum').val();
+	var password = $('#registeruserPassword').val();
+	var confpassword = $('#registeruserConfirmPassword').val();
+	if($.isNumeric(mobilenum) && mobilenum.length==10){
+	}else{
+		alert("Enter valid Mobile Number!");
+		return false;
+	}
+	if(password==confpassword){
+		return true;
+	}else{
+		alert("Passwords do not match!");
+		return false;
+	}
+}
+</script>
 <?php } ?>
+

@@ -34,6 +34,8 @@ if(isset($_POST['userLogin'])){
 					}else{
 						header("Location: {$_SESSION['redirect_url']}");
 					}
+				}else{
+					header("Location:userprofile.php");
 				}
 			}else{
 				$_SESSION['registerNum']=$mobileNum;

@@ -1,6 +1,9 @@
 <?php
 include('checkcookie.php');
-$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
+
+if(isset($_SESSION['userName'])){
+	header("Location:userprofile.php");
+}
 
 require_once 'database.php';
 
@@ -69,12 +72,12 @@ include('header.php');
 		<div class="alert alert-block" style="line-height:30px;width:80%;margin-left:auto;margin-right:auto;">
 		<h4 style="font-weight:normal;">SMS Reminder</h4><br>
 		<p>Frustrated to check your PNR Status again and again? Don't worry we will keep you updated daily about your PNR Status through SMS! For FREE!</p>
-		<p><a href="/quickpnr/smsreminder.php" style="color:blanchedAlmond;text-decoration:underline;">Click Here to Turn on SMS Reminder Service</a></p>
+		<p style="text-align:center"><a data-toggle="modal" href="#myRegisterModal" class="btn">Register Now!</a></p>
 		</div>
 		<div class="alert alert-info" style="line-height:30px;width:80%;margin-left:auto;margin-right:auto;">
 		<h4 style="font-weight:normal;">Sync with IRCTC</h4><br>
 		<p>Now sync your IRCTC account and keep getting PNR Status of all your tickets to your registered mobile through SMS! For FREE!</p>
-		<p><a href="" style="color:white;text-decoration:underline;">Click Here to Sync your IRCTC Account</a></p>
+		<p style="text-align:center"><a data-toggle="modal" href="#myRegisterModal" class="btn">Register Now!</a></p>
 		</div>
 	</div>
  </div>

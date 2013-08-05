@@ -19,10 +19,12 @@ include('header.php');
 <!-- Profile Details
 ================================================== -->
 <section id="userprofile">
-  <div class="page-header">
+  
+  <div class="row">
+  <div class="span6">
+	<div class="page-header">
     <h3>Profile</h3>
-  </div>
-  <div class="row" style="margin-left:auto;">
+	</div>
 	<h5>Welcome <?php echo $_SESSION['userName']; ?></h5>
 	<table>
 	<tr>
@@ -53,7 +55,34 @@ include('header.php');
 	</tr>
 	</table>
 	<br>
-	
+  </div>
+  <div class="span6">
+	<div class="page-header">
+    <h3>Active Services</h3>
+	</div>
+	<table>
+	<tr>
+		<td><a href="smsreminder.php" class="btn btn-warning" style="width:8em">SMS Reminder</a></td>
+		<td style="padding-left:2em;"><a href="">[Change]</a></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td><a href="smsreminder.php" class="btn btn-primary" style="width:8em">Sync with IRCTC</a></td>
+		<td style="padding-left:2em;"><a href="">[Change]</a></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td><a href="smsreminder.php" class="btn btn-success" style="width:8em">Active Tickets</a></td>
+		<td style="padding-left:2em;"><a href="">[Change]</a></td>
+	</tr>
+	</table>
+	<br>
+	<br>
+  </div>
   </div>
 </section> 
 
