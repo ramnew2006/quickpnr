@@ -1,5 +1,6 @@
 <?php
 include('checkcookie.php');
+$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
 
 require_once 'database.php';
 

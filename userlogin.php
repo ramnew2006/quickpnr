@@ -1,81 +1,83 @@
 <?php
-session_start();
+include('checkcookie.php');
+
+if(isset($_SESSION['userName'])){
+	header("Location:userprofile.php");
+	exit();
+}
+
 require_once 'database.php';
 
-if(isset($_SESSION['user'])){
-	header("Location:index.php");
-}else{
-?>
-<!DOCTYPE html>
-<html> 
-  <head>
-    <title>Quick PNR - Find PNR Status</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
-    <link href="css/bootstrap-icon-large.css" rel="stylesheet" media="screen">
-    <link href="css/custom.css" rel="stylesheet" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <script type="text/javascript">
-    function validateForm(){
-		var mobileNum = $(':input#mobileNum').val();
-    	if($.isNumeric(mobileNum)){
-			if(mobileNum.length==10){
-				return true;
-			}else{
-				alert("Enter the complete phone number");
-				return false;
-			}
-    	}else{
-    		alert("Please enter a number!");
-        	return false;
-        }
-    }
-    function resetForm(){
-    	$('#pnrResult').hide();
-    }
-    </script>
-  </head>
-  <body>
-  <div id="containercustom">
-		<header class="container-fluid-header">
-		  <h1 style="padding-top:0.5em;">
-			<span style="font-size: 1.05em;line-height:0.75em;font-style:italic;">quickPNR</span>
-			<div style="font-size:0.8em;font-weight:normal;float:right;padding-top:5px;">
-				<a href="" class="btn btn-primary">PNR Status</a>
-				<a href="" class="btn btn-primary">Trains</a>
-				<a href="" class="btn btn-primary">My Account</a>
-				<a href="" class="btn btn-primary">Sign Up</a>
-			</div>
-		  </h1>
-		</header>
-		<div class="container-fluid-content">
-			<div class="row-fluid" id="pnrForm">
-				<div class="span4"></div>
-				<div class="span4">
-					<form action="loginaction.php" method="post" onsubmit="return(validateForm());">
-					<input id="mobileNum" name="mobileNum" type="text" size="10" maxlength="10" placeholder="Mobile number"><br/>
-					<input name="userPassword" type="password" placeholder="Password"><br/>
-					<input type="submit" name="userLogin" value="Login" class="btn">
-					</form>
-				</div>
-				<div class="span4"></div>
-			</div>
-			<div class="container-fluid" id="pnrResult">
+$dbobj = new database();
+$dbobj->dbconnect();
 
-			</div>
-		</div>
-		<footer class="container-fluid-footer">
-			<div class="footer-content">
-				This is the Footer
-			</div>
-		</footer>
-	</div>
-	<script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-  </body>
-</html>
+include('header.php');
+?>
+
+<?php if($_SESSION['regSuccess']=="Yes"){ ?>
+	<br><br><p style="text-align:center;">Account Successfully Activated</p>
+<?php } ?>
+<!-- PNR Status
+================================================== -->
+<section id="userlogin">
+  <!-- Headings & Paragraph Copy -->
+<div class="page-header">
+    <h3>Login To Your Account</h3>
+  </div>
+  <div class="row" style="margin-left:auto;">
+	<p style="text-align:center;"></p><br/>
+	<form method="post" action="loginaction.php">
+	<table>
+	<tr>
+		<!--<td>IRCTC User Name</td>-->
+		<td><input type="text" name="mobileNum" placeholder="Enter User Name"></td>
+	</tr>
+	<tr>
+		<!--<td>&nbsp;</td>-->
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<!--<td>IRCTC Password</td>-->
+		<td><input type="password" name="userPassword" placeholder="Enter Password"></td>
+	</tr>
+	<tr>
+		<!--<td>&nbsp;</td>-->
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<!--<td></td>-->
+		<input type="hidden" name="userLogin" value="Y">
+		<td><input type="submit" class="btn btn-primary" value="Login"></td>
+	</tr>
+	</table>
+	</form>
+  </div>
+  
+</section>
+
+<!-- Send SMS Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+    <h3 id="myModalLabel">Send PNR Status to Any Mobile</h3>
+  </div>
+  <div class="modal-body">
+    <input type="hidden" name="currentpnr" id="currentpnr" value="">
+	Mobile Number:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+91&nbsp;&nbsp;<input type="text" name="currentmobileNum" id="currentmobileNum">
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <a class="sendsmsanymobile btn btn-info" name="sendSMSanyMobile" id="sendsmsanymobile">Send SMS</a>
+  </div>
+</div>
+
+<br><br><br><br>
+
 
 <?php
-}
+include('footer.php');
+$dbobj->dbdisconnect();
 ?>
+
+</body>
+</html>

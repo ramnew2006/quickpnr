@@ -1,7 +1,8 @@
 <?php
 include('checkcookie.php');
+$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
 
-if(!isset($_SESSION['user'])){
+if(!isset($_SESSION['userName'])){
 	$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
 	header("Location:userlogin.php");
 	exit();

@@ -1,7 +1,7 @@
 <?php 
 $titlequery=mysql_query("SELECT title FROM pagetitles WHERE url='" . $_SERVER["REQUEST_URI"] . "'");
 $numRows=mysql_num_rows($titlequery);
-if(isset($_SESSION['user']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php"){
+if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php"){
 	header("Location:userprofile.php");
 }
 ?>
@@ -92,7 +92,7 @@ if(isset($_SESSION['user']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php"){
           </li>-->
         </ul>
         <ul class="nav pull-right" id="main-menu-right">
-		<?php if(isset($_SESSION['user'])){ ?>
+		<?php if(isset($_SESSION['userName'])){ ?>
           <li><a href="userprofile.php" title="My Profile"><i class="icon-user"></i> My Account</a></li>
           <li><a href="logout.php" title="Logout"><i class="icon-unlock"></i> Logout</a></li>
 		<?php }else{ ?>
@@ -114,7 +114,7 @@ if(isset($_SESSION['user']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php"){
   <div class="subnav">
     <ul class="nav nav-pills">
 	<!-- Extra Navigation Menu when the user is logged in-->
-	<?php if(isset($_SESSION['user'])){ ?>
+	<?php if(isset($_SESSION['userName'])){ ?>
 	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userprofile.php") {?>
 	  <li class="active"><a href="#userprofile">My Account</a></li>
       <?php }else{ ?>
@@ -150,7 +150,7 @@ if(isset($_SESSION['user']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php"){
   </div>
   
   
-<?php if(isset($_SESSION['user'])) { ?>
+<?php if(isset($_SESSION['userName'])) { ?>
 <?php }else{ ?>
   <!-- Login Modal -->
 <div id="myLoginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -159,7 +159,6 @@ if(isset($_SESSION['user']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php"){
     <h3 id="myModalLabel">Login to your Account</h3>
   </div>
   <div class="modal-body">
-  <?php $_SESSION['redirect_url']=$_SERVER["REQUEST_URI"]; ?>
     <form action="loginaction.php" method="post">
 		<table>
 		<tr>
@@ -186,7 +185,6 @@ if(isset($_SESSION['user']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php"){
     <h3 id="myModalLabel">Register Now!</h3>
   </div>
   <div class="modal-body">
-  <?php $_SESSION['redirect_url']=$_SERVER["REQUEST_URI"]; ?>
     <form action="doregister.php" method="post" onsubmit="return(validateForm());">
 		<table>
 		<tr>

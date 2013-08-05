@@ -2,27 +2,31 @@
 session_start();
 require_once 'database.php';
 
-$dbobj = new database();
-$dbobj->dbconnect();
-
-if(isset($_SESSION['start']) && isset($_COOKIE['userName'])){
-}else{
-	if(isset($_COOKIE['userName'])){
+//If userCookie is set in a session check whether its correct and continue the user
+if(isset($_SESSION['userCookie'])){
+	if($_SESSION['userCookie']==$_COOKIE['usercookie'] . $_COOKIE['userName']){
+		
+	}else{ //If session variables and cookies doesn't match sign out the user
+		unset($_SESSION['userName']);
+		unset($_SESSION['userCookie']);
+	}
+}else{ //If not check whether the cookies are available and set the session variables
+	if(isset($_COOKIE['usercookie']) && isset($_COOKIE['userName'])){
 		$mobileNum = $_COOKIE['userName'];
 		$cookie = $_COOKIE['usercookie'];
-		
+		$dbobj = new database();
+		$dbobj->dbconnect();
 		$query=mysql_query("SELECT * FROM userlogin WHERE mobilenum=" . $mobileNum . " AND cookie='" . $cookie . "'");
 
 		if(mysql_num_rows($query)==1){
-			$_SESSION['user']="loggedin";
 			$_SESSION['userName']=$mobileNum;
-			$_SESSION['start']="Y";
+			$_SESSION['userCookie']=$_COOKIE['usercookie'] . $_COOKIE['userName'];
 		}
-	}else{
-		unset($_SESSION['user']);
+		$dbobj->dbdisconnect();
+	}else{ //if cookies are not available sign out the user;
 		unset($_SESSION['userName']);
+		unset($_SESSION['userCookie']);
 	}
 }
-	
-$dbobj->dbdisconnect();
+
 ?>

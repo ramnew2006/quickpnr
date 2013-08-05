@@ -5,9 +5,8 @@ require_once 'database.php';
 $dbobj = new database();
 $dbobj->dbconnect();
 
-if(isset($_SESSION['user'])){
-	header("Location:index.php");
-	
+if(isset($_SESSION['userName'])){
+	header("Location:userprofile.php");
 }
 
 if(isset($_POST['userLogin'])){
@@ -21,13 +20,13 @@ if(isset($_POST['userLogin'])){
 			$result = mysql_fetch_array($query);
 			$act_status = $result['act_status'];
 			if($act_status=="Y"){
-				$_SESSION['user']="loggedin";
 				$_SESSION['userName']=$mobileNum;
 				//$_SESSION['userEmail']=$email;
 				//$_SESSION['userFrequency']=$frequency;
 				$rand_cookie = hash('sha512', $mobileNum . $dbobj->returnSalt() . time() . rand());
 				setcookie('usercookie',$rand_cookie,time()+(86400*7));
 				setcookie('userName',$_SESSION['userName'],time()+(86400*7));
+				$_SESSION['userCookie']=$rand_cookie . $mobileNum;
 				$query = mysql_query("UPDATE userlogin SET cookie='" . $rand_cookie . "' WHERE mobilenum=" . $mobileNum);
 				if(isset($_SESSION['redirect_url'])){
 					if($_SESSION['redirect_url']=="/quickpnr/index.php" || $_SESSION['redirect_url']=="/quickpnr/"){
@@ -37,11 +36,12 @@ if(isset($_POST['userLogin'])){
 					}
 				}
 			}else{
+				$_SESSION['registerNum']=$mobileNum;
+				header("Location:doregister.php");
 			}
 		}else{
 			echo "wrong mobile num or password";
 		}
-		
 	}
 }else{
 	header("Location:userlogin.php");

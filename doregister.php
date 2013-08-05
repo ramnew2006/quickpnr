@@ -1,16 +1,11 @@
-<html>
-<head></head>
-<body>
 <?php
-session_start();
+include('checkcookie.php');
 require_once 'database.php';
-require_once 'sendsms.php';
+require_once 'userscripts/sendsms_class.php';
+
 $dbobj = new database();
 $dbobj->dbconnect();
 
-if(isset($_SESSION['user'])){
-	header("Location:index.php");
-}
 
 if(isset($_POST['userRegister'])){
 	$mobileNum = $_POST['mobileNum'];
@@ -23,9 +18,13 @@ if(isset($_POST['userRegister'])){
 			$act_code = randomDigits(6); //hash('sha512',mt_rand().time());
 			$query = "INSERT INTO userlogin (mobilenum, password, act_code) VALUES ('" . $mobileNum . "','" . $password . "','" . $act_code . "')";
 			if(mysql_query($query)){
+				include('header.php');
+				echo "<section id=\"registerconfirm\">
+					<div class=\"page-header\">
+					<h3>Enter Activation Code</h3>
+					</div>";
 				echo "<form action=\"activation.php\" method=\"post\" onsubmit=\"return(validateForm());\">
-				Enter your activation code: <input type=\"text\" name=\"act_code\" maxsize=\"6\" id=\"actcode\"><br>
-				<input type=\"submit\" name=\"mobActivation\" value=\"Validate\">
+				<input type=\"text\" name=\"act_code\" maxlength=\"6\" id=\"actcode\">  <input type=\"submit\" name=\"mobActivation\" class=\"btn btn-primary\" value=\"Validate\">
 				</form>";
 				$_SESSION['registerNum'] = $mobileNum;
 				$message = "Activation Code for qwikTravel: " . $act_code;
@@ -34,16 +33,23 @@ if(isset($_POST['userRegister'])){
 			}else{
 				echo "something is wrong";
 			}
+		}else{
+			echo "You are already Registered";
 		}
 	}
 }else{
 	if(isset($_SESSION['registerNum'])){
+		include('header.php');
+		echo "<section id=\"registerconfirm\">
+			<div class=\"page-header\">
+			<h3>Enter Activation Code</h3>
+			</div>";
 		echo "<form action=\"activation.php\" method=\"post\" onsubmit=\"return(validateForm());\">
-		Enter your activation code: <input type=\"text\" name=\"act_code\" maxsize=\"6\" id=\"actcode\"><br>
-		<input type=\"submit\" name=\"mobActivation\" value=\"Validate\">
+		<input type=\"text\" name=\"act_code\" maxlength=\"6\" id=\"actcode\">  <input class=\"btn btn-primary\" type=\"submit\" name=\"mobActivation\" value=\"Validate\">
 		</form>";
+	}else{
+		header("Location:index.php");
 	}
-	header("Location:register.php");
 }
 
 function randomDigits($length){
@@ -54,13 +60,15 @@ function randomDigits($length){
        $digits .= $numbers[$i];
     return $digits;
 }
+?>
 
+<?php
 $dbobj->dbdisconnect();
-
+include('footer.php');
 ?>
 <script type="text/javascript">
 function validateForm(){
-	var act_code = $('#actcode').val();
+	var act_code = $("#actcode").val();
 	if($.isNumeric(act_code) && act_code.length==6){
 		return true;
 	}else{
@@ -69,6 +77,5 @@ function validateForm(){
 	}
 }
 </script>
-<script src="http://code.jquery.com/jquery.js"></script>
 </body>
 </html>

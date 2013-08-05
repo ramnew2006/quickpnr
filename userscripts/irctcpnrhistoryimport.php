@@ -1,5 +1,5 @@
 <?php
-//set_time_limit(60);
+set_time_limit(60);
 session_start();
 require_once 'database.php';
 require_once 'postcurl.php';
@@ -8,7 +8,7 @@ if(isset($_POST['savePnrHistory'])){
 	$dbobj = new database();
 	$dbobj->dbconnect();
 
-	if(isset($_SESSION['user'])){
+	if(isset($_SESSION['userName'])){
 		
 		//IRCTC Login Parameters
 		$url = "https://www.irctc.co.in/cgi-bin/bv60.dll/irctc/services/login.do";
@@ -85,7 +85,7 @@ if(isset($_POST['savePnrHistory'])){
 			echo "Try again";
 		}
 	}else{
-		header("Location:userlogin.php");
+		header("Location:/quickpnr/userlogin.php");
 		$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
 	}
 	

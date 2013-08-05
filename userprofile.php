@@ -1,7 +1,8 @@
 <?php
 include('checkcookie.php');
+$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
 
-if(!isset($_SESSION['user'])){
+if(!isset($_SESSION['userName'])){
 	$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
 	header("Location:userlogin.php");
 	exit();
@@ -22,7 +23,7 @@ include('header.php');
     <h3>Profile</h3>
   </div>
   <div class="row" style="margin-left:auto;">
-	<h5>Welcome <?php echo $_COOKIE['userlogin']; ?></h5>
+	<h5>Welcome <?php echo $_SESSION['userName']; ?></h5>
 	<table>
 	<tr>
 		<td><h5>Mobile Number</h5></td>
