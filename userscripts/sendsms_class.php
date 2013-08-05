@@ -45,8 +45,8 @@ class sendSMS {
 		curl_setopt($ch, CURLOPT_POSTFIELDS,$postParams); //Post fields
 		curl_setopt($ch, CURLOPT_POST,true); //To send the POST parameters
 		curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__).'/cookie.txt'); //store the cookie in a local file
-		curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__).'/cookie.txt');
+		curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt'); //store the cookie in a local file
+		curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt');
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 		curl_setopt($ch, CURLOPT_URL,$postUrl);   //To set the page to be fetched
 		$result = curl_exec($ch);    //Execute and return the response
@@ -83,8 +83,8 @@ class sendSMS {
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION,true);   //To stop redirects
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,false);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__).'/cookie.txt'); 
-		curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__).'/cookie.txt');
+		curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt'); 
+		curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt');
 		curl_setopt($ch, CURLINFO_HEADER_OUT, true);
 		curl_setopt($ch, CURLOPT_URL,trim($getUrl));   //To set the page to be fetched
 		$output = curl_exec($ch);    //Execute and return the response
@@ -147,8 +147,8 @@ class sendSMS {
 		curl_setopt($ch, CURLOPT_POSTFIELDS,$postparams); //Post fields
 		curl_setopt($ch, CURLOPT_POST,true); //To send the POST parameters
 		curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__).'/cookie.txt'); //store the cookie in a local file
-		curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__).'/cookie.txt');
+		curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt'); //store the cookie in a local file
+		curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt');
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 		curl_setopt($ch, CURLOPT_URL,$postUrl);   //To set the page to be fetched
 		$output = curl_exec($ch);    //Execute and return the response
@@ -158,6 +158,7 @@ class sendSMS {
 		//print_r($info);
 		
 		unlink(dirname(__FILE__).'/tmp/' . $this->tempfile . '.html');
+		unlink(dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt');
 		return $info['url'];
 	}
 }
