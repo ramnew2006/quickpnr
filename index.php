@@ -69,15 +69,14 @@ include('header.php');
  </div>
  <div class="span6">
 	<div class="row" style="margin-left:auto;">
-		<div class="alert alert-block" style="line-height:30px;width:80%;margin-left:auto;margin-right:auto;">
-		<h4 style="font-weight:normal;">SMS Reminder</h4><br>
-		<p>Frustrated to check your PNR Status again and again? Don't worry we will keep you updated daily about your PNR Status through SMS! For FREE!</p>
-		<p style="text-align:center"><a data-toggle="modal" href="#myRegisterModal" class="btn">Register Now!</a></p>
-		</div>
-		<div class="alert alert-info" style="line-height:30px;width:80%;margin-left:auto;margin-right:auto;">
-		<h4 style="font-weight:normal;">Sync with IRCTC</h4><br>
-		<p>Now sync your IRCTC account and keep getting PNR Status of all your tickets to your registered mobile through SMS! For FREE!</p>
-		<p style="text-align:center"><a data-toggle="modal" href="#myRegisterModal" class="btn">Register Now!</a></p>
+		<div class="well" style="line-height:35px;margin-left:auto;margin-right:auto;">
+		<h4 style="font-weight:bold;">SMS Reminder</h4>
+		<p>Frustrated to check your PNR Status again and again? Don't worry we will keep you updated daily about your PNR Status through <b>SMS!</b> For <b>FREE!</b></p>
+		<h4 style="font-weight:bold;">Sync with IRCTC</h4>
+		<p>Now sync your IRCTC account and keep getting PNR Status of all your tickets to your registered mobile through <b>SMS!</b> For <b>FREE!</b></p>
+		<p style="text-align:center;padding-top:1em;">
+		<a data-toggle="modal" href="#myRegisterModal" class="btn btn-primary">Register Now!</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a data-toggle="modal" href="#myLoginModal" class="btn btn-primary">Login</a>
 		</div>
 	</div>
  </div>
