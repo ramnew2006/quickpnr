@@ -30,6 +30,9 @@ section {
 form {
 	margin-bottom:0px;
 }
+input {
+	width: 170px;
+}
 input[type="radio"] {
 	margin-bottom:3px;
 	margin-top: 0px;
@@ -71,12 +74,30 @@ li.ajaxdropdownsearch:hover {
 
 .ui-widget {
 	font-size: 0.8em;
+	background-color: #09d;
+	background-image: none;
+	color: white;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	max-width:207px;
+	max-height:200px;
+}
+
+.ui-widget-content a{
+	color: white;
+}
+.ui-corner-all{
+	border-radius: 0px;
 }
 
 @media 
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
-	.tooltip-inner {
+	/*.tooltip-inner {
 		display:none;
 	}
+	
+	.tooltip {
+		display:none;
+	}*/
 }

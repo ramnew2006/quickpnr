@@ -22,7 +22,8 @@ if(isset($_POST['savePnrHistory'])){
 		$code = $code['http_code'];
 		
 		if($code==302){
-			$url = $postobj->curlheaders()['redirect_url'];
+			$url = $postobj->curlheaders();
+			$url = $url['redirect_url'];
 			$query = parse_url($url);
 			$query = $query['query'];
 			$query = explode('&',$query);

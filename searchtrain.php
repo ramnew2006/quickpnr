@@ -36,7 +36,7 @@ $(function() {
 		<table>
 		<tr>
 			<td><input id="sourcestationsearchtrain" name="sourcestationsearchtrain" type="text" placeholder="From">
-			<div id="sourcestationsearchtraindisplay"></div>
+			<!--<div id="sourcestationsearchtraindisplay"></div>-->
 			</td>
 		</tr>
 		<tr>
@@ -44,7 +44,7 @@ $(function() {
 		</tr>
 		<tr>
 			<td><input id="deststationsearchtrain" name="deststationsearchtrain" type="text" placeholder="To">
-			<div id="deststationsearchtraindisplay"></div>
+			<!--<div id="deststationsearchtraindisplay"></div>-->
 			</td>
 		</tr>
 		<tr>

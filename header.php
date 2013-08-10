@@ -28,10 +28,9 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/bootswatch.css" rel="stylesheet">
-	<link href="css/custom.css" rel="stylesheet">
-	<?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrhistory.php" || $_SERVER["REQUEST_URI"]=="/quickpnr/smsreminder.php") {?>
+	<?php //if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrhistory.php" || $_SERVER["REQUEST_URI"]=="/quickpnr/smsreminder.php") {?>
 	<link href="css/pnrhistory.css" rel="stylesheet">
-	<?php } ?>
+	<?php //} ?>
 	<!-- Start WOWSlider.com HEAD section -->
 	<link rel="stylesheet" type="text/css" href="sliderengine/style.css" />
 	<!-- End WOWSlider.com HEAD section -->
@@ -40,6 +39,8 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>	
 	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<link href="css/custom.css" rel="stylesheet">
+	
   </head>
 
   <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
