@@ -1,7 +1,7 @@
 <?php 
 $titlequery=mysql_query("SELECT title FROM pagetitles WHERE url='" . $_SERVER["REQUEST_URI"] . "'");
 $numRows=mysql_num_rows($titlequery);
-if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php"){
+if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/index.php"){
 	header("Location:userprofile.php");
 }
 ?>
@@ -28,12 +28,9 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/bootswatch.css" rel="stylesheet">
-	<?php //if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrhistory.php" || $_SERVER["REQUEST_URI"]=="/quickpnr/smsreminder.php") {?>
+	<?php //if($_SERVER["REQUEST_URI"]=="/userpnrhistory.php" || $_SERVER["REQUEST_URI"]=="/smsreminder.php") {?>
 	<link href="css/pnrhistory.css" rel="stylesheet">
 	<?php //} ?>
-	<!-- Start WOWSlider.com HEAD section -->
-	<link rel="stylesheet" type="text/css" href="sliderengine/style.css" />
-	<!-- End WOWSlider.com HEAD section -->
 	
 	<!--Loading jQuery in the head for good experience-->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
@@ -56,7 +53,7 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
        </a>
-       <a class="brand" href="/quickpnr/">qwikTravel</a>
+       <a class="brand" href="/">qwikTravel</a>
        <div class="nav-collapse collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
           <!--<li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">News</a></li>
@@ -116,33 +113,33 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/quickpnr/index.php
     <ul class="nav nav-pills">
 	<!-- Extra Navigation Menu when the user is logged in-->
 	<?php if(isset($_SESSION['userName'])){ ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userprofile.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/userprofile.php") {?>
 	  <li class="active"><a href="#userprofile">My Account</a></li>
       <?php }else{ ?>
 	  <li><a href="userprofile.php">My Account</a></li>
 	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/smsreminder.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/smsreminder.php") {?>
 	  <li class="active"><a href="#smsreminder">SMS Reminder</a></li>
       <?php }else{ ?>
 	  <li><a href="smsreminder.php">SMS Reminder</a></li>
 	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrhistory.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/userpnrhistory.php") {?>
       <li class="active"><a href="#pnrhistory">PNR History</a></li>
 	  <?php }else{ ?>
 	  <li><a href="userpnrhistory.php">PNR History</a></li>
 	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/irctcimportview.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/irctcimportview.php") {?>
 	  <li class="active"><a href="#irctcimport">Import From IRCTC</a></li>
 	  <?php }else{ ?>
 	  <li><a href="irctcimportview.php">Import From IRCTC</a></li>
 	  <?php } ?>
 	<?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/userpnrstatus.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/userpnrstatus.php") {?>
       <li class="active"><a href="#pnrstatus">PNR Status</a></li>
 	  <?php }else{ ?>
 	  <li><a href="userpnrstatus.php">PNR Status</a></li>
 	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/quickpnr/searchtrain.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/searchtrain.php") {?>
 	  <li class="active"><a href="#searchtrain">Trains</a></li>
 	  <?php }else{ ?>
 	  <li><a href="searchtrain.php">Trains</a></li>
