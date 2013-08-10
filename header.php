@@ -14,7 +14,7 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/index.php"){
 		if($numRows==1){
 			echo mysql_result($titlequery,0);
 		}else{
-			echo "qwikTravel";
+			echo "quickPNR";
 		}
 	?>
 	</title>
@@ -53,7 +53,7 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/index.php"){
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
        </a>
-       <a class="brand" href="/">qwikTravel</a>
+       <a class="brand" href="/">quickPNR</a>
        <div class="nav-collapse collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
           <!--<li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">News</a></li>

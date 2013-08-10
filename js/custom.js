@@ -101,7 +101,7 @@ $(document).ready(function() {
 		}
 		var pnrnum = $(this).attr('name');
 		pnrnum = pnrnum.match(/[0-9]+/);
-		current.html("<i class=\"icon-refresh icon-spin\"></i> Sending...");
+		current.html("<i class=\"icon-refresh icon-spin\"></i> Sending.");
 		//alert("You are going to send the SMS for "+ pnrnum);
 		  
 		$.ajax({
@@ -143,7 +143,7 @@ $(document).ready(function() {
 			return false;
 		}	
 		var pnrnum = $('#currentpnr').val();
-		current.html("<i class=\"icon-refresh icon-spin\"></i> Sending...");
+		current.html("<i class=\"icon-refresh icon-spin\"></i> Sending.");
 		//window for confirmation
 		var conf = confirm("Do you want to send the SMS?");
 		if(conf==true){
