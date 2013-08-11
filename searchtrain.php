@@ -90,6 +90,3 @@ $(function() {
 include('footer.php');
 $dbobj->dbdisconnect();
 ?>
-
-</body>
-</html>

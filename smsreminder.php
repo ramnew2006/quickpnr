@@ -22,7 +22,7 @@ include('header.php');
 <section id="smsreminder">
   <!-- Headings & Paragraph Copy 
 -->
-<div class="alert alert-block" style="line-height:30px;">
+<div class="well" style="line-height:30px;">
  <!-- <h4 style="line-height:30px;text-align:none;"> -->
 Having a busy day? Days before your travel, we know how inconvenient it can be to constantly worry about your ticket status in the back of your mind. <br/><br/>
 Now leave that worrying behind and let us help keep you updated constantly on your status. <br/>Choose your frequency preference below and we will send you SMS dynamically updating you on your PNR status.
@@ -100,6 +100,3 @@ Now leave that worrying behind and let us help keep you updated constantly on yo
 include('footer.php');
 $dbobj->dbdisconnect();
 ?>
-
-</body>
-</html>

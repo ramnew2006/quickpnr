@@ -40,5 +40,4 @@ if(isset($_POST['mobActivation'])){
 }
 
 $dbobj->dbdisconnect();
-include('footer.php');
 ?>

@@ -62,10 +62,6 @@ function randomDigits($length){
 }
 ?>
 
-<?php
-$dbobj->dbdisconnect();
-include('footer.php');
-?>
 <script type="text/javascript">
 function validateForm(){
 	var act_code = $("#actcode").val();
@@ -77,5 +73,9 @@ function validateForm(){
 	}
 }
 </script>
-</body>
-</html>
+
+<?php
+$dbobj->dbdisconnect();
+include('footer.php');
+?>
+

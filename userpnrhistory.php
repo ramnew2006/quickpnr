@@ -102,6 +102,3 @@ include('header.php');
 include('footer.php');
 $dbobj->dbdisconnect();
 ?>
-
-</body>
-</html>

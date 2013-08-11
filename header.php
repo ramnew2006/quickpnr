@@ -33,16 +33,13 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/index.php"){
 	<?php //} ?>
 	
 	<!--Loading jQuery in the head for good experience-->
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>	
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<link href="css/jquery-ui.css" rel="stylesheet">
 	<link href="css/custom.css" rel="stylesheet">
-	
+	<script src="js/jquery.js"></script>
   </head>
 
   <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
-
-
+ 
   <!-- Navbar
     ================================================== -->
  <div class="navbar navbar-fixed-top">
@@ -56,7 +53,7 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/index.php"){
        <a class="brand" href="/">quickPNR</a>
        <div class="nav-collapse collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
-          <!--<li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">News</a></li>
+          <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">News</a></li>
           <li><a id="swatch-link" href="../#gallery">Gallery</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Preview <b class="caret"></b></a>
@@ -87,7 +84,7 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/index.php"){
               <li><a target="_blank" href="variables.less">variables.less</a></li>
               <li><a target="_blank" href="bootswatch.less">bootswatch.less</a></li>
             </ul>
-          </li>-->
+          </li>
         </ul>
         <ul class="nav pull-right" id="main-menu-right">
 		<?php if(isset($_SESSION['userName'])){ ?>
@@ -143,7 +140,17 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/index.php"){
 	  <li class="active"><a href="#searchtrain">Trains</a></li>
 	  <?php }else{ ?>
 	  <li><a href="searchtrain.php">Trains</a></li>
-	  <?php } ?>	  
+	  <?php } ?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/searchtrain.php") {?>
+	  <li class="active"><a href="searchtrain.php">How it Works?</a></li>
+	  <?php }else{ ?>
+	  <li><a href="searchtrain.php">How it Works?</a></li>
+	  <?php } ?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/searchtrain.php") {?>
+	  <li class="active"><a href="searchtrain.php">Feedback!</a></li>
+	  <?php }else{ ?>
+	  <li><a href="searchtrain.php">Feedback!</a></li>
+	  <?php } ?>
 	</ul>
   </div>
   
