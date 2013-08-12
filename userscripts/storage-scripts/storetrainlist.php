@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
-require_once 'getcurl.php';
-require_once 'database.php';
+require_once '../userscripts/getcurl.php';
+require_once '../database.php';
 
 $db = new database();
 $db->dbconnect();

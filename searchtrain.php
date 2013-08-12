@@ -1,12 +1,12 @@
 <?php
-include('checkcookie.php');
+include('../checkcookie.php');
 
-require_once 'database.php';
+require_once '../database.php';
 
 $dbobj = new database();
 $dbobj->dbconnect();
 
-include('header.php');
+include('../header.php');
 ?>
 
 <script type="text/javascript">
@@ -87,6 +87,6 @@ $(function() {
 
 
 <?php
-include('footer.php');
+include('../footer.php');
 $dbobj->dbdisconnect();
 ?>

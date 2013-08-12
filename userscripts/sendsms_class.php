@@ -45,8 +45,8 @@ class sendSMS {
 		curl_setopt($ch, CURLOPT_POSTFIELDS,$postParams); //Post fields
 		curl_setopt($ch, CURLOPT_POST,true); //To send the POST parameters
 		curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, '/var/www/userscripts/tmp/cookies/' . $this->tempfile . '_cookie.txt'); //store the cookie in a local file
-		curl_setopt($ch, CURLOPT_COOKIEFILE, '/var/www/userscripts/tmp/cookies/' . $this->tempfile . '_cookie.txt');
+		curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt'); //store the cookie in a local file
+		curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt');
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 		curl_setopt($ch, CURLOPT_URL,$postUrl);   //To set the page to be fetched
 		$result = curl_exec($ch);    //Execute and return the response
@@ -83,19 +83,19 @@ class sendSMS {
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION,true);   //To stop redirects
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,false);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, '/var/www/userscripts/tmp/cookies/' . $this->tempfile . '_cookie.txt'); 
-		curl_setopt($ch, CURLOPT_COOKIEFILE, '/var/www/userscripts/tmp/cookies/' . $this->tempfile . '_cookie.txt');
+		curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt'); 
+		curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt');
 		curl_setopt($ch, CURLINFO_HEADER_OUT, true);
 		curl_setopt($ch, CURLOPT_URL,trim($getUrl));   //To set the page to be fetched
 		$output = curl_exec($ch);    //Execute and return the response
 		curl_close($ch);
 
-		file_put_contents('/var/www/userscripts/tmp/' . $this->tempfile . '.html',$output); //write the output to a temporary html file
+		file_put_contents(dirname(__FILE__).'/tmp/' . $this->tempfile . '.html',$output); //write the output to a temporary html file
 	}
 	
 	private function finalPage(){
 		
-		$htmldoc = file_get_contents('/var/www/userscripts/tmp/' . $this->tempfile . '.html'); //construct a html variable from the temporary html file
+		$htmldoc = file_get_contents(dirname(__FILE__).'/tmp/' . $this->tempfile . '.html'); //construct a html variable from the temporary html file
 
 		$responseDOM = new DOMDocument();        //Create new DOM Object
 		$responseDOM->strictErrorChecking=false;
@@ -147,8 +147,8 @@ class sendSMS {
 		curl_setopt($ch, CURLOPT_POSTFIELDS,$postparams); //Post fields
 		curl_setopt($ch, CURLOPT_POST,true); //To send the POST parameters
 		curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, '/var/www/userscripts/tmp/cookies/' . $this->tempfile . '_cookie.txt'); //store the cookie in a local file
-		curl_setopt($ch, CURLOPT_COOKIEFILE, '/var/www/userscripts/tmp/cookies/' . $this->tempfile . '_cookie.txt');
+		curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt'); //store the cookie in a local file
+		curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt');
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 		curl_setopt($ch, CURLOPT_URL,$postUrl);   //To set the page to be fetched
 		$output = curl_exec($ch);    //Execute and return the response
@@ -157,8 +157,8 @@ class sendSMS {
 		
 		//print_r($info);
 		
-		unlink('/var/www/userscripts/tmp/' . $this->tempfile . '.html');
-		unlink('/var/www/userscripts/tmp/cookies/' . $this->tempfile . '_cookie.txt');
+		unlink(dirname(__FILE__).'/tmp/' . $this->tempfile . '.html');
+		unlink(dirname(__FILE__).'/tmp/cookies/' . $this->tempfile . '_cookie.txt');
 		return $info['url'];
 	}
 }

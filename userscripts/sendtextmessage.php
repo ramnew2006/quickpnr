@@ -1,8 +1,8 @@
 <?php
 session_start();
 set_time_limit(0);
-require_once 'postcurl.php';
-require_once 'sendsms_class.php';
+require_once '../userscripts/postcurl.php';
+require_once '../userscripts/sendsms_class.php';
 
 //Send SMS to Registered Mobile Number
 if(isset($_POST['regMobile'])){

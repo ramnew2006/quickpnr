@@ -1,8 +1,8 @@
 <?php 
 $titlequery=mysql_query("SELECT title FROM pagetitles WHERE url='" . $_SERVER["REQUEST_URI"] . "'");
 $numRows=mysql_num_rows($titlequery);
-if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/index.php"){
-	header("Location:userprofile.php");
+if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="../index.php"){
+	header("Location:../user/profile.php");
 }
 ?>
 <!DOCTYPE html>
@@ -24,18 +24,18 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/index.php"){
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-	<link href="css/bootswatch.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+	<link href="../css/bootswatch.css" rel="stylesheet">
 	<?php //if($_SERVER["REQUEST_URI"]=="/userpnrhistory.php" || $_SERVER["REQUEST_URI"]=="/smsreminder.php") {?>
-	<link href="css/pnrhistory.css" rel="stylesheet">
+	<link href="../css/pnrhistory.css" rel="stylesheet">
 	<?php //} ?>
 	
 	<!--Loading jQuery in the head for good experience-->
-	<link href="css/jquery-ui.css" rel="stylesheet">
-	<link href="css/custom.css" rel="stylesheet">
-	<script src="js/jquery.js"></script>
+	<link href="../css/jquery-ui.css" rel="stylesheet">
+	<link href="../css/custom.css" rel="stylesheet">
+	<script src="../js/jquery.js"></script>
   </head>
 
   <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -52,7 +52,7 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/index.php"){
        </a>
        <a class="brand" href="/">quickPNR</a>
        <div class="nav-collapse collapse" id="main-menu">
-        <ul class="nav" id="main-menu-left">
+        <!--<ul class="nav" id="main-menu-left">
           <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">News</a></li>
           <li><a id="swatch-link" href="../#gallery">Gallery</a></li>
           <li class="dropdown">
@@ -85,11 +85,11 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/index.php"){
               <li><a target="_blank" href="bootswatch.less">bootswatch.less</a></li>
             </ul>
           </li>
-        </ul>
+        </ul>-->	
         <ul class="nav pull-right" id="main-menu-right">
 		<?php if(isset($_SESSION['userName'])){ ?>
-          <li><a href="userprofile.php" title="My Profile"><i class="icon-user"></i> My Account</a></li>
-          <li><a href="logout.php" title="Logout"><i class="icon-unlock"></i> Logout</a></li>
+          <li><a href="../user/profile.php" title="My Profile"><i class="icon-user"></i> My Account</a></li>
+          <li><a href="../logout.php" title="Logout"><i class="icon-unlock"></i> Logout</a></li>
 		<?php }else{ ?>
 		  <li><a data-toggle="modal" href="#myRegisterModal" title="Register Now!" id="mainRegisterModal">Sign Up</a></li>
           <li><a data-toggle="modal" href="#myLoginModal" title="Login" id="mainLoginModal">Login</a></li>
@@ -110,36 +110,36 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="/index.php"){
     <ul class="nav nav-pills">
 	<!-- Extra Navigation Menu when the user is logged in-->
 	<?php if(isset($_SESSION['userName'])){ ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/userprofile.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/user/profile.php") {?>
 	  <li class="active"><a href="#userprofile">My Account</a></li>
       <?php }else{ ?>
-	  <li><a href="userprofile.php">My Account</a></li>
+	  <li><a href="../user/profile.php">My Account</a></li>
 	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/smsreminder.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/user/sms-reminder.php") {?>
 	  <li class="active"><a href="#smsreminder">SMS Reminder</a></li>
       <?php }else{ ?>
-	  <li><a href="smsreminder.php">SMS Reminder</a></li>
+	  <li><a href="../user/sms-reminder.php">SMS Reminder</a></li>
 	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/userpnrhistory.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/user/pnr-history.php") {?>
       <li class="active"><a href="#pnrhistory">PNR History</a></li>
 	  <?php }else{ ?>
-	  <li><a href="userpnrhistory.php">PNR History</a></li>
+	  <li><a href="../user/pnr-history.php">PNR History</a></li>
 	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/irctcimportview.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/user/sync-with-irctc.php") {?>
 	  <li class="active"><a href="#irctcimport">Import From IRCTC</a></li>
 	  <?php }else{ ?>
-	  <li><a href="irctcimportview.php">Import From IRCTC</a></li>
+	  <li><a href="../user/sync-with-irctc.php">Import From IRCTC</a></li>
 	  <?php } ?>
 	<?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/userpnrstatus.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/user/pnr-status.php") {?>
       <li class="active"><a href="#pnrstatus">PNR Status</a></li>
 	  <?php }else{ ?>
-	  <li><a href="userpnrstatus.php">PNR Status</a></li>
+	  <li><a href="../user/pnr-status.php">PNR Status</a></li>
 	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/searchtrain.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/search-train.php") {?>
 	  <li class="active"><a href="#searchtrain">Trains</a></li>
 	  <?php }else{ ?>
-	  <li><a href="searchtrain.php">Trains</a></li>
+	  <li><a href="../search-train.php">Trains</a></li>
 	  <?php } ?>
 	  <?php if($_SERVER["REQUEST_URI"]=="/searchtrain.php") {?>
 	  <li class="active"><a href="searchtrain.php">How it Works?</a></li>

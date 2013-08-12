@@ -22,7 +22,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: "POST",
-			url: "userscripts/getpnrstatus.php",
+			url: "../userscripts/getpnrstatus.php",
 			data: "pnrNum="+pnrnum,
 			success: function(html){
 				var newhtml = html+'<br><a id="getSMS" class="getsms btn btn-warning" name="getSMS" rel="tooltip" title="Get Message to your registered Mobile">Get SMS</a>&nbsp;&nbsp;<a data-toggle="modal" href="#mySMSModal" rel="tooltip" title="Send Message to any Mobile" id="sendSMS" class="sendsms btn btn-info" name="sendSMS" value="">Send SMS</a>';
@@ -50,7 +50,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: "POST",
-			url: "userscripts/getpnrstatus.php",
+			url: "../userscripts/getpnrstatus.php",
 			data: "pnrNum="+pnrnum,
 			success: function(html){
 				var newhtml = html+'<br><a id="getSMS" class="getsms btn btn-warning" name="getSMS" rel="tooltip" title="Get Message to your registered Mobile">Get SMS</a>&nbsp;&nbsp;&nbsp;<a data-toggle="modal" href="#mySMSModal" rel="tooltip" title="Send Message to any Mobile" id="sendSMS" class="sendsms btn btn-info" name="sendSMS" value="">Send SMS</a>';
@@ -77,7 +77,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: "POST",
-			url: "userscripts/getpnrstatus.php",
+			url: "../userscripts/getpnrstatus.php",
 			data: "pnrNum="+pnrnum,
 			success: function(html){
 				var newhtml = html+'<br><a id="getSMS" class="getsms btn btn-warning" name="getSMS" rel="tooltip" title="Get Message to your registered Mobile">Get SMS</a>&nbsp;&nbsp;&nbsp;<a data-toggle="modal" href="#mySMSModal" rel="tooltip" title="Send Message to any Mobile" id="sendSMS" class="sendsms btn btn-info" name="sendSMS" value="">Send SMS</a>';
@@ -106,7 +106,7 @@ $(document).ready(function() {
 		  
 		$.ajax({
 			type: "POST",
-			url: "userscripts/sendtextmessage.php",
+			url: "../userscripts/sendtextmessage.php",
 			data: "pnrNum="+pnrnum+"&regMobile=Y" ,
 			success: function(html){
 				if(html=="Success"){
@@ -153,7 +153,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: "POST",
-			url: "userscripts/sendtextmessage.php",
+			url: "../userscripts/sendtextmessage.php",
 			data: "pnrNum="+pnrnum+"&mobileNum="+anymobilenum+"&anyMobile=Y" ,
 			success: function(html){
 				if(html=="Success"){
@@ -205,7 +205,7 @@ $(document).ready(function() {
 		//current.html("<i class=\"icon-refresh icon-spin\"></i> Importing...");
 		$.ajax({
 			type: "POST",
-			url: "userscripts/irctcpnrhistoryimport.php",
+			url: "../userscripts/irctcpnrhistoryimport.php",
 			data: "irctcUsername="+irctcusername+"&irctcPassword="+irctcpassword+"&savePnrHistory=Y" ,
 			success: function(html){
 				var result = html;
@@ -252,7 +252,7 @@ $(document).ready(function() {
 		$('#displaytrainbetweenstations').html("<h5><i class=\"icon-refresh icon-spin\"></i> Retrieving the trains between two stations...</h5>").show();
 		$.ajax({
 			type: "POST",
-			url: "userscripts/searchtrainschedule.php",
+			url: "../userscripts/searchtrainschedule.php",
 			data: "src_stn="+src_stn+"&dest_stn="+dest_stn ,
 			success: function(html){
 				$('#displaytrainbetweenstations').html(html);			

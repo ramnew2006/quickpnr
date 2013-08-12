@@ -1,19 +1,19 @@
 <?php
-include('checkcookie.php');
+include('../checkcookie.php');
 $_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
 
 if(!isset($_SESSION['userName'])){
 	$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
-	header("Location:userlogin.php");
+	header("Location:../user/login.php");
 	exit();
 }
 
-require_once 'database.php';
+require_once '../database.php';
 
 $dbobj = new database();
 $dbobj->dbconnect();
 
-include('header.php');
+include('../header.php');
 ?>
 
  
@@ -97,6 +97,6 @@ Now leave that worrying behind and let us help keep you updated constantly on yo
 
 
 <?php
-include('footer.php');
+include('../footer.php');
 $dbobj->dbdisconnect();
 ?>

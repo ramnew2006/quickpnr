@@ -1,17 +1,17 @@
 <?php
-include('checkcookie.php');
+include('../checkcookie.php');
 
 if(isset($_SESSION['userName'])){
-	header("Location:userprofile.php");
+	header("Location:../user/profile.php");
 	exit();
 }
 
-require_once 'database.php';
+require_once '../database.php';
 
 $dbobj = new database();
 $dbobj->dbconnect();
 
-include('header.php');
+include('../header.php');
 ?>
 
 <?php if($_SESSION['regSuccess']=="Yes"){ ?>
@@ -75,6 +75,6 @@ include('header.php');
 
 
 <?php
-include('footer.php');
+include('../footer.php');
 $dbobj->dbdisconnect();
 ?>

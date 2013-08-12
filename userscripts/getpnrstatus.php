@@ -1,7 +1,7 @@
 <?php
 //session_start();
 set_time_limit(0);
-require_once 'postcurl.php';
+require_once '../userscripts/postcurl.php';
 
 if(isset($_POST['pnrNum'])){
 	$url = "http://www.indianrail.gov.in/cgi_bin/inet_pnrstat_cgi.cgi";

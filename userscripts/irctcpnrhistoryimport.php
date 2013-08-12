@@ -1,8 +1,8 @@
 <?php
 set_time_limit(0);
 session_start();
-require_once 'database.php';
-require_once 'postcurl.php';
+require_once '../database.php';
+require_once '../userscripts/postcurl.php';
 
 if(isset($_POST['savePnrHistory'])){
 	$dbobj = new database();

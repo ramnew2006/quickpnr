@@ -1,8 +1,8 @@
 <?php
-require_once 'database.php';
+require_once '../database.php';
 
 if(isset($_SESSION['user'])){
-	header("Location:index.php");
+	header("Location:../index.php");
 }else{
 ?>
 <!DOCTYPE html>
