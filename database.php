@@ -11,7 +11,7 @@ class database{
 	public function database(){
 		$this->dbhost="localhost";
 		$this->dbuser="root";
-		$this->dbpass="";
+		$this->dbpass="!@#har0man";
 		$this->dbname="quickpnr";
 	}
 	

@@ -1,7 +1,7 @@
 <?php 
 $titlequery=mysql_query("SELECT title FROM pagetitles WHERE url='" . $_SERVER["REQUEST_URI"] . "'");
 $numRows=mysql_num_rows($titlequery);
-if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="../index.php"){
+if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index.php" || $_SERVER["REQUEST_URI"]=="")){
 	header("Location:../user/profile.php");
 }
 ?>
@@ -164,7 +164,7 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="../index.php"){
     <h3 id="myModalLabel">Login to your Account</h3>
   </div>
   <div class="modal-body">
-    <form action="loginaction.php" method="post">
+    <form action="../user/loginaction.php" method="post">
 		<table>
 		<tr>
 			<td>Mobile Number</td>
@@ -190,7 +190,7 @@ if(isset($_SESSION['userName']) && $_SERVER["REQUEST_URI"]=="../index.php"){
     <h3 id="myModalLabel">Register Now!</h3>
   </div>
   <div class="modal-body">
-    <form action="doregister.php" method="post" onsubmit="return(validateForm());">
+    <form action="../doregister.php" method="post" onsubmit="return(validateForm());">
 		<table>
 		<tr>
 			<td>Mobile Number</td>
