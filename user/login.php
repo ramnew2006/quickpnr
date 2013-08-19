@@ -14,9 +14,10 @@ $dbobj->dbconnect();
 include('../header.php');
 ?>
 
-<?php if($_SESSION['regSuccess']=="Yes"){ ?>
+<?php if(isset($_SESSION['regSuccess'])){
+	if($_SESSION['regSuccess']=="Yes"){ ?>
 	<br><br><p style="text-align:center;">Account Successfully Activated</p>
-<?php } ?>
+<?php }} ?>
 <!-- PNR Status
 ================================================== -->
 <section id="userlogin">

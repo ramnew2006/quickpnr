@@ -25,7 +25,7 @@ class postcurl {
 	
 	//Main curl operation
 	private function curlOpt(){
-		set_time_limit(30);
+		set_time_limit(15);
 		$header = array("Content-Type:application/x-www-form-urlencoded",
 					"Host:www.indianrail.gov.in",
 					"Origin:http://www.indianrail.gov.in",

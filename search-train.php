@@ -1,12 +1,12 @@
 <?php
-include('../checkcookie.php');
+include('checkcookie.php');
 
-require_once '../database.php';
+require_once 'database.php';
 
 $dbobj = new database();
 $dbobj->dbconnect();
 
-include('../header.php');
+include('header.php');
 ?>
 
 <script type="text/javascript">
@@ -35,7 +35,7 @@ $(function() {
 	<div class="span4">
 		<table>
 		<tr>
-			<td><input id="sourcestationsearchtrain" name="sourcestationsearchtrain" type="text" placeholder="From">
+			<td><input id="sourcestationsearchtrain" name="sourcestationsearchtrain" class="sourcestation" type="text" placeholder="From">
 			<!--<div id="sourcestationsearchtraindisplay"></div>-->
 			</td>
 		</tr>
@@ -87,6 +87,6 @@ $(function() {
 
 
 <?php
-include('../footer.php');
+include('footer.php');
 $dbobj->dbdisconnect();
 ?>

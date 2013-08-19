@@ -1,12 +1,12 @@
 <?php
-include('../checkcookie.php');
+include('checkcookie.php');
 
 if(isset($_SESSION['userName'])){
-	header("Location:../user/profile.php");
+	header("Location:user/profile.php");
 	exit();
 }
 
-require_once '../database.php';
+require_once 'database.php';
 
 $dbobj = new database();
 $dbobj->dbconnect();
@@ -23,7 +23,7 @@ if(isset($_POST['mobActivation'])){
 				$_SESSION['regSuccess']="Yes";
 				// echo "Successfully Activated" . "<br/>";
 				// echo "<a href=\"/quickpnr/userlogin.php\">Click Here</a>";				
-				header("Location:userlogin.php");
+				header("Location:user/login.php");
 			}else{
 				echo "Sorry! Something is broke!";
 			}
@@ -33,9 +33,9 @@ if(isset($_POST['mobActivation'])){
 	}
 }else{
 	if(isset($_SESSION['registerNum'])){
-		header("Location:../doregister.php");
+		header("Location:doregister.php");
 	}else{
-		header("Location:../index.php");
+		header("Location:index.php");
 	}
 }
 

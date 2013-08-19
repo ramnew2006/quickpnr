@@ -2,7 +2,7 @@
 include('checkcookie.php');
 
 if(isset($_SESSION['userName'])){
-	header("Location:/user/profile.php");
+	header("Location:/user/profile");
 }
 
 require_once 'database.php';

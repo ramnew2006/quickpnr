@@ -21,31 +21,38 @@ include('../header.php');
 ================================================== -->
 <section id="pnrhistory">
   <!-- Headings & Paragraph Copy -->
-<?php
-	echo "<div class=\"page-header\">
-    <h3>PNR History</h3>
+
+	<div class="page-header">
+		<h3>PNR History</h3>
+		
 	</div>
-	<div class=\"row\">";
+	
+	<div class="row" style="margin-left:auto;">
+	<div><a id="activeticketslink" style="font-weight:bold;">Active Tickets</a>&nbsp;&nbsp;&nbsp;<a id="archiveticketslink" style="">Archived Tickets</a></div><br>
+<?php
 	
 	$query = mysql_query("SELECT pn.pnrnum, sl.station_name as source, sl2.station_name as dest, pn.doj 
 			FROM pnrdetails AS pn, stationlist AS sl, stationlist AS sl2 
 			WHERE 
 			pn.src_stn=sl.station_code 
 			AND pn.dest_stn=sl2.station_code 
-			AND pn.archive='N' 
+			AND pn.doj>=CURDATE()
 			AND pn.mobnum=" . $_SESSION['userName']
 			);
-			
-	echo "<table class=\"table table-bordered table-striped table-hover\">";
-	echo "<thead><tr>
+	
+?>
+<div id="pnrhistoryactivetickets">
+	<table class="table table-bordered table-striped table-hover">
+	<thead><tr>
 		<th>#</th>
 		<th>PNR Number</th>
         <th>Source</th>
 		<th>Destination</th>
 		<th>Date of Journey</th>
 		<th></th>
-		</tr></thead>";
-	echo "<tbody>";
+	</tr></thead>
+	<tbody>
+<?php
 	$j=1;
 	while ($row = mysql_fetch_array($query)) {
 		echo "<form method=\"post\" action=\"userprofile.php#pnrstatus\" onsubmit=\"return(pnrtimevalidate());\">";
@@ -68,11 +75,54 @@ include('../header.php');
 		echo "</form>";
 		$j++;
 	}
-	echo "</tbody>";
-	echo "</table>";
-	echo "</div>";
 ?>
+	</tbody>
+	</table>
+</div>
 
+<?php	
+	$query = mysql_query("SELECT pn.pnrnum, sl.station_name as source, sl2.station_name as dest, pn.doj 
+			FROM pnrdetails AS pn, stationlist AS sl, stationlist AS sl2 
+			WHERE 
+			pn.src_stn=sl.station_code 
+			AND pn.dest_stn=sl2.station_code 
+			AND pn.doj<CURDATE()
+			AND pn.mobnum=" . $_SESSION['userName']
+			);
+			
+?>
+<div id="pnrhistoryarchivetickets" style="display:none;">
+	<table class="table table-bordered table-striped table-hover">
+	<thead><tr>
+		<th>#</th>
+		<th>PNR Number</th>
+        <th>Source</th>
+		<th>Destination</th>
+		<th>Date of Journey</th>
+		</tr>
+	</thead>
+	<tbody>
+
+<?php
+	$j=1;
+	while ($row = mysql_fetch_array($query)) {
+		echo "<tr>";
+			echo "<td>" . $j . "</td>";
+			echo "<td>" . $row['pnrnum'] . "</td>";
+			echo "<td>" . $row['source'] . "</td>";
+			echo "<td>" . $row['dest'] . "</td>";
+			$date = date_create($row['doj']);
+			echo "<td>" . date_format($date, 'jS F Y') . "<br/>" . "(" . date_format($date, 'l') . ")" . "</td>";
+		echo "</tr>";
+		$j++;
+	}
+?>
+	</tbody>
+	</table>
+</div>
+
+
+</div>
   
 
 </section>

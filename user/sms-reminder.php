@@ -2,12 +2,6 @@
 include('../checkcookie.php');
 $_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
 
-if(!isset($_SESSION['userName'])){
-	$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
-	header("Location:../user/login.php");
-	exit();
-}
-
 require_once '../database.php';
 
 $dbobj = new database();
@@ -16,85 +10,87 @@ $dbobj->dbconnect();
 include('../header.php');
 ?>
 
- 
 <!-- PNR History
 ================================================== -->
 <section id="smsreminder">
   <!-- Headings & Paragraph Copy 
 -->
-<div class="well" style="line-height:30px;">
- <!-- <h4 style="line-height:30px;text-align:none;"> -->
-Having a busy day? Days before your travel, we know how inconvenient it can be to constantly worry about your ticket status in the back of your mind. <br/><br/>
-Now leave that worrying behind and let us help keep you updated constantly on your status. <br/>Choose your frequency preference below and we will send you SMS dynamically updating you on your PNR status.
-<!--</h4>-->
-</div><br/>
-<div class="page-header">
-    <h3>Choose Frequency</h3>
-  </div>
-	<!--<form>
-	<input type="radio" name="automatedpnrupdatestatus" value="Y">&nbsp;Yes&nbsp;&nbsp;
-	<input type="radio" name="automatedpnrupdatestatus" value="N">&nbsp;No
-	</form>
-	<br/>-->
-	
+
+
+
+<?php
+if(!isset($_SESSION['userName'])){
+?>
+	<div class="well" style="line-height:30px;">
+	<p style="line-height:30px;text-align:none;">
+	Having a busy day? Days before your travel, we know how inconvenient it can be to constantly worry about your ticket status in the back of your mind. <br/><br/>
+	Now leave that worrying behind and let us help keep you updated constantly on your status. <br/>Register Now and get the updates starting today! For Free!
+	</p>
+	</div><br/>
+	<p style="text-align:center;padding-top:1em;">
+		<a data-toggle="modal" href="#myRegisterModal" class="btn btn-primary">Register Now!</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a data-toggle="modal" href="#myLoginModal" class="btn btn-primary">Login</a>
+	</p>
+<?php
+}else{
+?>
+	<div class="well" style="line-height:30px;">
+	<p style="line-height:30px;text-align:none;">
+	Having a busy day? Days before your travel, we know how inconvenient it can be to constantly worry about your ticket status in the back of your mind. <br/><br/>
+	Now leave that worrying behind and let us help keep you updated constantly on your status. <br>Choose your frequency preference below and we will send you SMS dynamically updating you on your PNR status.
+	</p>
+	</div><br/>
+<?php
+	echo "<div class=\"page-header\">
+		<h3>Choose Frequency</h3>
+		</div>";
+	if(isset($_POST['savePref'])){
+		if(isset($_POST['automatedpnrupdatefreq'])){
+			$freq = $_POST['automatedpnrupdatefreq'];
+			$query = mysql_query("UPDATE userlogin SET msgfrequency='" . $freq . "' WHERE mobilenum=" . $_SESSION['userName']);
+			if($query){
+				$output = "Preferences Saved successfully";
+			}else{
+				$output = "There is some problem while saving the preferences!";
+			}
+		}
+	}
+
+	$query=mysql_query("SELECT msgfrequency FROM userlogin WHERE mobilenum=" . $_SESSION['userName']);
+	$freqval = mysql_result($query,0);
+?>  
+  <form method="post" action="sms-reminder.php">
 	<div id="automatedpnrupdatefreq">
 		<div class="row">
 		<div class="span10">
 		<table class="table table-bordered table-striped table-hover" style="width:100%;">
 		<tr>
-		<td><input type="radio" name="automatedpnrupdatefreq" value="1"> A message every other day</td>
-		<td><input type="radio" name="automatedpnrupdatefreq" value="2"> One message every day</td>
-		<td><input type="radio" name="automatedpnrupdatefreq" value="3"> Two messages every day</td>
-		<td><input type="radio" name="automatedpnrupdatefreq" value="4"> Turn Off Reminder Service</td>
+		<td><input type="radio" name="automatedpnrupdatefreq" value="3" <?php if($freqval==3){echo "checked";} ?>> A message every other day</td>
+		<td><input type="radio" name="automatedpnrupdatefreq" value="1" <?php if($freqval==1){echo "checked";} ?>> One message every day</td>
+		<td><input type="radio" name="automatedpnrupdatefreq" value="2" <?php if($freqval==2){echo "checked";} ?>> Two messages every day</td>
+		<td><input type="radio" name="automatedpnrupdatefreq" value="0" <?php if($freqval==0){echo "checked";} ?>> Turn Off Reminder Service</td>
 		</tr>
 		</table>
 		</div>
 		<div class="span2" style="margin-top:3px;">
-		<a class="btn btn-primary">Save Preferences</a>
+		<input type="submit" name="savePref" class="btn btn-primary" value="Save Preferences">
 		</div>
 		</div>
-		<!--<form>
-		<table class="table table-bordered table-striped table-hover" style="margin-left:0px;width:auto;">
-		<thead>
-			<th>Daily - Messages/Day</th>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-				<input type="radio" name="automatedpnrupdatefreq" value="1"> 1&nbsp;
-				<input type="radio" name="automatedpnrupdatefreq" value="2"> 2&nbsp;
-				<input type="radio" name="automatedpnrupdatefreq" value="3"> 3&nbsp;
-				<input type="radio" name="automatedpnrupdatefreq" value="4"> 4
-				</td>
-			</tr>
-		</tbody>
-		</table>
-		</form>-->
-	</div> 
-  
+	</div>
+  </form>	
+<?php } ?>
 
 </section>
 
-<div id="displaypnrstatus"></div>
-
-<!-- Send SMS Modal -->
-<div id="mySMSModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-    <h3 id="myModalLabel">Send PNR Status to Any Mobile</h3>
-  </div>
-  <div class="modal-body">
-    <input type="hidden" name="currentpnr" id="currentpnr" value="">
-	Mobile Number:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+91&nbsp;&nbsp;<input type="text" name="currentmobileNum" id="currentmobileNum">
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <a class="sendsmsanymobile btn btn-info" name="sendSMSanyMobile" id="sendsmsanymobile">Send SMS</a>
-  </div>
+<div>
+<?php
+if(isset($output)){
+	echo $output;
+}
+?>
 </div>
 
 <br><br><br><br>
-
 
 <?php
 include('../footer.php');

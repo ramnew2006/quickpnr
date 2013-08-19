@@ -1,6 +1,6 @@
 <?php
 session_start();
-set_time_limit(0);
+set_time_limit(10);
 require_once '../userscripts/postcurl.php';
 require_once '../userscripts/sendsms_class.php';
 

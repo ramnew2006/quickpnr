@@ -1,7 +1,7 @@
 <?php
-include('../checkcookie.php');
-require_once '../database.php';
-require_once '../userscripts/sendsms_class.php';
+include('checkcookie.php');
+require_once 'database.php';
+require_once 'userscripts/sendsms_class.php';
 
 $dbobj = new database();
 $dbobj->dbconnect();
@@ -48,7 +48,7 @@ if(isset($_POST['userRegister'])){
 		<input type=\"text\" name=\"act_code\" maxlength=\"6\" id=\"actcode\">  <input class=\"btn btn-primary\" type=\"submit\" name=\"mobActivation\" value=\"Validate\">
 		</form>";
 	}else{
-		header("Location:../index.php");
+		header("Location:index.php");
 	}
 }
 
@@ -76,6 +76,6 @@ function validateForm(){
 
 <?php
 $dbobj->dbdisconnect();
-include('../footer.php');
+include('footer.php');
 ?>
 

@@ -43,6 +43,17 @@ if(isset($_POST['savePnrHistory'])){
 			$code = $code['http_code'];
 
 			if($code==200){
+				
+				//save current irctc account into user's profile
+				$query = mysql_query("SELECT username FROM irctcaccounts WHERE mobilenum=".$_SESSION['userName']);
+				$rows = mysql_num_rows($query);
+				if($rows==1){
+					//this account is already saved
+				}elseif($rows==0){
+					//save this account
+					$query=mysql_query("INSERT into irctcaccounts (mobilenum, username, password) VALUES ('" . $_SESSION['userName'] . "', '', '')");
+				}
+				
 				//print_r($postobj->curlheaders());
 				$numRows = $postobj->tableRows();
 				$mobnum = $_SESSION['userName'];

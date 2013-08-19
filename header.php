@@ -1,8 +1,8 @@
 <?php 
 $titlequery=mysql_query("SELECT title FROM pagetitles WHERE url='" . $_SERVER["REQUEST_URI"] . "'");
 $numRows=mysql_num_rows($titlequery);
-if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index.php" || $_SERVER["REQUEST_URI"]=="")){
-	header("Location:../user/profile.php");
+if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER["REQUEST_URI"]=="")){
+	header("Location:../user/profile");
 }
 ?>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index.php" || $_SE
     <title>
 	<?php 
 		if($numRows==1){
-			echo mysql_result($titlequery,0);
+			echo mysql_result($titlequery,0) . " - quickPNR";
 		}else{
 			echo "quickPNR";
 		}
@@ -28,7 +28,7 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index.php" || $_SE
     <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="../css/font-awesome.min.css" rel="stylesheet">
 	<link href="../css/bootswatch.css" rel="stylesheet">
-	<?php //if($_SERVER["REQUEST_URI"]=="/userpnrhistory.php" || $_SERVER["REQUEST_URI"]=="/smsreminder.php") {?>
+	<?php //if($_SERVER["REQUEST_URI"]=="/userpnrhistory" || $_SERVER["REQUEST_URI"]=="/smsreminder") {?>
 	<link href="../css/pnrhistory.css" rel="stylesheet">
 	<?php //} ?>
 	
@@ -88,8 +88,8 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index.php" || $_SE
         </ul>-->	
         <ul class="nav pull-right" id="main-menu-right">
 		<?php if(isset($_SESSION['userName'])){ ?>
-          <li><a href="../user/profile.php" title="My Profile"><i class="icon-user"></i> My Account</a></li>
-          <li><a href="../logout.php" title="Logout"><i class="icon-unlock"></i> Logout</a></li>
+          <li><a href="../user/profile" title="My Profile"><i class="icon-user"></i> My Account</a></li>
+          <li><a href="../logout" title="Logout"><i class="icon-unlock"></i> Logout</a></li>
 		<?php }else{ ?>
 		  <li><a data-toggle="modal" href="#myRegisterModal" title="Register Now!" id="mainRegisterModal">Sign Up</a></li>
           <li><a data-toggle="modal" href="#myLoginModal" title="Login" id="mainLoginModal">Login</a></li>
@@ -110,46 +110,48 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index.php" || $_SE
     <ul class="nav nav-pills">
 	<!-- Extra Navigation Menu when the user is logged in-->
 	<?php if(isset($_SESSION['userName'])){ ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/user/profile.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/user/profile") {?>
 	  <li class="active"><a href="#userprofile">My Account</a></li>
       <?php }else{ ?>
-	  <li><a href="../user/profile.php">My Account</a></li>
-	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/user/sms-reminder.php") {?>
-	  <li class="active"><a href="#smsreminder">SMS Reminder</a></li>
-      <?php }else{ ?>
-	  <li><a href="../user/sms-reminder.php">SMS Reminder</a></li>
-	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/user/pnr-history.php") {?>
-      <li class="active"><a href="#pnrhistory">PNR History</a></li>
-	  <?php }else{ ?>
-	  <li><a href="../user/pnr-history.php">PNR History</a></li>
-	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/user/sync-with-irctc.php") {?>
-	  <li class="active"><a href="#irctcimport">Import From IRCTC</a></li>
-	  <?php }else{ ?>
-	  <li><a href="../user/sync-with-irctc.php">Import From IRCTC</a></li>
+	  <li><a href="../user/profile">My Account</a></li>
 	  <?php } ?>
 	<?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/user/pnr-status.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/user/pnr-status") {?>
       <li class="active"><a href="#pnrstatus">PNR Status</a></li>
 	  <?php }else{ ?>
-	  <li><a href="../user/pnr-status.php">PNR Status</a></li>
+	  <li><a href="../user/pnr-status">PNR Status</a></li>
 	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/search-train.php") {?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/user/sms-reminder") {?>
+	  <li class="active"><a href="#smsreminder">SMS Reminder</a></li>
+      <?php }else{ ?>
+	  <li><a href="../user/sms-reminder">SMS Reminder</a></li>
+	  <?php } ?>
+	<?php if(isset($_SESSION['userName'])){ ?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/user/pnr-history") {?>
+      <li class="active"><a href="#pnrhistory">PNR History</a></li>
+	  <?php }else{ ?>
+	  <li><a href="../user/pnr-history">PNR History</a></li>
+	  <?php } ?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/user/sync-with-irctc") {?>
+	  <li class="active"><a href="#irctcimport">Sync with IRCTC</a></li>
+	  <?php }else{ ?>
+	  <li><a href="../user/sync-with-irctc">Sync with IRCTC</a></li>
+	  <?php } ?>
+	<?php } ?>
+	  <?php if($_SERVER["REQUEST_URI"]=="/search-train") {?>
 	  <li class="active"><a href="#searchtrain">Trains</a></li>
 	  <?php }else{ ?>
-	  <li><a href="../search-train.php">Trains</a></li>
+	  <li><a href="../search-train">Trains</a></li>
 	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/searchtrain.php") {?>
-	  <li class="active"><a href="searchtrain.php">How it Works?</a></li>
+	  <?php if($_SERVER["REQUEST_URI"]=="/how-it-works") {?>
+	  <li class="active"><a href="../how-it-works">How it Works?</a></li>
 	  <?php }else{ ?>
-	  <li><a href="searchtrain.php">How it Works?</a></li>
+	  <li><a href="../how-it-works">How it Works?</a></li>
 	  <?php } ?>
-	  <?php if($_SERVER["REQUEST_URI"]=="/searchtrain.php") {?>
-	  <li class="active"><a href="searchtrain.php">Feedback!</a></li>
+	  <?php if($_SERVER["REQUEST_URI"]=="/feedback") {?>
+	  <li class="active"><a href="../feedback">Feedback!</a></li>
 	  <?php }else{ ?>
-	  <li><a href="searchtrain.php">Feedback!</a></li>
+	  <li><a href="../feedback">Feedback!</a></li>
 	  <?php } ?>
 	</ul>
   </div>
@@ -164,20 +166,20 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index.php" || $_SE
     <h3 id="myModalLabel">Login to your Account</h3>
   </div>
   <div class="modal-body">
-    <form action="../user/loginaction.php" method="post">
+    <form action="../user/loginaction" method="post" onsubmit="return(validateLoginForm());">
 		<table>
 		<tr>
 			<td>Mobile Number</td>
-			<td style="padding-left:1em;"><input id="loginmobileNum" name="mobileNum" type="text" size="10" maxlength="10" placeholder="Mobile number"></td>
+			<td style="padding-left:1em;"><input id="loginmobileNum" name="mobileNum" type="text" maxlength="10" placeholder="Mobile number"></td>
 		</tr>
 		<tr>
 			<td>Password</td>
-			<td style="padding-left:1em;"><input name="userPassword" type="password" placeholder="Password"><br/>
+			<td style="padding-left:1em;"><input id="loginPassword" name="userPassword" type="password" placeholder="Password"><br/></td>
 		</tr>
 		</table>
 	</div>
   <div class="modal-footer">
-    <input class="btn btn-primary" value="Login" name="userLogin" type="submit">
+	<input class="btn btn-primary" value="Login" name="userLogin" type="submit">
 	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     </form>
   </div>
@@ -190,7 +192,7 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index.php" || $_SE
     <h3 id="myModalLabel">Register Now!</h3>
   </div>
   <div class="modal-body">
-    <form action="../doregister.php" method="post" onsubmit="return(validateForm());">
+    <form action="../doregister" method="post" onsubmit="return(validateRegisterForm());">
 		<table>
 		<tr>
 			<td>Mobile Number</td>
@@ -207,13 +209,14 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index.php" || $_SE
 		</table>
 	</div>
   <div class="modal-footer">
-	<input class="btn btn-primary" name="userRegister" value="Register" type="submit">
+    <div id="registrationValidation"></div>
+    <input class="btn btn-primary" name="userRegister" value="Register" type="submit">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     </form>
   </div>
 </div>
 <script type="text/javascript">
-function validateForm(){
+function validateRegisterForm(){
 	var mobilenum = $('#registermobileNum').val();
 	var password = $('#registeruserPassword').val();
 	var confpassword = $('#registeruserConfirmPassword').val();
@@ -226,6 +229,20 @@ function validateForm(){
 		return true;
 	}else{
 		alert("Passwords do not match!");
+		return false;
+	}
+}
+function validateLoginForm(){
+	var mobilenum = $('#loginmobileNum').val();
+	var password = $('#loginPassword').val();
+	if($.isNumeric(mobilenum) && mobilenum.length==10){
+	}else{
+		alert("Enter valid Mobile Number!");
+		return false;
+	}
+	if(password){
+	}else{
+		alert("Enter Password!");
 		return false;
 	}
 }
