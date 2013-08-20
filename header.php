@@ -39,7 +39,7 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER
   </head>
 
   <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
- 
+<?php include_once("analyticstracking.php") ?> 
   <!-- Navbar
     ================================================== -->
  <div class="navbar navbar-fixed-top">
