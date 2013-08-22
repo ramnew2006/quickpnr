@@ -15,12 +15,12 @@ function fill(Value,boxname){
 	$(id).val(Value);
 	$('#'+boxname+'display').hide();
 }
-$(function() {
-	$( "#searchtrainsdatepicker" ).datepicker({
-	  numberOfMonths: 1,
-	  showButtonPanel: true
-	});
-});
+
+function movetoNext(current, nextFieldID) {
+	if (current.value.length >= current.maxLength) {
+	document.getElementById(nextFieldID).focus();
+	}
+}
 </script>	
 
 <!-- PNR Status
@@ -35,6 +35,7 @@ $(function() {
 	<div class="span4">
 		<table>
 		<tr>
+			<td>Source</td>
 			<td><input id="sourcestationsearchtrain" name="sourcestationsearchtrain" class="sourcestation" type="text" placeholder="From">
 			<!--<div id="sourcestationsearchtraindisplay"></div>-->
 			</td>
@@ -43,12 +44,21 @@ $(function() {
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
+			<td>Destination</td>
 			<td><input id="deststationsearchtrain" name="deststationsearchtrain" type="text" placeholder="To">
 			<!--<div id="deststationsearchtraindisplay"></div>-->
 			</td>
 		</tr>
 		<tr>
-			<td><input type="text" id="searchtrainsdatepicker" placeholder="Select Date"></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Date of Journey</td>
+			<td>
+			<input type="text" name="searchtraindateday" id="searchtraindateday" size="4" onkeyup="movetoNext(this, 'searchtraindatemon')" maxlength="2" style="width:30px" placeholder="DD" /> /
+			<input type="text" name="searchtraindatemon" id="searchtraindatemon" size="4" onkeyup="movetoNext(this, 'searchtraindateyear')" maxlength="2" style="width:30px" placeholder="MM" /> /
+			<input type="text" name="searchtraindateyear" id="searchtraindateyear" size="5" maxlength="4" style="width:54px" placeholder="YYYY" />
+			<!--<input type="text" id="searchtrainsdatepicker" placeholder="Select Date">--></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>

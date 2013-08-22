@@ -1,5 +1,5 @@
 <?php 
-$titlequery=mysql_query("SELECT title FROM pagetitles WHERE url='" . $_SERVER["REQUEST_URI"] . "'");
+$titlequery=mysql_query("SELECT * FROM metadata WHERE url='" . $_SERVER["REQUEST_URI"] . "'");
 $numRows=mysql_num_rows($titlequery);
 if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER["REQUEST_URI"]=="")){
 	header("Location:../user/profile");
@@ -9,15 +9,19 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>
-	<?php 
+    <?php 
 		if($numRows==1){
-			echo mysql_result($titlequery,0) . " - quickPNR";
+			$result=mysql_fetch_array($titlequery);
+			echo "<title>" . $result['title'] . " - quickPNR</title>";
+			echo "<meta name=\"description\" content=\"" . $result['description'] . "\">";
+			echo "<meta name=\"keywords\" content=\"" . $result['keywords'] . "\">";
 		}else{
-			echo "quickPNR";
+			echo "<title>quickPNR</title>";
+			echo "<meta name=\"description\" content=\"\">";
+			echo "<meta name=\"keywords\" content=\"\">";
 		}
 	?>
-	</title>
+	
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!--[if lt IE 9]>
@@ -29,7 +33,7 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER
     <link href="../css/font-awesome.min.css" rel="stylesheet">
 	<link href="../css/bootswatch.css" rel="stylesheet">
 	<?php //if($_SERVER["REQUEST_URI"]=="/userpnrhistory" || $_SERVER["REQUEST_URI"]=="/smsreminder") {?>
-	<link href="../css/pnrhistory.css" rel="stylesheet">
+	<!--<link href="../css/pnrhistory.css" rel="stylesheet">-->
 	<?php //} ?>
 	
 	<!--Loading jQuery in the head for good experience-->

@@ -90,6 +90,9 @@ li.ajaxdropdownsearch:hover {
 	border-radius: 0px;
 }
 
+.ui-datepicker {
+	background-color: none;
+}
 @media 
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
