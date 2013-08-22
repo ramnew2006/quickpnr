@@ -59,7 +59,7 @@ if(!isset($_SESSION['userName'])){
 	$query=mysql_query("SELECT msgfrequency FROM userlogin WHERE mobilenum=" . $_SESSION['userName']);
 	$freqval = mysql_result($query,0);
 ?>  
-  <form method="post" action="sms-reminder.php">
+  <form method="post" action="sms-reminder">
 	<div id="automatedpnrupdatefreq">
 		<div class="row">
 		<div class="span10">

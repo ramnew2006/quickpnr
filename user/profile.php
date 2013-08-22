@@ -14,6 +14,24 @@ $dbobj = new database();
 $dbobj->dbconnect();
 
 include('../header.php');
+
+$query = mysql_query("SELECT count(*) 
+			FROM pnrdetails AS pn, stationlist AS sl, stationlist AS sl2 
+			WHERE 
+			pn.src_stn=sl.station_code 
+			AND pn.dest_stn=sl2.station_code 
+			AND pn.doj>=CURDATE()
+			AND pn.mobnum=" . $_SESSION['userName']
+			);
+$numTickets = mysql_result($query,0);
+
+$query=mysql_query("SELECT msgfrequency FROM userlogin WHERE mobilenum=" . $_SESSION['userName']);
+$freqval = mysql_result($query,0);
+if($freqval==0){
+	$smsReminder = "Turned Off";
+}else{
+	$smsReminder = "Turned On";
+}			
 ?>
 
 <!-- Profile Details
@@ -62,22 +80,22 @@ include('../header.php');
 	</div>
 	<table>
 	<tr>
-		<td><a href="smsreminder.php" class="btn btn-warning" style="width:8em">SMS Reminder</a></td>
-		<td style="padding-left:2em;"><a href="">[Change]</a></td>
+		<td><a class="btn btn-warning" style="width:8em">SMS Reminder</a></td>
+		<td style="padding-left:2em;"><?php echo $smsReminder; ?> <a href="../user/sms-reminder">[Change]</a></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<td><a href="smsreminder.php" class="btn btn-primary" style="width:8em">Sync with IRCTC</a></td>
-		<td style="padding-left:2em;"><a href="">[Change]</a></td>
+		<td><a class="btn btn-primary" style="width:8em">Sync with IRCTC</a></td>
+		<td style="padding-left:2em;"><a href="../user/sync-with-irctc">[Change]</a></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<td><a href="smsreminder.php" class="btn btn-success" style="width:8em">Active Tickets</a></td>
-		<td style="padding-left:2em;"><a href="">[Change]</a></td>
+		<td><a class="btn btn-success" style="width:8em">Active Tickets</a></td>
+		<td style="padding-left:2em;"><?php echo $numTickets; ?> Tickets <a href="../user/pnr-history">[Check Status]</a></td>
 	</tr>
 	</table>
 	<br>
