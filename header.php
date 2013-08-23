@@ -23,14 +23,13 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER
 	?>
 	
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
+	
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="../css/font-awesome.min.css" rel="stylesheet">
+	<!--[if IE 7]>
+	<link href="../css/font-awesome-ie7.min.css" rel="stylesheet">
+	<![endif]-->
 	<link href="../css/bootswatch.css" rel="stylesheet">
 	<?php //if($_SERVER["REQUEST_URI"]=="/userpnrhistory" || $_SERVER["REQUEST_URI"]=="/smsreminder") {?>
 	<!--<link href="../css/pnrhistory.css" rel="stylesheet">-->

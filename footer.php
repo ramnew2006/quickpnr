@@ -26,5 +26,5 @@
     <script src="../js/bootswatch.js"></script>
 	<script src="../js/custom.js"></script>
 
-</body>
+	</body>
 </html>
