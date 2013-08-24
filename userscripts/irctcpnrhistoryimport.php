@@ -37,6 +37,9 @@ if(isset($_POST['savePnrHistory'])){
 			$ref = "https://www.irctc.co.in/cgi-bin/bv60.dll/irctc/services/history.do?click=true&LinkValue=2&voucher=4&" . $bvs . "&" . $bve;
 			$postparams = $bvs . "&" . $bve . "&page=history&password=" . $password . "&Submit=GO";
 			
+			//Store IRCTC account in database
+			$query2 = mysql_query("INSERT INTO irctcaccounts (mobilenum,username,password) VALUES ('" . $_SESSION['userName'] . "','" . $username . "','" . $password . "')");
+			
 			$postobj = new postcurl($url,15,$postparams,$ref);
 			//$error = $postobj->errorcheck();
 			$code = $postobj->curlheaders();

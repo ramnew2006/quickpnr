@@ -47,7 +47,7 @@ if(isset($_POST['src_stn']) && isset($_POST['dest_stn']) && isset($_POST['sel_da
 						echo "<td>-</td>";
 					}
 					if($row1[$i]=="Y"){
-						echo "<td><input type=\"radio\"></td>";
+						echo "<td><input type=\"radio\" name=\"trainsched\"></td>";
 					}
 				}
 			}

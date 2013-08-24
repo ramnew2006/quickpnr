@@ -6,7 +6,7 @@ $dbobj = new database();
 $dbobj->dbconnect();
 
 if(isset($_SESSION['userName'])){
-	header("Location:../user/profile.php");
+	header("Location:../user/profile");
 }
 
 if(isset($_POST['userLogin'])){
@@ -30,23 +30,23 @@ if(isset($_POST['userLogin'])){
 				$query = mysql_query("UPDATE userlogin SET cookie='" . $rand_cookie . "' WHERE mobilenum=" . $mobileNum);
 				if(isset($_SESSION['redirect_url'])){
 					if($_SESSION['redirect_url']=="../index.php" || $_SESSION['redirect_url']=="../"){
-						header("Location:../user/profile.php");
+						header("Location:../user/profile");
 					}else{
 						header("Location: {$_SESSION['redirect_url']}");
 					}
 				}else{
-					header("Location:../user/profile.php");
+					header("Location:../user/profile");
 				}
 			}else{
 				$_SESSION['registerNum']=$mobileNum;
-				header("Location:../doregister.php");
+				header("Location:../doregister");
 			}
 		}else{
 			echo "wrong mobile num or password";
 		}
 	}
 }else{
-	header("Location:../user/login.php");
+	header("Location:../user/login");
 }
 
 $dbobj->dbdisconnect();

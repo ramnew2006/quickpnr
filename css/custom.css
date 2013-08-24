@@ -95,6 +95,15 @@ li.ajaxdropdownsearch:hover {
 	background-color: none;
 }
 
+html {
+  width: auto !important;
+  overflow-x: hidden !important;
+}
+body {
+  width: auto !important;
+  overflow-x: hidden !important;
+}
+
 @media 
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
@@ -105,4 +114,7 @@ only screen and (max-width: 760px),
 	.tooltip {
 		display:none;
 	}*/
+	.btn {
+		width:auto;
+	}
 }
