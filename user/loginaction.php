@@ -30,23 +30,48 @@ if(isset($_POST['userLogin'])){
 				$query = mysql_query("UPDATE userlogin SET cookie='" . $rand_cookie . "' WHERE mobilenum=" . $mobileNum);
 				if(isset($_SESSION['redirect_url'])){
 					if($_SESSION['redirect_url']=="../index.php" || $_SESSION['redirect_url']=="../"){
-						header("Location:../user/profile");
+						if($_POST['userLogin']=="loginPage"){
+							header("Location:../user/profile");
+						}
+						if($_POST['userLogin']=="ajaxLogin"){
+							echo "/user/profile";
+						}
 					}else{
-						header("Location: {$_SESSION['redirect_url']}");
+						if($_POST['userLogin']=="loginPage"){
+							header("Location: {$_SESSION['redirect_url']}");
+						}
+						if($_POST['userLogin']=="ajaxLogin"){
+							echo $_SESSION['redirect_url'];
+						}
 					}
 				}else{
-					header("Location:../user/profile");
+					if($_POST['userLogin']=="loginPage"){
+						header("Location:../user/profile");
+					}
+					if($_POST['userLogin']=="ajaxLogin"){
+						echo "/user/profile";
+					}
 				}
 			}else{
 				$_SESSION['registerNum']=$mobileNum;
-				header("Location:../doregister");
+				if($_POST['userLogin']=="loginPage"){
+					header("Location:../doregister");
+				}
+				if($_POST['userLogin']=="ajaxLogin"){
+					echo "/doregister";
+				}
 			}
 		}else{
-			echo "wrong mobile num or password";
+			echo "wrong";
 		}
 	}
 }else{
-	header("Location:../user/login");
+	if($_POST['userLogin']=="loginPage"){
+		header("Location:../user/login");
+	}
+	if($_POST['userLogin']=="ajaxLogin"){
+		echo "/user/login";
+	}
 }
 
 $dbobj->dbdisconnect();

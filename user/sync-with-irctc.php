@@ -36,7 +36,7 @@ include('../header.php');
 			while($row = mysql_fetch_array($query)){
 				echo "<tr>";
 					echo "<td>" . $row['username'] . "</td>";
-					echo "<td style=\"padding-left:2em;\"><a class=\"btn btn-primary\">Sync</a></td>";
+					echo "<td style=\"padding-left:2em;\"><a class=\"btn btn-primary\">Sync Now</a></td>";
 					echo "<td style=\"padding-left:0.5em;\"><a class=\"btn btn-danger\">Remove</a></td>";
 				echo "</tr>";
 				$i++;
@@ -52,7 +52,7 @@ include('../header.php');
 		<table>
 		<tr>
 			<td>IRCTC User Name</td>
-			<td><input type="text" name="irctcusername" id="irctcusername" placeholder="IRCTC User Name"></td>
+			<td style="padding-left:2em;"><input type="text" name="irctcusername" id="irctcusername" placeholder="IRCTC User Name"></td>
 		</tr>
 		<tr>
 			<!--<td>&nbsp;</td>-->
@@ -60,7 +60,7 @@ include('../header.php');
 		</tr>
 		<tr>
 			<td>IRCTC Password</td>
-			<td><input type="password" name="irctcpassword" id="irctcpassword" placeholder="IRCTC Password"></td>
+			<td style="padding-left:2em;"><input type="password" name="irctcpassword" id="irctcpassword" placeholder="IRCTC Password"></td>
 		</tr>
 		<tr>
 			<!--<td>&nbsp;</td>-->

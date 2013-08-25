@@ -18,6 +18,10 @@ include('../header.php');
 	if($_SESSION['regSuccess']=="Yes"){ ?>
 	<br><br><p style="text-align:center;">Account Successfully Activated</p>
 <?php }} ?>
+<?php if(isset($_SESSION['changePassword'])){
+	if($_SESSION['changePassword']=="Y"){ ?>
+	<br><br><p style="text-align:center;">Password Changed Successfully</p>
+<?php }} ?>
 <!-- PNR Status
 ================================================== -->
 <section id="userlogin">
@@ -47,7 +51,7 @@ include('../header.php');
 	</tr>
 	<tr>
 		<!--<td></td>-->
-		<input type="hidden" name="userLogin" value="Y">
+		<input type="hidden" name="userLogin" value="loginPage">
 		<td><input type="submit" class="btn btn-primary" value="Login"></td>
 	</tr>
 	</table>

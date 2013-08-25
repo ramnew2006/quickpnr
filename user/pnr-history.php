@@ -32,7 +32,7 @@ include('../header.php');
 <?php
 	
 	$query = mysql_query("SELECT pn.pnrnum, sl.station_name as source, sl2.station_name as dest, pn.doj 
-			FROM pnrdetails AS pn, stationlist AS sl, stationlist AS sl2 
+			FROM userpnrdetails AS pn, stationlist AS sl, stationlist AS sl2 
 			WHERE 
 			pn.src_stn=sl.station_code 
 			AND pn.dest_stn=sl2.station_code 
@@ -82,7 +82,7 @@ include('../header.php');
 
 <?php	
 	$query = mysql_query("SELECT pn.pnrnum, sl.station_name as source, sl2.station_name as dest, pn.doj 
-			FROM pnrdetails AS pn, stationlist AS sl, stationlist AS sl2 
+			FROM userpnrdetails AS pn, stationlist AS sl, stationlist AS sl2 
 			WHERE 
 			pn.src_stn=sl.station_code 
 			AND pn.dest_stn=sl2.station_code 

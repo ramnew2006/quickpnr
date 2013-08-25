@@ -95,14 +95,6 @@ li.ajaxdropdownsearch:hover {
 	background-color: none;
 }
 
-html {
-  width: auto !important;
-  overflow-x: hidden !important;
-}
-body {
-  width: auto !important;
-  overflow-x: hidden !important;
-}
 
 @media 
 only screen and (max-width: 760px),
@@ -116,5 +108,13 @@ only screen and (max-width: 760px),
 	}*/
 	.btn {
 		width:auto;
+	}
+	.navbar-fixed-top{
+		position:fixed;
+		padding-left:15px;
+		padding-right:15px;
+	}
+	body{
+		margin-top:30px;
 	}
 }

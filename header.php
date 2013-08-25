@@ -169,7 +169,7 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER
     <h3 id="myModalLabel">Login to your Account</h3>
   </div>
   <div class="modal-body">
-    <form action="../user/loginaction" method="post" onsubmit="return(validateLoginForm());">
+    <!--<form action="../user/loginaction" method="post" onsubmit="return(validateLoginForm());">-->
 		<table>
 		<tr>
 			<td>Mobile Number</td>
@@ -182,9 +182,10 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER
 		</table>
 	</div>
   <div class="modal-footer">
-	<input class="btn btn-primary" value="Login" name="userLogin" type="submit">
+	<a data-dismiss="modal" data-toggle="modal" href="#myForgotPassModal" style="float:left;">Forgot Password?</a>
+	<input class="btn btn-primary" value="Login" name="userLogin" id="userLogin" type="submit">
 	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    </form>
+    <!--</form>-->
   </div>
 </div>
 
@@ -218,6 +219,29 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER
     </form>
   </div>
 </div>
+
+<!-- Forgot Password Modal -->
+<div id="myForgotPassModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+    <h3 id="myModalLabel">Forgot Password?</h3>
+  </div>
+  <div class="modal-body">
+    <form action="../forgot-password" method="post" onsubmit="return(validateForgotPassForm());">
+		<table>
+		<tr>
+			<td>Mobile Number</td>
+			<td style="padding-left:1em;"><input id="forgotPassmobileNum" name="mobileNum" type="text" size="10" maxlength="10" placeholder="Mobile number"></td>
+		</tr>
+		</table>
+	</div>
+  <div class="modal-footer">
+    <div id="registrationValidation"></div>
+    <input class="btn btn-primary" name="forgotPassword" value="Submit" type="submit">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </form>
+  </div>
+</div>
 <script type="text/javascript">
 function validateRegisterForm(){
 	var mobilenum = $('#registermobileNum').val();
@@ -246,6 +270,14 @@ function validateLoginForm(){
 	if(password){
 	}else{
 		alert("Enter Password!");
+		return false;
+	}
+}
+function validateForgotPassForm(){
+	var mobilenum = $('#forgotPassmobileNum').val();
+	if($.isNumeric(mobilenum) && mobilenum.length==10){
+	}else{
+		alert("Enter valid Mobile Number!");
 		return false;
 	}
 }

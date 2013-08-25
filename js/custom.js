@@ -249,8 +249,22 @@ $(document).ready(function() {
 	$('#searchtraindateday').pressEnter(function(){ trainBetweenStations();});
 	$('#searchtraindatemon').pressEnter(function(){ trainBetweenStations();});
 	$('#searchtraindateyear').pressEnter(function(){ trainBetweenStations();});
-	$('#sourcestationsearchtrain').pressEnter(function(){ trainBetweenStations();});
-	$('#deststationsearchtrain').pressEnter(function(){ trainBetweenStations();});
+	var tempsrcstn1 = $('#sourcestationsearchtrain').val();
+	$('#sourcestationsearchtrain').pressEnter(function(){ 
+		var tempsrcstn2 = $('#sourcestationsearchtrain').val();
+		if(tempsrcstn1==tempsrcstn2){
+			trainBetweenStations();
+		}
+		tempsrcstn1 = $('#sourcestationsearchtrain').val();
+	});
+	var tempdeststn1 = $('#deststationsearchtrain').val();
+	$('#deststationsearchtrain').pressEnter(function(){ 
+		var tempdeststn2 = $('#deststationsearchtrain').val();
+		if(tempdeststn1==tempdeststn2){
+			trainBetweenStations();
+		}
+		tempdeststn1 = $('#deststationsearchtrain').val();
+	});
 	
 	//Focus on text box on page landing
 	$('input[name="irctcusername"]').focus(); //IRCTC Import Page
@@ -279,6 +293,44 @@ $(document).ready(function() {
 		$('#pnrhistoryarchivetickets').show();
 	});
 	
+	//Login
+	function ajaxLogin(){
+		var mobileNum = $('#loginmobileNum').val();
+		var userPassword = $('#loginPassword').val();
+		if(mobileNum){
+			if(userPassword){
+			}else{
+				alert("Enter Password");
+				return false;
+			}
+		}else{
+			alert("Enter Username");
+			return false;
+		}
+		$.ajax({
+			type: "POST",
+			url: "../user/loginaction.php",
+			data: "mobileNum="+mobileNum+"&userPassword="+userPassword+"&userLogin=ajaxLogin",
+			success: function(html){
+				var result = html
+				if(result=="wrong"){
+					alert("Wrong Username or Password");
+				}else{
+					window.location.href=html;
+				}
+			}
+		});
+	}
+	$('#userLogin').click(function(){ ajaxLogin(); });
+	var tempmobNum = $('#loginmobileNum').val();
+	$('#loginmobileNum').pressEnter(function(){ 
+		var tempmobNum2 = $('#loginmobileNum').val();	
+		if(tempmobNum==tempmobNum2){
+			ajaxLogin();
+		}
+		tempmobNum=$('#loginmobileNum').val();
+	});
+	$('#loginPassword').pressEnter(function(){ ajaxLogin(); });
 	
 });
 

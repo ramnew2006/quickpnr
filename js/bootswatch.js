@@ -26,16 +26,40 @@ $('.navbar a, .subnav a').smoothScroll();
 
 		function processScroll() {
 			var i, scrollTop = $win.scrollTop();
-
-			if (scrollTop >= subnavTop && !isFixed) {
-				isFixed = 1;
-				$nav.addClass('subnav-fixed');
-				$body.css('margin-top', marginTop + subnavHeight + 'px');
-			} else if (scrollTop <= subnavTop && isFixed) {
-				isFixed = 0;
-				$nav.removeClass('subnav-fixed');
-				$body.css('margin-top', marginTop + 'px');
+			
+			if ($(window).width()<=760){ //If opened from a mobile device fix the body top margin
+				$body.css('margin-top', '65px');
+			}else{
+				if (scrollTop >= subnavTop && !isFixed) {
+					isFixed = 1;
+					$nav.addClass('subnav-fixed');
+					$body.css('margin-top', marginTop + subnavHeight + 'px');
+					//$body.css('margin-top', '100px');
+				} else if (scrollTop <= subnavTop && isFixed) {
+					isFixed = 0;
+					$nav.removeClass('subnav-fixed');
+					$body.css('margin-top', marginTop + 'px');
+					//$body.css('margin-top', '30px');
+				}
 			}
+			
+			$(window).resize(function() {
+				if ($(window).width()<=760){
+					$body.css('margin-top', '65px');
+				}else{
+					if (scrollTop >= subnavTop && !isFixed) {
+						isFixed = 1;
+						$nav.addClass('subnav-fixed');
+						$body.css('margin-top', marginTop + subnavHeight + 'px');
+						//$body.css('margin-top', '100px');
+					} else if (scrollTop <= subnavTop && isFixed) {
+						isFixed = 0;
+						$nav.removeClass('subnav-fixed');
+						$body.css('margin-top', marginTop + 'px');
+						//$body.css('margin-top', '30px');
+					}
+				}
+			});
 		}
 
 	});
