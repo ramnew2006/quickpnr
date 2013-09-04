@@ -13,6 +13,7 @@ class sendSMS {
 	private $finalsmspostparams;
 	
 	function __construct($toMob, $message) {
+		//set_time_limit(30);
 		$this->username = "8122636821";
 		$this->password = "man0har";
 		$this->toMob = $toMob;

@@ -31,7 +31,7 @@ class postcurl {
 					"Origin:http://www.indianrail.gov.in",
 					"Proxy-Connection:keep-alive",
 					"Referer:".$this->referrer,
-					"User-Agent:Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1");
+					"User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.62 Safari/537.36");
 		$this->ch = curl_init();        //Initialize the cURL handler
 		curl_setopt($this->ch, CURLOPT_RETURNTRANSFER,true);    //To give the file fetched back to the handler
 		curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION,false);   //To stop redirects
@@ -39,7 +39,7 @@ class postcurl {
 		curl_setopt($this->ch, CURLOPT_USERAGENT, $this->userAgent);    //To mask the robot as a browser
 		curl_setopt($this->ch, CURLOPT_POSTFIELDS,$this->postParams); //Post fields
 		curl_setopt($this->ch, CURLOPT_POST,true); //To send the POST parameters
-		//curl_setopt($this->ch, CURLOPT_REFERER, 'http://www.indianrail.gov.in/train_Schedule.html');
+		//curl_setopt($this->ch, CURLOPT_REFERER, 'http://www.indianrail.gov.in/seat_Avail.html');
 		curl_setopt($this->ch, CURLOPT_HTTPHEADER, $header);
 		curl_setopt($this->ch, CURLINFO_HEADER_OUT, true);
 		curl_setopt($this->ch, CURLOPT_URL,$this->postUrl);   //To set the page to be fetched

@@ -15,6 +15,10 @@ $(document).ready(function() {
 	
 	//User Profile - PNR History- GET PNR Status
 	$(".getpnrstatus").click(function() {
+		if(currentTimeCheck()){
+		}else{
+			return false;
+		}
 		var current = $(this);
 		var pnrnum = $(this).attr('name');
 		pnrnum = pnrnum.match(/[0-9]+/);
@@ -33,6 +37,10 @@ $(document).ready(function() {
 	
 	//Get PNR Status on PNR Status page
 	function getPnrStatus(){
+		if(currentTimeCheck()){
+		}else{
+			return false;
+		}
 		var current = $(this);
 		var pnrnum = $('#displaypnrstatusinput').val();
 		if($.isNumeric(pnrnum)){
@@ -63,6 +71,10 @@ $(document).ready(function() {
 
 	//User Profile - Sending SMS to Registered Mobile
 	$(".getsms").click(function() {
+		if(currentTimeCheck()){
+		}else{
+			return false;
+		}
 		var current = $(this);
 		//check whether the button is enabled or not
 		if(current.attr('class')=="sendsms btn btn-inverse disabled"){
@@ -106,6 +118,10 @@ $(document).ready(function() {
 	});
 	
 	$(".sendsmsanymobile").click(function() {
+		if(currentTimeCheck()){
+		}else{
+			return false;
+		}
 		var current = $(this);
 		//If the Send SMS button is disabled stop the action
 		if(current.attr('class')=="sendsmsanymobile btn btn-info disabled"){
@@ -188,16 +204,27 @@ $(document).ready(function() {
 				var result = html;
 				if(result=="Success"){
 					$('#displayirctcimportstatus').html("<h5>Successfully Imported your booking history!</h5>");
+					$(function() {
+						setTimeout(function() {
+							location.reload();
+						}, 2000);
+					});
 					//current.html("<i class=\"icon-thumbs-up\"></i> Success");
 				} else if(result=="Failure"){
-					$('#displayirctcimportstatus').html("<h5>Your Booking history has already been imported and upto date!!</h5>");
+					$('#displayirctcimportstatus').html("<h5>Your Booking history has been imported and upto date!!</h5>");
+					$(function() {
+						setTimeout(function() {
+							location.reload();
+						}, 2000);
+					});
 					//current.html("<i class=\"icon-warning-sign\"></i> Enough");
-				} else {
+				} else if(result=="WrongPassword"){
+					$('#displayirctcimportstatus').html("<h5>Wrong Username or Password! Please Try Again!</h5>");
+				}else {
 					$('#displayirctcimportstatus').html("<h5>There is a problem connecting to IRCTC Servers. Please try again!</h5>");
 					//current.html("<i class=\"icon-warning-sign\"></i> Try Again");
 				} 			
 			}
-			
 		});
 	}
 	$("#importirctchistory").click(function() { syncIrctc(); });
@@ -216,6 +243,7 @@ $(document).ready(function() {
 	//Trains between two stations - Finding results
 	function trainBetweenStations(){
 		//Search Train check whether date is greater than or equal to today
+		$('#displaytrainfareavailability').hide();
 		var givenDay = $('#searchtraindateday').val();
 		var givenMon = $('#searchtraindatemon').val();
 		var givenYear = $('#searchtraindateyear').val();
@@ -241,6 +269,7 @@ $(document).ready(function() {
 			url: "../userscripts/searchtrainschedule.php",
 			data: "src_stn="+src_stn+"&dest_stn="+dest_stn+"&sel_date="+givenDateOrg ,
 			success: function(html){
+				$('#displaytrainfareavailability').hide();
 				$('#displaytrainbetweenstations').html(html);			
 			}
 		});
@@ -281,14 +310,14 @@ $(document).ready(function() {
 	
 	//PNR History - Active Archive tickets toggle
 	$('#activeticketslink').click(function(){
-		$('#activeticketslink').attr('style','font-weight:bold;');
-		$('#archiveticketslink').attr('style','font-weight:normal;');
+		$('#activeticketslink').attr('style','font-weight:bold;cursor:pointer;');
+		$('#archiveticketslink').attr('style','font-weight:normal;cursor:pointer;');
 		$('#pnrhistoryactivetickets').show();
 		$('#pnrhistoryarchivetickets').hide();
 	});
 	$('#archiveticketslink').click(function(){
-		$('#activeticketslink').attr('style','font-weight:normal;');
-		$('#archiveticketslink').attr('style','font-weight:bold;');
+		$('#activeticketslink').attr('style','font-weight:normal;cursor:pointer;');
+		$('#archiveticketslink').attr('style','font-weight:bold;cursor:pointer;');
 		$('#pnrhistoryactivetickets').hide();
 		$('#pnrhistoryarchivetickets').show();
 	});
@@ -331,6 +360,122 @@ $(document).ready(function() {
 		tempmobNum=$('#loginmobileNum').val();
 	});
 	$('#loginPassword').pressEnter(function(){ ajaxLogin(); });
+	
+	//Blurring mobile num change and password change alerts
+	$(function() {
+		setTimeout(function() {
+			$("#changePasswordAlert").hide('blind', {}, 500);
+			$("#changeMobileAlert").hide('blind', {}, 500);
+		}, 5000);
+	});
+	
+	//Check for Current time between 1130 PM and 1230 AM
+	function currentTimeCheck(){
+		var currentTime = new Date();
+		currentTimeHour = currentTime.getHours();
+		currentTimeMin = currentTime.getMinutes();
+		if(currentTimeHour==0){
+			if(currentTimeMin<=30){
+				alert("Indian Railways Servers are down between 11.30 PM and 12.30 AM!");
+				return false;
+			}
+		}
+		if(currentTimeHour==23){
+			if(currentTimeMin>=30){
+				alert("Indian Railways Servers are down between 11.30 PM and 12.30 AM!");
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//Sync with IRCTC - small sync now button
+	function syncIrctcButton(irctcusername){
+		
+		$('#displayirctcimportbtnstatus').html("<h5><i class=\"icon-refresh icon-spin\"></i> Syncing PNR History of your IRCTC account...</h5>");
+		//current.html("<i class=\"icon-refresh icon-spin\"></i> Importing...");
+		$.ajax({
+			type: "POST",
+			url: "../userscripts/irctcpnrhistoryimport.php",
+			data: "irctcUsername="+irctcusername+"&savePnrHistoryButton=Y" ,
+			success: function(html){
+				var result = html;
+				if(result=="Success"){
+					$('#displayirctcimportbtnstatus').html("<h5>Successfully Synced your booking history!</h5>");
+					$(function() {
+						setTimeout(function() {
+							location.reload();
+						}, 2000);
+					});
+					//current.html("<i class=\"icon-thumbs-up\"></i> Success");
+				} else if(result=="Failure"){
+					$('#displayirctcimportbtnstatus').html("<h5>Your Booking history has been synced and upto date!!</h5>");
+					$(function() {
+						setTimeout(function() {
+							location.reload();
+						}, 2000);
+					});
+					//current.html("<i class=\"icon-warning-sign\"></i> Enough");
+				} else if(result=="WrongPassword"){
+					$('#displayirctcimportbtnstatus').html("<h5>Wrong Username or Password! Please Try Again!</h5>");
+				}else {
+					$('#displayirctcimportbtnstatus').html("<h5>There is a problem connecting to IRCTC Servers. Please try again!</h5>");
+					//current.html("<i class=\"icon-warning-sign\"></i> Try Again");
+				} 			
+			}
+		});
+	}
+	
+	$('.irctcsyncnowbtn').click(function(){ 
+		var current = $(this);
+		var irctcusername = current.attr('name');
+		syncIrctcButton(irctcusername); 
+	});
+	
+	$('.irctcremovebtn').click(function(){
+		var current = $(this);
+		var irctcusername = current.attr('name');
+		$('#displayirctcimportbtnstatus').html("<h5><i class=\"icon-refresh icon-spin\"></i> Removing your IRCTC account...</h5>");
+		$.ajax({
+			type: "POST",
+			url: "../userscripts/irctc-remove-account.php",
+			data: "irctcUsername="+irctcusername+"&removeAccount=Y" ,
+			success: function(html){
+				var result = html;
+				if(result=="Success"){
+					$(function() {
+						setTimeout(function() {
+							location.reload();
+						}, 1000);
+					});
+					//current.html("<i class=\"icon-thumbs-up\"></i> Success");
+				} else {
+					$('#displayirctcimportbtnstatus').html("<h5>There is a problem removing your account. Please try again!</h5>");
+					//current.html("<i class=\"icon-warning-sign\"></i> Try Again");
+				} 			
+			}
+		});
+		
+	});
+
+	//search train auto tab
+	$('#searchtraindateday, #searchtraindatemon, #searchtraindateyear').autotab_magic().autotab_filter('numeric');
+	
+	$(document).on("click",'.trains2stations',function(){
+		var current = $(this);
+		var travelDetails = current.val();
+		$('#displaytrainfareavailability').show();
+		$('#displaytrainfareavailability').html("<h5><i class=\"icon-refresh icon-spin\"></i> Getting Fare and Availability Details...</h5>");
+		$.ajax({
+			type: "POST",
+			url: "../userscripts/fare-availability.php",
+			data: "travelDetails="+travelDetails+"&getSeatAvailability=Y" ,
+			success: function(html){
+				var result = html;
+				$('#displaytrainfareavailability').html(result);
+			}
+		});
+	});
 	
 });
 

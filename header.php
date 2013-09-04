@@ -31,9 +31,9 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER
 	<link href="../css/font-awesome-ie7.min.css" rel="stylesheet">
 	<![endif]-->
 	<link href="../css/bootswatch.css" rel="stylesheet">
-	<?php //if($_SERVER["REQUEST_URI"]=="/userpnrhistory" || $_SERVER["REQUEST_URI"]=="/smsreminder") {?>
-	<!--<link href="../css/pnrhistory.css" rel="stylesheet">-->
-	<?php //} ?>
+	<?php if($_SERVER["REQUEST_URI"]!="/search-train") {?>
+	<link href="../css/pnrhistory.css" rel="stylesheet">
+	<?php } ?>
 	
 	<!--Loading jQuery in the head for good experience-->
 	<link href="../css/jquery-ui.css" rel="stylesheet">
@@ -214,6 +214,7 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER
 	</div>
   <div class="modal-footer">
     <div id="registrationValidation"></div>
+	<span style="float:left;"><input type="checkbox"> I Agree to the <a href="#">Terms & Conditions</a></span>
     <input class="btn btn-primary" name="userRegister" value="Register" type="submit">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     </form>

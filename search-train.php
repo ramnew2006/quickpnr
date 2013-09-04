@@ -9,20 +9,6 @@ $dbobj->dbconnect();
 include('header.php');
 ?>
 
-<script type="text/javascript">
-function fill(Value,boxname){
-	var id = "#"+boxname;
-	$(id).val(Value);
-	$('#'+boxname+'display').hide();
-}
-
-function movetoNext(current, nextFieldID) {
-	if (current.value.length >= current.maxLength) {
-	document.getElementById(nextFieldID).focus();
-	}
-}
-</script>	
-
 <!-- PNR Status
 ================================================== -->
 <section id="searchtrain">
@@ -55,8 +41,8 @@ function movetoNext(current, nextFieldID) {
 		<tr>
 			<td>Date of Journey</td>
 			<td>
-			<input type="text" name="searchtraindateday" id="searchtraindateday" size="4" onkeyup="movetoNext(this, 'searchtraindatemon')" maxlength="2" style="width:30px" placeholder="DD" /> /
-			<input type="text" name="searchtraindatemon" id="searchtraindatemon" size="4" onkeyup="movetoNext(this, 'searchtraindateyear')" maxlength="2" style="width:30px" placeholder="MM" /> /
+			<input type="text" name="searchtraindateday" id="searchtraindateday" size="4" maxlength="2" style="width:30px" placeholder="DD" /> /
+			<input type="text" name="searchtraindatemon" id="searchtraindatemon" size="4" maxlength="2" style="width:30px" placeholder="MM" /> /
 			<input type="text" name="searchtraindateyear" id="searchtraindateyear" size="5" maxlength="4" style="width:54px" placeholder="YYYY" />
 			<!--<input type="text" id="searchtrainsdatepicker" placeholder="Select Date">--></td>
 		</tr>
@@ -65,13 +51,21 @@ function movetoNext(current, nextFieldID) {
 		</tr>
 		<tr>
 			<td><a id="getsearchtrains" class="btn btn-primary">Search Trains</a></td>
+			<td style="padding-left:1em;"><a id="getsearchtrains" class="btn">Reset</a></td>
 		</tr>
 		</table>
 		<br><br>
 		
 	</div>
 	<div class="span7">
-		<div id="displaytrainbetweenstations" style="display: none;"></div>
+		<div id="displaytrainfareavailability" style="display: none;"></div>
+		<div id="displaytrainbetweenstations">
+			<div class="well">
+			<h5 style="font-weight:bold;padding-bottom:5px;"><i class="icon-check-sign"></i> Find Trains Between Two Stations</h5>
+			<h5 style="font-weight:bold;padding-bottom:5px;"><i class="icon-check-sign"></i> Check Seat Availability</h5>
+			<h5 style="font-weight:bold;padding-bottom:5px;"><i class="icon-check-sign"></i> Check Ticket Fare</h5>
+			</div>
+		</div>
 	</div>
 	</div>
 

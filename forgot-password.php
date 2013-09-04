@@ -3,6 +3,11 @@ include('checkcookie.php');
 require_once 'database.php';
 require_once 'userscripts/sendsms_class.php';
 
+if(isset($_SESSION['userName'])){
+	header("Location:user/profile.php");
+	exit();
+}
+
 $dbobj = new database();
 $dbobj->dbconnect();
 

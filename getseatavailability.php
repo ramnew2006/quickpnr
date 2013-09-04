@@ -1,9 +1,9 @@
 <?php
-require_once 'postcurl.php';
+require_once 'userscripts/postcurl.php';
 
 $train_num = "12077";//"";
-$day_travel = "08";//"";
-$month_travel = "7";//"";
+$day_travel = "09";//"";
+$month_travel = "9";//"";
 $source_stn = "mas";
 $dest_stn = "nlr";
 $class_travel = "2S";
@@ -17,11 +17,14 @@ $postobj = new postcurl($url,$tablenum,$postparams);
 $i=0;
 $lengthCol = $postobj->tableColumns($i);
 
+echo "<table>";
+echo "<tr>";
 for($j=0;$j<$lengthCol;$j++){
-	echo $postobj->getInfoFromRow($i,$j);
+	echo "<td>" . $postobj->getInfoFromRow($i,$j) . "</td>";
 	if($j%4==3){
-		echo "<br/>";
+		echo "</tr><tr>";
 	}
 }
+echo "</table>";
 
 ?>

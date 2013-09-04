@@ -1,6 +1,7 @@
 <?php
 include('../checkcookie.php');
 $_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
+session_write_close();
 
 require_once '../database.php';
 
@@ -20,12 +21,14 @@ include('../header.php');
 	<div class="row" style="margin-left:auto;">
 		<table>
 			<tr>
-				<td><input id="displaypnrstatusinput" name="displaypnrstatusinput" type="text" placeholder="Enter PNR Number" maxlength="10"></td>
+				<td><input id="displaypnrstatusinput" name="displaypnrstatusinput" type="text" placeholder="Enter PNR Number" maxlength="10" autocomplete="on"></td>
 				<td style="padding-left:2em;">
 					<a id="displaypnrstatusinputgetstatus" class="btn btn-primary">Get Status</a>
+					&nbsp;&nbsp;<a class="btn"> Reset </a>
 				</td>
 			</tr>
-		</table><br><br>
+		</table>
+		<br><br>
 		<div id="displaypnrstatus"></div>
 	</div>
 

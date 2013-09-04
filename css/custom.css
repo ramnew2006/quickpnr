@@ -21,10 +21,12 @@ section {
 	padding-top: 55px;
 	margin-top: 0px;
 }
+
 .table-bordered th, .table-bordered td {
 	text-align: center;
 	font-size: 14px;
 }
+
 .btn {
 	margin-bottom: 10.5px;
 }
@@ -35,6 +37,10 @@ input {
 	width: 170px;
 }
 input[type="radio"] {
+	margin-bottom:3px;
+	margin-top: 0px;
+}
+input[type="checkbox"] {
 	margin-bottom:3px;
 	margin-top: 0px;
 }
@@ -106,9 +112,9 @@ only screen and (max-width: 760px),
 	.tooltip {
 		display:none;
 	}*/
-	.btn {
+	/*.btn {
 		width:auto;
-	}
+	}*/
 	.navbar-fixed-top{
 		position:fixed;
 		padding-left:15px;
@@ -117,4 +123,8 @@ only screen and (max-width: 760px),
 	body{
 		margin-top:30px;
 	}
+	.smsremindertable td {
+		text-align:left;
+	}
+
 }

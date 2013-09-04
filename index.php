@@ -48,6 +48,13 @@ include('header.php');
 	</div>
  </div>
 </div>
+<div style="margin:left:0;text-align:center;margin-top:30px;">
+	<button class="btn btn-inverse" style="width:154px;"><i class="icon-ok"></i> PNR Status</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="btn btn-warning" style="width:154px;"><i class="icon-ok"></i> SMS Reminder</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="btn btn-primary" style="width:154px;"><i class="icon-ok"></i> Sync with IRCTC</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="btn btn-success" style="width:154px;"><i class="icon-ok"></i> Train Enquiry</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="btn btn-info" style="width:154px;"><i class="icon-ok"></i> Send SMS</button>&nbsp;&nbsp;&nbsp;&nbsp;
+ </div>
 </section>
 
 <!-- Send SMS Modal -->
@@ -66,7 +73,7 @@ include('header.php');
   </div>
 </div>
 
-<br><br><br><br>
+<br><br>
 
 
 <?php

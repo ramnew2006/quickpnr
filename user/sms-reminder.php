@@ -33,6 +33,8 @@ if(!isset($_SESSION['userName'])){
 	</p>
 <?php
 }else{
+	$quickpnrmob = $_SESSION['userName'];
+	session_write_close();
 ?>
 	<div class="well" style="line-height:30px;">
 	<p style="line-height:30px;text-align:none;">
@@ -47,7 +49,7 @@ if(!isset($_SESSION['userName'])){
 	if(isset($_POST['savePref'])){
 		if(isset($_POST['automatedpnrupdatefreq'])){
 			$freq = $_POST['automatedpnrupdatefreq'];
-			$query = mysql_query("UPDATE userlogin SET msgfrequency='" . $freq . "' WHERE mobilenum=" . $_SESSION['userName']);
+			$query = mysql_query("UPDATE userlogin SET msgfrequency='" . $freq . "' WHERE mobilenum=" . $quickpnrmob);
 			if($query){
 				$output = "Preferences Saved successfully";
 			}else{
@@ -56,14 +58,14 @@ if(!isset($_SESSION['userName'])){
 		}
 	}
 
-	$query=mysql_query("SELECT msgfrequency FROM userlogin WHERE mobilenum=" . $_SESSION['userName']);
+	$query=mysql_query("SELECT msgfrequency FROM userlogin WHERE mobilenum=" . $quickpnrmob);
 	$freqval = mysql_result($query,0);
 ?>  
   <form method="post" action="sms-reminder">
 	<div id="automatedpnrupdatefreq">
 		<div class="row">
 		<div class="span10">
-		<table class="table table-bordered table-striped table-hover" style="width:100%;">
+		<table class="table table-bordered table-striped table-hover smsremindertable" style="width:100%;">
 		<tr>
 		<td><input type="radio" name="automatedpnrupdatefreq" value="3" <?php if($freqval==3){echo "checked";} ?>> A message every other day</td>
 		<td><input type="radio" name="automatedpnrupdatefreq" value="1" <?php if($freqval==1){echo "checked";} ?>> One message every day</td>

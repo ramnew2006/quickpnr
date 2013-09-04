@@ -26,7 +26,7 @@ if(isset($_POST['userLogin'])){
 				$rand_cookie = hash('sha512', $mobileNum . $dbobj->returnSalt() . time() . rand());
 				setcookie('usercookie',$rand_cookie,time()+(86400*7),"/");
 				setcookie('userName',$_SESSION['userName'],time()+(86400*7),"/");
-				$_SESSION['userCookie']=$rand_cookie . $mobileNum;
+				$_SESSION['userCookieSession']=$rand_cookie . $mobileNum;
 				$query = mysql_query("UPDATE userlogin SET cookie='" . $rand_cookie . "' WHERE mobilenum=" . $mobileNum);
 				if(isset($_SESSION['redirect_url'])){
 					if($_SESSION['redirect_url']=="../index.php" || $_SESSION['redirect_url']=="../"){

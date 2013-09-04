@@ -8,6 +8,10 @@ if(!isset($_SESSION['userName'])){
 	exit();
 }
 
+//quickpnr - mobilenum
+$quickmobnum = $_SESSION['userName'];
+session_write_close();
+
 require_once '../database.php';
 
 $dbobj = new database();
@@ -28,7 +32,7 @@ include('../header.php');
 	</div>
 	
 	<div class="row" style="margin-left:auto;">
-	<div><a id="activeticketslink" style="font-weight:bold;">Active Tickets</a>&nbsp;&nbsp;&nbsp;<a id="archiveticketslink" style="">Archived Tickets</a></div><br>
+	<div><a id="activeticketslink" style="font-weight:bold;cursor:pointer;">Active Tickets</a>&nbsp;&nbsp;&nbsp;<a id="archiveticketslink" style="cursor:pointer;">Archived Tickets</a></div><br>
 <?php
 	
 	$query = mysql_query("SELECT pn.pnrnum, sl.station_name as source, sl2.station_name as dest, pn.doj 
@@ -37,7 +41,7 @@ include('../header.php');
 			pn.src_stn=sl.station_code 
 			AND pn.dest_stn=sl2.station_code 
 			AND pn.doj>=CURDATE()
-			AND pn.mobnum=" . $_SESSION['userName']
+			AND pn.mobnum=" . $quickmobnum
 			);
 	
 ?>
@@ -87,7 +91,7 @@ include('../header.php');
 			pn.src_stn=sl.station_code 
 			AND pn.dest_stn=sl2.station_code 
 			AND pn.doj<CURDATE()
-			AND pn.mobnum=" . $_SESSION['userName']
+			AND pn.mobnum=" . $quickmobnum
 			);
 			
 ?>
@@ -120,6 +124,17 @@ include('../header.php');
 	</tbody>
 	</table>
 </div>
+
+<?php
+$query = mysql_query("SELECT pn.pnrnum, sl.station_name as source, sl2.station_name as dest, pn.doj 
+			FROM userpnrdetails AS pn, stationlist AS sl, stationlist AS sl2 
+			WHERE 
+			pn.src_stn=sl.station_code 
+			AND pn.dest_stn=sl2.station_code 
+			AND pn.doj>=CURDATE()
+			AND pn.mobnum=" . $quickmobnum
+			);
+?>
 
 
 </div>
