@@ -27,11 +27,12 @@ include('header.php');
 			<tr>
 				<td><input id="displaypnrstatusinput" name="displaypnrstatusinput" type="text" placeholder="Enter PNR Number" maxlength="10" autocomplete="on"></td>
 				<td style="padding-left:2em;">
-					<a id="displaypnrstatusinputgetstatus" class="btn btn-primary">Get Status</a>
+					<a id="displaypnrstatusinputgetstatus" class="btn btn-primary">Get Status</a>&nbsp;&nbsp;
+					<a id="displaypnrstatusinputgetstatus" class="btn">Reset</a>
 				</td>
 			</tr>
 		</table><br><br>
-		<div id="displaypnrstatus"></div>
+		
 	</div>
  </div>
  <div class="span6">
@@ -48,13 +49,7 @@ include('header.php');
 	</div>
  </div>
 </div>
-<div style="margin:left:0;text-align:center;margin-top:30px;">
-	<button class="btn btn-inverse" style="width:154px;"><i class="icon-ok"></i> PNR Status</button>&nbsp;&nbsp;&nbsp;&nbsp;
-	<button class="btn btn-warning" style="width:154px;"><i class="icon-ok"></i> SMS Reminder</button>&nbsp;&nbsp;&nbsp;&nbsp;
-	<button class="btn btn-primary" style="width:154px;"><i class="icon-ok"></i> Sync with IRCTC</button>&nbsp;&nbsp;&nbsp;&nbsp;
-	<button class="btn btn-success" style="width:154px;"><i class="icon-ok"></i> Train Enquiry</button>&nbsp;&nbsp;&nbsp;&nbsp;
-	<button class="btn btn-info" style="width:154px;"><i class="icon-ok"></i> Send SMS</button>&nbsp;&nbsp;&nbsp;&nbsp;
- </div>
+<div id="displaypnrstatus" style="text-align:center"></div>
 </section>
 
 <!-- Send SMS Modal -->
@@ -74,6 +69,14 @@ include('header.php');
 </div>
 
 <br><br>
+
+<div style="margin:left:0;text-align:center;margin-top:30px;">
+	<button class="btn btn-inverse" style="width:154px;"><i class="icon-ok"></i> PNR Status</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="btn btn-warning" style="width:154px;"><i class="icon-ok"></i> SMS Reminder</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="btn btn-primary" style="width:154px;"><i class="icon-ok"></i> Sync with IRCTC</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="btn btn-success" style="width:154px;"><i class="icon-ok"></i> Train Enquiry</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="btn btn-info" style="width:154px;"><i class="icon-ok"></i> Send SMS</button>&nbsp;&nbsp;&nbsp;&nbsp;
+ </div>
 
 
 <?php
