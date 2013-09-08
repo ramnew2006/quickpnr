@@ -27,12 +27,14 @@ if(isset($_POST['regMobile'])){
 
 		for($i=1;$i<$lengthRow-1;$i++){
 			$lengthCol = $postobj->tableColumns($i);
-			for($j=0;$j<$lengthCol;$j++){
+			for($j=0;$j<3;$j++){
 				$temp = $postobj->getInfoFromRow($i,$j);
 				$temp = preg_replace('/Passenger /','P',$temp);
-				if($j==1 && ($i!=$lengthRow-2)){
-					$temp = preg_replace('/ /','',$temp);
+				//if($j==1 && ($i!=$lengthRow-2)){
+				if($i!=$lengthRow-2){	
+					$temp = preg_replace('/\s+/','',$temp);
 				}
+				//}
 				if(($i==$lengthRow-2)&&($j==0)){
 					
 				}else{
@@ -81,7 +83,7 @@ if(isset($_POST['anyMobile'])){
 
 		for($i=1;$i<$lengthRow-1;$i++){
 			$lengthCol = $postobj->tableColumns($i);
-			for($j=0;$j<$lengthCol;$j++){
+			for($j=0;$j<3;$j++){
 				$temp = $postobj->getInfoFromRow($i,$j);
 				$temp = preg_replace('/Passenger /','P',$temp);
 				if($j==1 && ($i!=$lengthRow-2)){

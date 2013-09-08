@@ -28,7 +28,7 @@ $('.navbar a, .subnav a').smoothScroll();
 			var i, scrollTop = $win.scrollTop();
 			
 			if ($(window).width()<=760){ //If opened from a mobile device fix the body top margin
-				$body.css('margin-top', '65px');
+				$body.css('margin-top', '85px');
 			}else{
 				if (scrollTop >= subnavTop && !isFixed) {
 					isFixed = 1;
@@ -45,7 +45,7 @@ $('.navbar a, .subnav a').smoothScroll();
 			
 			$(window).resize(function() {
 				if ($(window).width()<=760){
-					$body.css('margin-top', '65px');
+					$body.css('margin-top', '85px');
 				}else{
 					if (scrollTop >= subnavTop && !isFixed) {
 						isFixed = 1;

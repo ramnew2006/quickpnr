@@ -94,23 +94,24 @@ if($query){
 	<div class="page-header">
     <h3>Active Services</h3>
 	</div>
-	<table class="table table-bordered table-striped table-hover">
+	<!--<table class="table table-bordered table-striped table-hover">-->
+	<table>
 	<thead></thead>
 	<tbody>
-		<tr>
-			<td><!--<a class="btn" style="width:8em">SMS Reminder</a>--><h5><b>SMS Reminder</b></h5></td>
-			<td><h5><?php echo $smsReminder; ?></h5></td>
-			<td><a class="btn btn-primary" href="../user/sms-reminder">Change</a></td>
+		<tr style="margin-bottom:1em;">
+			<td><a class="btn btn-warning" href="../user/sms-reminder" style="width:8em">SMS Reminder</a><!--<h5><b>SMS Reminder</b></h5>--></td>
+			<td style="padding-left:2em"><h5><?php echo $smsReminder; ?></h5></td>
+			<!-- <td><a class="btn btn-primary" >Change</a></td> -->
 		</tr>
 		<tr>
-			<td><h5><b>Sync with IRCTC<!--<a class="btn btn-primary" style="width:8em">Sync with IRCTC</a>--></b></h5></td>
-			<td><h5><?php echo $irctcaccounts; ?></h5></td>
-			<td><a href="../user/sync-with-irctc" class="btn btn-primary">Change</a></td>
+			<td><!--<h5><b>Sync with IRCTC</b></h5>--><a class="btn btn-primary" href="../user/sync-with-irctc" style="width:8em">Sync with IRCTC</a></td>
+			<td style="padding-left:2em"><h5><?php echo $irctcaccounts; ?></h5></td>
+			<!-- <td><a  class="btn btn-primary">Change</a></td> -->
 		</tr>
 		<tr>
-			<td><h5><b>Active Tickets<!--<a class="btn btn-success" style="width:8em">Active Tickets</a>--></b></h5></td>
-			<td><h5><?php echo $numTickets; ?> Tickets</h5></td>
-			<td><a href="../user/pnr-history" class="btn btn-primary">Change</a></td>
+			<td><!--<h5><b>Active Tickets--></b></h5><a class="btn btn-success" href="../user/pnr-history" style="width:8em">Active Tickets</a></td>
+			<td style="padding-left:2em"><h5><?php echo $numTickets; ?> Tickets</h5></td>
+			<!-- <td><a  class="btn btn-primary">Change</a></td> -->
 		</tr>
 	</tbody>
 	</table>

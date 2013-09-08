@@ -61,9 +61,9 @@ include('header.php');
 		<div id="displaytrainfareavailability" style="display: none;"></div>
 		<div id="displaytrainbetweenstations">
 			<div class="well">
-			<h5 style="font-weight:bold;padding-bottom:5px;"><i class="icon-check-sign"></i> Find Trains Between Two Stations</h5>
-			<h5 style="font-weight:bold;padding-bottom:5px;"><i class="icon-check-sign"></i> Check Seat Availability</h5>
-			<h5 style="font-weight:bold;padding-bottom:5px;"><i class="icon-check-sign"></i> Check Ticket Fare</h5>
+			<h5 class="displaytrainbetweenstationswell"><i class="icon-check-sign"></i> Find Trains Between Two Stations</h5>
+			<h5 class="displaytrainbetweenstationswell"><i class="icon-check-sign"></i> Check Seat Availability</h5>
+			<h5 class="displaytrainbetweenstationswell"><i class="icon-check-sign"></i> Check Ticket Fare</h5>
 			</div>
 		</div>
 	</div>

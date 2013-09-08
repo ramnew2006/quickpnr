@@ -85,8 +85,12 @@ class postcurl {
 	//return the number of columns in a give row
 	public function tableColumns($i){
 		if($this->responseRows){
-			$this->tableColumns = $this->responseRows->item($i)->getElementsByTagName('td')->length;
-			return $this->tableColumns;
+			if($this->responseRows->item($i)){
+				$this->tableColumns = $this->responseRows->item($i)->getElementsByTagName('td')->length;
+				return $this->tableColumns;
+			}else{
+				return false;
+			}
 		}else{
 			return false;
 		}

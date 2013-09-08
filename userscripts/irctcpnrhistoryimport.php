@@ -18,7 +18,7 @@ if(isset($_POST['savePnrHistory'])){
 		$username = $_POST['irctcUsername'];
 		$password = $_POST['irctcPassword'];
 		
-		importIrctc($mobnum,$username,$password);
+		importIrctc($mobnum,$username,$password,$dbobj);
 	}else{
 		header("Location:/user/login");
 		$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
@@ -32,10 +32,10 @@ if(isset($_POST['savePnrHistory'])){
 		//IRCTC Login Parameters
 		$username = $_POST['irctcUsername'];
 		
-		$query=mysql_query("SELECT password FROM irctcaccounts WHERE mobilenum=" . $mobnum . " AND username='" . $username . "'");
+		$query=mysql_query("SELECT AES_DECRYPT(password,'" . $dbobj->returnSalt() . "') FROM irctcaccounts WHERE mobilenum=" . $mobnum . " AND username='" . $username . "'");
 		$password = mysql_result($query,0);
 		
-		importIrctc($mobnum,$username,$password);
+		importIrctc($mobnum,$username,$password,$dbobj);
 	}else{
 		header("Location:/quickpnr/userlogin.php");
 		$_SESSION['redirect_url']=$_SERVER["REQUEST_URI"];
@@ -46,7 +46,7 @@ if(isset($_POST['savePnrHistory'])){
 
 $dbobj->dbdisconnect();
 
-function importIrctc($mobnum,$username,$password){
+function importIrctc($mobnum,$username,$password,$dbobj){
 	$url = "https://www.irctc.co.in/cgi-bin/bv60.dll/irctc/services/login.do";
 	$postparams = "screen=home&userName=" . $username . "&password=" . $password;
 	
@@ -54,7 +54,17 @@ function importIrctc($mobnum,$username,$password){
 	$postobj = new postcurl($url,1,$postparams);
 	$code = $postobj->curlheaders();
 	$code = $code['http_code'];
+
+	//Store IRCTC account in database at initial Go
+	$query = mysql_query("SELECT * FROM irctcaccounts WHERE mobilenum=". $mobnum ." AND username='". $username . "'");
 	
+	if(mysql_num_rows($query)==1){
+		$query2 = mysql_query("UPDATE irctcaccounts SET updatetime=CURRENT_TIMESTAMP(), password=AES_ENCRYPT('" . $password ."', '" . $dbobj->returnSalt() . "') WHERE mobilenum=" . $mobnum . " AND username='" . $username . "'");
+	}
+	if(mysql_num_rows($query)==0){
+		$query2 = mysql_query("INSERT INTO irctcaccounts (mobilenum,username,password) VALUES ('" . $mobnum . "','" . $username . "',AES_ENCRYPT('" . $password . "','" . $dbobj->returnSalt() . "'))");
+	}
+
 	if($code==302){
 		$url = $postobj->curlheaders();
 		$url = $url['redirect_url'];
@@ -78,14 +88,14 @@ function importIrctc($mobnum,$username,$password){
 
 		if($code==200){
 			
-			//Store IRCTC account in database
+			//Store IRCTC account in database after username and password are validated
 			$query = mysql_query("SELECT * FROM irctcaccounts WHERE mobilenum=". $mobnum ." AND username='". $username . "'");
 			
 			if(mysql_num_rows($query)==1){
-				$query2 = mysql_query("UPDATE irctcaccounts SET updatetime=CURRENT_TIMESTAMP(), password='" . $password ."' WHERE mobilenum=" . $mobnum . " AND username='" . $username . "'");
+				$query2 = mysql_query("UPDATE irctcaccounts SET updatetime=CURRENT_TIMESTAMP(), password=AES_ENCRYPT('" . $password ."', '" . $dbobj->returnSalt() . "') WHERE mobilenum=" . $mobnum . " AND username='" . $username . "'");
 			}
 			if(mysql_num_rows($query)==0){
-				$query2 = mysql_query("INSERT INTO irctcaccounts (mobilenum,username,password) VALUES ('" . $mobnum . "','" . $username . "','" . $password . "')");
+				$query2 = mysql_query("INSERT INTO irctcaccounts (mobilenum,username,password) VALUES ('" . $mobnum . "','" . $username . "',AES_ENCRYPT('" . $password . "','" . $dbobj->returnSalt() . "'))");
 			}
 		
 			//print_r($postobj->curlheaders());

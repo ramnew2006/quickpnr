@@ -37,7 +37,7 @@ if(isset($_POST['pnrNum'])){
 			}
 			
 			echo "<h5>Train Details</h5>";
-			echo "<table class=\"table table-bordered table-striped table-hover\" style=\"margin-left:0;\">";
+			echo "<table class=\"table table-bordered table-striped table-hover\">";
 			for($i=0;$i<$trainlengthRow;$i++){
 				if($i==1){
 					echo "<thead>";
@@ -70,7 +70,7 @@ if(isset($_POST['pnrNum'])){
 			echo "</table>";
 		}
 		echo "<h5>PNR Status</h5>";
-		echo "<table class=\"table table-bordered table-striped table-hover\" style=\"margin-left:0;\">";
+		echo "<table class=\"table table-bordered table-striped table-hover\">";
 		for($i=0;$i<$lengthRow-1;$i++){
 			if($i==0){
 				echo "<thead>";
