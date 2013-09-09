@@ -72,6 +72,11 @@ $(document).ready(function() {
 
 	//PNR History - Sending SMS to Registered Mobile
 	$(".getsms").click(function() {
+		if(checkLinkedAccount()){
+		}else{
+			window.location.href = "../user/profile";
+			return false;
+		}
 		if(currentTimeCheck()){
 		}else{
 			return false;
@@ -121,6 +126,11 @@ $(document).ready(function() {
 	$('.sendsms').click(function(){ $('#currentmobileNum').focus(); });
 
 	function sendsmsAnyMobile(current){
+		if(checkLinkedAccount()){
+		}else{
+			window.location.href = "../user/profile";
+			return false;
+		}
 		if(currentTimeCheck()){
 		}else{
 			return false;
@@ -487,6 +497,53 @@ $(document).ready(function() {
 		});
 	});
 
+	//Linking 160by2 Account
+	function onesixVA(){
+		if($('#onesixVA').attr('class')=="btn btn-inverse disabled"){
+			return false;
+		}
+		var onesixU = $('#onesixU').val();
+		var onesixP = $('#onesixP').val();
+		if(onesixU){
+			if(onesixP){
+			}else{
+				alert("Enter Password");
+				return false;
+			}
+		}else{
+			alert("Enter Username");
+			return false;
+		}
+		$('#onesixVA').html("<i class=\"icon-refresh icon-spin\"></i> Verifying..");
+		$.ajax({
+			type: "POST",
+			url: "../userscripts/smsaccount-verify.php",
+			data: "onesixU="+onesixU+"&onesixP="+onesixP ,
+			success: function(html){
+				if(html=="Success"){
+					$('#onesixVA').html("<i class=\"icon-ok\"></i> Verified");
+					$('#onesixVA').attr('class','btn btn-inverse disabled');
+				}
+				if(html=="Failure"){
+					alert("Wrong Username or Password! Please check and try again!");
+					$('#onesixVA').html("Verify & Add");
+				}
+			}
+		});
+	}
+	$('#onesixVA').click(function(){ onesixVA(); });
+	$('#onesixU').pressEnter(function(){ onesixVA(); });
+	$('#onesixP').pressEnter(function(){ onesixVA(); });
+
+	function checkLinkedAccount(){
+		var linkedsmsAccount = $('#linkedsmsaccount').val();
+		if(linkedsmsAccount==100){
+			return true;
+		}else{
+			alert("You do not have a Free SMS Account linked to your profile! Please Link an account and try again!")
+			return false;
+		}
+	}
 });
 
 //Disabling tooltip on smaller screens

@@ -137,6 +137,11 @@ li.ajaxdropdownsearch:hover {
 	padding-bottom:5px;
 }
 
+#myOnesixtybyTwoModal{
+	left:40%;
+	width:850px;
+}
+
 @media 
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {

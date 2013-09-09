@@ -28,13 +28,17 @@ if(isset($_POST['userRegister'])){
 				</form>";
 				$_SESSION['registerNum'] = $mobileNum;
 				$message = "Activation Code for quickPNR: " . $act_code;
-				$smsobj = new sendSMS($mobileNum,$message);
+				$smsobj = new sendSMS("8122636821","man0har",$mobileNum,$message);
 				//echo "User Successfully Registered";
 			}else{
 				echo "something is wrong";
 			}
 		}else{
-			echo "You are already Registered";
+			include('header.php');
+			echo "<section id=\"alreadyregistered\">
+					<div class=\"page-header\">
+					<h3>You are already Registered! Please <a data-toggle=\"modal\" href=\"#myLoginModal\">Login</a> to proceed!</h3>
+					</div>";
 		}
 	}
 }else{
@@ -48,7 +52,7 @@ if(isset($_POST['userRegister'])){
 		<input type=\"text\" name=\"act_code\" maxlength=\"6\" id=\"actcode\">  <input class=\"btn btn-primary\" type=\"submit\" name=\"mobActivation\" value=\"Validate\">
 		</form>";
 	}else{
-		header("Location:index.php");
+		header("Location:/");
 	}
 }
 

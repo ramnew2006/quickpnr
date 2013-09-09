@@ -3,6 +3,10 @@ session_start();
 set_time_limit(10);
 require_once '../userscripts/postcurl.php';
 require_once '../userscripts/sendsms_class.php';
+require_once '../database.php';
+
+$dbobj = new database();
+$dbobj->dbconnect();
 
 //Send SMS to Registered Mobile Number
 if(isset($_POST['regMobile'])){
@@ -49,7 +53,11 @@ if(isset($_POST['regMobile'])){
 		
 		//echo $message;
 		if($lengthRow>0){
-			$smsobj = new sendSMS($quickpnrmob,$message);
+			$query=mysql_query("SELECT username, AES_DECRYPT(password,'" . $dbobj->returnSalt() . "') FROM onesixtybytwo WHERE mobilenum=". $quickpnrmob);
+			$result = mysql_fetch_array($query);
+			$username = $result[0];
+			$password = $result[1];
+			$smsobj = new sendSMS($username, $password, $quickpnrmob,$message);
 			if($smsobj){
 				//return true;
 				echo "Success";
@@ -65,6 +73,7 @@ if(isset($_POST['regMobile'])){
 
 //Send SMS to Any Mobile Number
 if(isset($_POST['anyMobile'])){
+	$quickpnrmob = $_POST['mobileNum'];
 	$url = "http://www.indianrail.gov.in/cgi_bin/inet_pnrstat_cgi.cgi";
 	$tablenum = 25;
 	$postparams = "lccp_pnrno1=" . $_POST['pnrNum'] . "&submit=Wait+For+PNR+Enquiry%21";
@@ -103,7 +112,11 @@ if(isset($_POST['anyMobile'])){
 		
 		//echo $message;
 		if($lengthRow>0){
-			$smsobj = new sendSMS($_POST['mobileNum'],$message);
+			$query=mysql_query("SELECT username, AES_DECRYPT(password,'" . $dbobj->returnSalt() . "') FROM onesixtybytwo WHERE mobilenum=". $quickpnrmob);
+			$result = mysql_fetch_array($query);
+			$username = $result[0];
+			$password = $result[1];
+			$smsobj = new sendSMS($username, $password, $quickpnrmob,$message);
 			if($smsobj){
 				//return true;
 				echo "Success";
@@ -116,4 +129,6 @@ if(isset($_POST['anyMobile'])){
 		echo "There is a problem with Indian Railway Servers!!";
 	}
 }
+
+$dbobj->dbdisconnect();
 ?>

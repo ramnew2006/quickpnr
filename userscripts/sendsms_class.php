@@ -12,10 +12,10 @@ class sendSMS {
 	private $tempfile;
 	private $finalsmspostparams;
 	
-	function __construct($toMob, $message) {
+	function __construct($username, $password, $toMob, $message) {
 		//set_time_limit(30);
-		$this->username = "8122636821";
-		$this->password = "man0har";
+		$this->username = $username; //"8122636821";
+		$this->password = $password; //"man0har";
 		$this->toMob = $toMob;
 		$this->message = $message;
 		$this->tempfile = time() . mt_rand();

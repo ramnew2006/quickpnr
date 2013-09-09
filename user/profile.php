@@ -55,7 +55,7 @@ if($query){
 	<table>
 	<tr>
 		<td><h5><b>Mobile Number</b></h5></td>
-		<td style="padding-left:2em;"><h5><div id="profilemob"><?php echo $quickpnrmob; ?>&nbsp;&nbsp;<a id="changeprofilemob">[Change]</a></div>
+		<td style="padding-left:2em;"><h5><div id="profilemob"><?php echo $quickpnrmob; ?>&nbsp;&nbsp;<a id="changeprofilemob" style="cursor:pointer;">[Change]</a></div>
 			<div id="changeMobileAlert"><?php
 				if(isset($_SESSION['changeMobNumDone'])){
 					echo "  <br/>Mobile Number Changed Successfully!";
@@ -69,7 +69,7 @@ if($query){
 	<tr>
 		<td><h5><b>Password</b></h5></td>
 		<td style="padding-left:2em;"><h5>
-			<div id="profilepwd">XXXXXXX&nbsp;&nbsp;<a id="changeprofilepwd">[Change]</a></div>
+			<div id="profilepwd">XXXXXXX&nbsp;&nbsp;<a id="changeprofilepwd" style="cursor:pointer;">[Change]</a></div>
 			<div id="changePasswordAlert"><?php 
 				if(isset($_POST['saveprofilepwd'])){
 					$password = $_POST['inputprofilepwd'];
@@ -87,41 +87,78 @@ if($query){
 			<div id="formprofilepwd" style="display: none;"><form method="post" action="../user/profile"><input type="password" id="inputprofilepwd" name="inputprofilepwd" type="text">&nbsp;&nbsp;<input name="saveprofilepwd" id="saveprofilepwd" type="submit" class="btn btn-primary" value="Save">&nbsp;&nbsp;<a id="cancelprofilepwd" class="btn">Cancel</a></form></div>
 		</h5></td>
 	</tr>
-	</table>
+	<tr>
+		<td><h5><b>SMS Reminder</b></h5></td>
+		<td style="padding-left:2em"><h5><?php echo $smsReminder; ?> <a href="../user/sms-reminder">[Change]</a></h5></td>
+	</tr>
+	<tr>
+		<td><h5><b>Sync with IRCTC</b></h5></td>
+		<td style="padding-left:2em"><h5><?php echo $irctcaccounts; ?></h5></td>
+		<!-- <td><a  class="btn btn-primary">Change</a></td> -->
+	</tr>
+	<tr>
+		<td><h5><b>Active Tickets</b></h5></td>
+		<td style="padding-left:2em"><h5><?php echo $numTickets; ?> Tickets</h5></td>
+		<!-- <td><a  class="btn btn-primary">Change</a></td> -->
+	</tr>
+  </table>
 	<br>
+	
   </div>
   <div class="span6">
-	<div class="page-header">
-    <h3>Active Services</h3>
+  	<div class="page-header">
+    <h3>Link Free SMS Account</h3>
 	</div>
-	<!--<table class="table table-bordered table-striped table-hover">-->
+	<?php
+		$query = mysql_query("SELECT count(*) FROM onesixtybytwo WHERE mobilenum=".$quickpnrmob);
+		$result = mysql_result($query, 0);
+		if($result==1){
+	?>
+		<h5>Account Linked!</h5>
+	<?php }else{ ?>
+	<div class="well" style="line-height:35px;">Link your 160by2 Account and get FREE SMS Reminders.
+			<h5 class="displaytrainbetweenstationswell"><i class="icon-check-sign"></i> It's Absolutely Free! Fully Personalized</h5>
+			<h5 class="displaytrainbetweenstationswell"><i class="icon-check-sign"></i> No more worries thinking about being spammed!</h5>
+			<h5 class="displaytrainbetweenstationswell"><i class="icon-check-sign"></i> Industry Standard Encryption to link your account!</h5>
+	</div>
 	<table>
-	<thead></thead>
-	<tbody>
-		<tr style="margin-bottom:1em;">
-			<td><a class="btn btn-warning" href="../user/sms-reminder" style="width:8em">SMS Reminder</a><!--<h5><b>SMS Reminder</b></h5>--></td>
-			<td style="padding-left:2em"><h5><?php echo $smsReminder; ?></h5></td>
-			<!-- <td><a class="btn btn-primary" >Change</a></td> -->
+		<tr>
+			<td>160by2 Username</td>
+			<td style="padding-left:2em"><input id="onesixU" type="text" maxlength="10" placeholder="Enter 160by2 Username"></td>
 		</tr>
 		<tr>
-			<td><!--<h5><b>Sync with IRCTC</b></h5>--><a class="btn btn-primary" href="../user/sync-with-irctc" style="width:8em">Sync with IRCTC</a></td>
-			<td style="padding-left:2em"><h5><?php echo $irctcaccounts; ?></h5></td>
-			<!-- <td><a  class="btn btn-primary">Change</a></td> -->
+			<td>160by2 Password</td>
+			<td style="padding-left:2em"><input id="onesixP" type="password" placeholder="Enter 160by2 Password"></td>
 		</tr>
 		<tr>
-			<td><!--<h5><b>Active Tickets--></b></h5><a class="btn btn-success" href="../user/pnr-history" style="width:8em">Active Tickets</a></td>
-			<td style="padding-left:2em"><h5><?php echo $numTickets; ?> Tickets</h5></td>
-			<!-- <td><a  class="btn btn-primary">Change</a></td> -->
+			<td></td>
+			<td style="padding-left:2em"><a id="onesixVA" class="btn btn-primary">Verify & Add</a></td>
 		</tr>
-	</tbody>
 	</table>
+	<br>
+	No 160by2 Account? <a data-toggle="modal" href="#myOnesixtybyTwoModal" id="mainLoginModal">Register Here</a> for a Free Account and Link it!
+	<?php } ?>
 	<br>
 	<br>
   </div>
   </div>
 </section> 
 
-<br><br><br><br>
+<!-- 160by2 Registration Modal -->
+<div id="myOnesixtybyTwoModal" class="modal hide fade onesixtybytwo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+    <h3 id="myModalLabel">160by2 Registration</h3>
+  </div>
+  <div class="modal-body" style="height:510px;max-height:510px;">
+    <!-- <iframe src="http://www.160by2.com/UserReg#container" style="overflow:hidden;width:790px;height:500px;"></iframe> -->
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<br><br><br>
 
 
 <?php

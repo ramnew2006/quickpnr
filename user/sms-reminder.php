@@ -38,8 +38,10 @@ if(!isset($_SESSION['userName'])){
 ?>
 	<div class="well" style="line-height:30px;">
 	<p style="line-height:30px;text-align:none;">
-	Having a busy day? Days before your travel, we know how inconvenient it can be to constantly worry about your ticket status in the back of your mind. <br/><br/>
-	Now leave that worrying behind and let us help keep you updated constantly on your status. <br>Choose your frequency preference below and we will send you SMS dynamically updating you on your PNR status.
+	Before selecting your frequency, please make sure there is a linked 160by2 account in your profile to get FREE SMS Reminders. <br>Not Linked? <a href="../user/profile">Link your 160by2 Account Now!</a>
+	<h5 class="displaytrainbetweenstationswell"><i class="icon-check-sign"></i> It's Absolutely Free! Fully Personalized for your account!</h5>
+	<h5 class="displaytrainbetweenstationswell"><i class="icon-check-sign"></i> No more worries thinking about being spammed from an unknown party!</h5>
+	<h5 class="displaytrainbetweenstationswell"><i class="icon-check-sign"></i> Industry Standard Encryption to link your account!</h5>
 	</p>
 	</div><br/>
 <?php

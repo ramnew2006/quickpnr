@@ -55,7 +55,7 @@ if(isset($_POST['saveprofilemob'])){
 				
 				<?php
 				$message = "One Time Password for quickPNR: " . $act_code;
-				$smsobj = new sendSMS($mobileNumNew,$message);
+				$smsobj = new sendSMS("8122636821","man0har",$mobileNumNew,$message);
 			}else{
 				echo "Something went wrong. Please try again!";
 			}

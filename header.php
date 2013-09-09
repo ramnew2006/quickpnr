@@ -4,6 +4,15 @@ $numRows=mysql_num_rows($titlequery);
 if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER["REQUEST_URI"]=="")){
 	header("Location:../user/profile");
 }
+if(isset($_SESSION['userName'])){
+	$query=mysql_query("SELECT count(*) FROM onesixtybytwo WHERE mobilenum=".$_SESSION['userName']);
+	$result = mysql_result($query, 0);
+	if($result==1){
+		$linkedsmsaccount = true;
+	}else{
+		$linkedsmsaccount = false;
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -180,7 +189,7 @@ if(isset($_SESSION['userName']) && ($_SERVER["REQUEST_URI"]=="index" || $_SERVER
 	</div>
   <div class="modal-footer">
     <div id="registrationValidation"></div>
-	<span style="float:left;"><input type="checkbox"> I Agree to the <a href="#">Terms & Conditions</a></span>
+	<span style="float:left;"><input id="terms" type="checkbox"> I Agree to the <a href="#">Terms & Conditions</a></span>
     <input class="btn btn-primary" name="userRegister" value="Register" type="submit">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     </form>
@@ -215,15 +224,21 @@ function validateRegisterForm(){
 	var mobilenum = $('#registermobileNum').val();
 	var password = $('#registeruserPassword').val();
 	var confpassword = $('#registeruserConfirmPassword').val();
+	var termsChecked = $('#terms:checked').length;
 	if($.isNumeric(mobilenum) && mobilenum.length==10){
 	}else{
 		alert("Enter valid Mobile Number!");
 		return false;
 	}
 	if(password==confpassword){
-		return true;
 	}else{
 		alert("Passwords do not match!");
+		return false;
+	}
+	if(termsChecked==1){
+		return true;
+	}else{
+		alert("You have to agree to the terms and conditions to complete the sign up!");
 		return false;
 	}
 }
@@ -238,5 +253,11 @@ function validateForgotPassForm(){
 	}
 }
 </script>
-<?php } ?>
+<?php } 
+if($linkedsmsaccount){
+	echo "<input type=\"hidden\" name=\"linkedsmsaccount\" id=\"linkedsmsaccount\" value=\"" . 100 . "\">";
+}else{
+	echo "<input type=\"hidden\" name=\"linkedsmsaccount\" id=\"linkedsmsaccount\" value=\"" . 500 . "\">";
+}
+?>
 

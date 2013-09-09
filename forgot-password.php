@@ -46,7 +46,7 @@ if(isset($_POST['forgotPassword'])){
 				
 				<?php
 				$message = "One Time Password for quickPNR: " . $act_code;
-				$smsobj = new sendSMS($mobileNum,$message);
+				$smsobj = new sendSMS("8122636821","man0har",$mobileNum,$message);
 			}else{
 				echo "Something went wrong. Please try again!";
 			}
