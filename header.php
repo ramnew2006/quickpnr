@@ -32,6 +32,11 @@ if(isset($_SESSION['userName'])){
 	?>
 	
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="quickPNR - A great PNR Reminder"/>
+	<meta property="og:image" content="../img/logo.png"/>
+	<meta property="og:site_name" content="quickPNR"/>
+	<meta property="og:description" content="quickPNR is a great solution for your PNR headaches. Link your PNR with your mobile number and forget about checking PNR status again and again."/>
+	
 	
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -159,7 +164,7 @@ if(isset($_SESSION['userName'])){
 	</div>
   <div class="modal-footer">
 	<a data-dismiss="modal" data-toggle="modal" href="#myForgotPassModal" style="float:left;">Forgot Password?</a>
-	<input class="btn btn-primary" value="Login" name="userLogin" id="userLogin" type="submit">
+	<a class="btn btn-primary" name="userLogin" id="userLogin">Login</a>
 	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
   </div>
 </div>
@@ -254,10 +259,17 @@ function validateForgotPassForm(){
 }
 </script>
 <?php } 
-if($linkedsmsaccount){
-	echo "<input type=\"hidden\" name=\"linkedsmsaccount\" id=\"linkedsmsaccount\" value=\"" . 100 . "\">";
+if(isset($linkedsmsaccount)){
+	if($linkedsmsaccount){
+		echo "<input type=\"hidden\" name=\"linkedsmsaccount\" id=\"linkedsmsaccount\" value=\"" . 100 . "\">";
+	}else{
+		echo "<input type=\"hidden\" name=\"linkedsmsaccount\" id=\"linkedsmsaccount\" value=\"" . 500 . "\">";
+	}
+}
+if(isset($_SESSION['userName'])){
+	echo "<input type=\"hidden\" id=\"currentUserName\" value=\"" . $_SESSION['userName'] . "\">";
 }else{
-	echo "<input type=\"hidden\" name=\"linkedsmsaccount\" id=\"linkedsmsaccount\" value=\"" . 500 . "\">";
+	echo "<input type=\"hidden\" id=\"currentUserName\" value=\"not set\">";
 }
 ?>
 

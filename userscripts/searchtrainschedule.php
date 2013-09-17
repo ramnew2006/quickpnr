@@ -14,6 +14,7 @@ if(isset($_POST['src_stn']) && isset($_POST['dest_stn']) && isset($_POST['sel_da
 	}
 	$src_stn = $_POST['src_stn'];
 	$dest_stn = $_POST['dest_stn'];
+	
 	$DDMM = explode('-',$_POST['sel_date']);
 	$MM = $DDMM[1];
 	$DD = $DDMM[2];
@@ -22,8 +23,8 @@ if(isset($_POST['src_stn']) && isset($_POST['dest_stn']) && isset($_POST['sel_da
 	$query = mysql_query("SELECT distinct(tr1.train_num), tr1.dep_time, tr4.train_name 
 			FROM trainschedule AS tr1, trainschedule AS tr2, trainrunning AS tr3, trainlist AS tr4 
 			WHERE 
-			tr1.stn_code='" . $src_stn . "' 
-			AND tr2.stn_code='" . $dest_stn . "' 
+			tr1.stn_code = '" . $src_stn . "' 
+			AND tr2.stn_code = '" . $dest_stn . "'
 			AND tr1.train_num=tr2.train_num 
 			AND tr1.train_num=tr3.train_num 
 			AND tr1.train_num=tr4.train_num 

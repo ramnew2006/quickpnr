@@ -28,7 +28,7 @@ if(isset($_POST['pnrNum'])){
 	
 	if($lengthRow){
 		if($trainlengthRow){
-			echo "<h4>PNR Number: " . $_POST['pnrNum'] . "</h4>";	
+			echo "<h4><b>PNR Number: " . $_POST['pnrNum'] . "</b></h4>";	
 			if($_SERVER['REQUEST_URI']=="/user/pnr-status"){
 				echo "<div class=\"well\">Get SMS updates of this PNR Number daily to your Mobile number OR Send the PNR Status to your friend's Mobile Number<br/><br/>";
 				echo "Mobile Number: <input type=\"text\" maxsize=\"10\">&nbsp;&nbsp;&nbsp;<input title=\"Get SMS updates of this PNR to your Mobile\" type=\"submit\" value=\"Get SMS Updates\" class=\"btn btn-warning\">
@@ -36,7 +36,7 @@ if(isset($_POST['pnrNum'])){
 					</div>";
 			}
 			
-			echo "<h5>Train Details</h5>";
+			echo "<h5><b>Train Details</b></h5>";
 			echo "<table class=\"table table-bordered table-striped table-hover\">";
 			for($i=0;$i<$trainlengthRow;$i++){
 				if($i==1){
@@ -69,7 +69,7 @@ if(isset($_POST['pnrNum'])){
 			echo "</tbody>";
 			echo "</table>";
 		}
-		echo "<h5>PNR Status</h5>";
+		echo "<h5><b>PNR Status</b></h5>";
 		echo "<table class=\"table table-bordered table-striped table-hover\">";
 		for($i=0;$i<$lengthRow-1;$i++){
 			if($i==0){

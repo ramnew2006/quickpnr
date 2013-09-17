@@ -27,7 +27,7 @@ include('header.php');
 			<tr>
 				<td><input id="displaypnrstatusinput" name="displaypnrstatusinput" type="text" placeholder="Enter PNR Number" maxlength="10" autocomplete="on"></td>
 				<td style="padding-left:2em;">
-					<a id="displaypnrstatusinputgetstatus" class="btn btn-primary">Get Status</a>&nbsp;&nbsp;
+					<a id="displaypnrstatusinputgetstatus" class="btn btn-primary" href="#displaypnrstatus">Get Status</a>&nbsp;&nbsp;
 					<a id="displaypnrstatusinputgetstatus" class="btn">Reset</a>
 				</td>
 			</tr>
@@ -49,7 +49,7 @@ include('header.php');
 	</div>
  </div>
 </div>
-<div id="displaypnrstatus" style="text-align:center"></div>
+<div id="displaypnrstatus"></div>
 </section>
 
 <!-- Send SMS Modal -->
@@ -71,11 +71,11 @@ include('header.php');
 <br><br>
 
 <div class="homepagefooteractiveiconsdiv">
-	<a class="btn btn-inverse homepagefooteractiveicons" rel="tooltip" title="Get Current PNR Status"><i class="icon-ok"></i> PNR Status</a>
-	<a class="btn btn-warning homepagefooteractiveicons" rel="tooltip" title="Get PNR Status updates as SMS Reminders to your registered Mobile"><i class="icon-ok"></i> SMS Reminder</a>
-	<a class="btn btn-primary homepagefooteractiveicons" rel="tooltip" title="Sync your IRCTC account and avail automated SMS Reminders"><i class="icon-ok"></i> Sync with IRCTC</a>
-	<a class="btn btn-success homepagefooteractiveicons" rel="tooltip" title="Get general train enquiry information"><i class="icon-ok"></i> Train Enquiry</a>
-	<a class="btn btn-info homepagefooteractiveicons" rel="tooltip" title="Send current PNR Status to any mobile number of your choice"><i class="icon-ok"></i> Send SMS</a>
+	<span class="label label-inverse homepagefooteractiveicons" rel="tooltip" title="Get Current PNR Status"><i class="icon-ok"></i> PNR Status</span>
+	<span class="label label-warning homepagefooteractiveicons" rel="tooltip" title="Get PNR Status updates as SMS Reminders to your registered Mobile"><i class="icon-ok"></i> SMS Reminder</span>
+	<span class="label label-info homepagefooteractiveicons" rel="tooltip" title="Sync your IRCTC account and avail automated SMS Reminders"><i class="icon-ok"></i> Sync with IRCTC</span>
+	<span class="label label-success homepagefooteractiveicons" rel="tooltip" title="Get general train enquiry information"><i class="icon-ok"></i> Train Enquiry</span>
+	<span class="label label-sendsms homepagefooteractiveicons" rel="tooltip" title="Send current PNR Status to any mobile number of your choice"><i class="icon-ok"></i> Send SMS</span>
  </div>
 
 

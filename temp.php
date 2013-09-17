@@ -4,9 +4,13 @@ require_once 'database.php';
 $dbobj = new database();
 $dbobj->dbconnect();
 
-$query=mysql_query("SELECT username, password FROM onesixtybytwo WHERE mobilenum=8939686018");
+$query=mysql_query("SELECT distinct(stn_code), stn_name FROM trainschedule order by stn_code");
+$result ="";
+while($row=mysql_fetch_array($query)){
+  $result .= "\"" . trim($row['stn_name']) . " (" . trim($row['stn_code']) . ")\",";
+}
 
-print_r(mysql_fetch_array($query));
+print_r($result);
 
 // $query = mysql_query("SELECT train_num FROM trainrunning WHERE updated='N'");
 // $numrows = mysql_num_rows($query);

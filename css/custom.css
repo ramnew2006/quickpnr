@@ -128,13 +128,18 @@ li.ajaxdropdownsearch:hover {
 .homepagefooteractiveicons{
 	margin-left:2em;
 	width:154px;
-	border-radius: 0;
+/*	border-radius: 0;
 	cursor: default;
+*/
 }
 
 .displaytrainbetweenstationswell{
 	font-weight:bold;
 	padding-bottom:5px;
+}
+
+.label-sendsms, .badge-sendsms{
+	background-color: #436c98;
 }
 
 #myOnesixtybyTwoModal{
